@@ -1,2 +1,95 @@
-# medGuard
-A fake verification fullstack site
+# 💊 MedGuard – AI-Powered Drug Verification Platform
+
+**MedGuard** is a full-stack AI-enhanced web application designed to **combat fake and substandard drugs** in Nigeria. Using smart verification tools like image recognition, voice input, and token validation, MedGuard empowers users to validate pharmaceutical products and report suspicious cases in real-time.
+
+> ⚠️ For demonstration purposes only. This is not an official verification tool.
+
+---
+
+## 🚀 Vision
+
+To **protect public health** by enabling **reliable drug verification** through a **smart, accessible, and AI-powered platform**.
+
+MedGuard aims to serve individuals, pharmacists, and regulatory agencies with tools to identify fake drugs, analyze threats, and take quick action.
+
+---
+
+## 👥 Authors
+
+| Name                     | GitHub                                 | Alias       |
+| ------------------------ | -------------------------------------- | ----------- |
+| Makinde Olasubomi Alade  | [@Shubbin](https://github.com/Shubbin) | **Shubbin** |
+| Ayinde Abubakar Damilare | N/A                                    | **Damien**  |
+| Tomioluwa David          | N/A                                    | **Mac**     |
+
+---
+
+## 🧠 Core Objectives
+
+- ✅ Allow users to **verify drug authenticity** via NAFDAC numbers and product tokens.
+- 🧠 Use **image recognition** to detect counterfeit packaging.
+- 📤 Enable **reporting of suspicious drugs** with AI-powered risk scoring.
+- 📊 Provide an **admin dashboard** for authorities to review reports, monitor statistics, and visualize threat data.
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend
+
+- **React.js**
+- **Tailwind CSS**
+- **Framer Motion**
+- **Axios**
+- **React Hook Form**
+- **React Router DOM**
+- **React Speech Recognition** (optional)
+
+### Backend
+
+- **Node.js + Express.js**
+- **MongoDB** via Mongoose
+- **JWT** + **bcryptjs**
+- **Multer** + **Cloudinary**
+- **Google Vision API** (OCR)
+- **Clarifai API** (Image Similarity)
+- **OpenAI Whisper API** (Voice input, optional)
+- **OpenAI GPT API** (NLP features, optional)
+
+---
+
+## 📦 Core Features
+
+### 1. Drug Verification
+
+- Input NAFDAC number + Product token
+- Server checks database and returns drug details
+
+### 2. Image-Based Validation
+
+- Upload drug packaging photo
+- OCR reads printed info
+- Clarifai compares image similarity against registered drugs
+
+### 3. Suspicious Drug Reports
+
+- Users submit photo, location, and description
+- AI engine scores risk level
+- Admin panel shows pending reports
+
+### 4. Admin Dashboard
+
+- Filter reports by time, location, drug
+- Visualize heatmaps, high-risk areas
+- Review flagged cases
+
+### 5. Voice Search (Phase 2)
+
+- Whisper API transcribes user’s spoken NAFDAC code
+- Backend validates it and returns results
+
+---
+
+## 🗂 Suggested Project Structure
+
+### Frontend (React)
