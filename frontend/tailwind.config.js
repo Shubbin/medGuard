@@ -6,6 +6,7 @@ export default {
       colors: {
         primary: "#4Az8BBE", // soft blue
         "primary-dark": "#2563eb", // deep blue
+        "secondary-dark": "#2C549C",
         secondary: "#B7D3E3", // light blue
         background: "#ffffff", // classic white
         "background-light": "#eaf6fb", // very light blue

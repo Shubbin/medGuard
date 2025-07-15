@@ -20,7 +20,7 @@ import { Separator } from "../components/ui/separator";
 
 const DashboardPage = () => {
   const { user, logout } = useAuthStore();
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("Welcome Back");
 
   const handleLogout = () => {
     logout();
@@ -97,7 +97,7 @@ const DashboardPage = () => {
           </Card>
         )}
 
-        <div className="mt-10">
+        {/* <div className="mt-10">
           <Button
             variant="destructive"
             onClick={handleLogout}
@@ -105,7 +105,7 @@ const DashboardPage = () => {
           >
             <LogOutIcon className="h-5 w-5" /> Logout
           </Button>
-        </div>
+        </div> */}
       </motion.main>
     </div>
   );

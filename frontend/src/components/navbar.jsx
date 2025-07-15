@@ -1,8 +1,16 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
-import { Menu, X } from "lucide-react";
-
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  AlertTriangle,
+  LayoutDashboard,
+  CircleCheck,
+} from "lucide-react";
+import navbarLogo from "@/assets/images/Medguard Logo Two.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, logout } = useAuthStore();
@@ -15,42 +23,46 @@ const Navbar = () => {
   };
 
   const isActive = (path) => location.pathname === path;
+  const navItems = [
+    { to: "/", label: "Home", icon: <Home /> },
+    { to: "/about", label: "About", icon: <User /> },
+    { to: "/report", label: "Report", icon: <AlertTriangle /> },
+    { to: "/verify", label: "Verify Drug", icon: <CircleCheck /> },
+    { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard /> },
+  ];
 
   return (
-    <nav className="bg-white/80 backdrop-blur-lg shadow-md fixed top-0 w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 z-50 w-full bg-white shadow-md backdrop-blur-lg py-2">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold text-primary hover:text-secondary transition duration-200">
-            MedGuard
+          <Link
+            to="/"
+            className="text-xl font-bold transition duration-200 text-primary hover:text-secondary"
+          >
+            <img src={navbarLogo} className="h-14" alt="" />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6">
-            {[
-              { to: "/", label: "Home" },
-              { to: "/about", label: "About" },
-              { to: "/report", label: "Report" },
-              { to: "/verify", label: "Verify Drug" },
-              { to: "/dashboard", label: "Dashboard" },
-            ].map(({ to, label }) => (
+          <div className="hidden space-x-6 md:flex">
+            {navItems.map((item) => (
               <Link
-                key={to}
-                to={to}
-                className={`font-medium transition duration-200 ${
-                  isActive(to)
-                    ? "text-primary underline underline-offset-4 font-semibold"
-                    : "text-gray-700 hover:text-primary"
+                key={item.name}
+                to={item.to}
+                className={`font-bold transition duration-200  p-2  rounded-md flex gap-2 items-end  ${
+                  isActive(item.to)
+                    ? "text-primary font-semibold bg-secondary-dark text-white"
+                    : "text-black hover:bg-secondary-dark hover:text-white "
                 }`}
               >
-                {label}
+                {item.icon}
+                {item.label}
               </Link>
             ))}
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
-                className="text-red-600 font-semibold hover:underline"
+                className="font-semibold text-red-600 hover:underline"
               >
                 Logout
               </button>
@@ -68,14 +80,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white shadow-lg px-4 pb-4 space-y-2">
-          {[
-            { to: "/", label: "Home" },
-            { to: "/about", label: "About" },
-            { to: "/report", label: "Report" },
-            { to: "/verify", label: "Verify Drug" },
-            { to: "/dashboard", label: "Dashboard" },
-          ].map(({ to, label }) => (
+        <div className="flex px-4 pb-4 space-y-2 bg-white shadow-lg md:hidden">
+          {navItems.map(({ to, label }) => (
             <Link
               key={to}
               to={to}
@@ -95,7 +101,7 @@ const Navbar = () => {
                 handleLogout();
                 setIsOpen(false);
               }}
-              className="block text-red-600 font-semibold hover:underline"
+              className="block font-semibold text-red-600 hover:underline"
             >
               Logout
             </button>

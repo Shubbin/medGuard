@@ -27,7 +27,7 @@ const About = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
           <div>
-            <img src={about1} alt="Mission" className="rounded-xl w-full h-64 object-cover shadow-lg" loading="lazy" />
+            <img src={about1} alt="Mission" className="rounded-xl w-full h-72 object-center object-cover shadow-lg" loading="lazy" />
             <h2 className="text-2xl font-bold text-primary-dark mt-6 mb-2">Our Mission</h2>
             <p className="text-gray-700 leading-relaxed">
               We aim to eliminate the threat of counterfeit drugs by creating a robust ecosystem of verification, awareness, and reporting. Our mission is rooted in saving lives, one verification at a time.
