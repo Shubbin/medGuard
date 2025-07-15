@@ -43,7 +43,6 @@ MedGuard aims to serve individuals, pharmacists, and regulatory agencies with to
 - **Axios**
 - **React Hook Form**
 - **React Router DOM**
-- **React Speech Recognition** (optional)
 
 ### Backend
 
@@ -51,12 +50,6 @@ MedGuard aims to serve individuals, pharmacists, and regulatory agencies with to
 - **MongoDB** via Mongoose
 - **JWT** + **bcryptjs**
 - **Multer** + **Cloudinary**
-- **Google Vision API** (OCR)
-- **Clarifai API** (Image Similarity)
-- **OpenAI Whisper API** (Voice input, optional)
-- **OpenAI GPT API** (NLP features, optional)
-
----
 
 ## 📦 Core Features
 
@@ -82,14 +75,3 @@ MedGuard aims to serve individuals, pharmacists, and regulatory agencies with to
 - Filter reports by time, location, drug
 - Visualize heatmaps, high-risk areas
 - Review flagged cases
-
-### 5. Voice Search (Phase 2)
-
-- Whisper API transcribes user’s spoken NAFDAC code
-- Backend validates it and returns results
-
----
-
-## 🗂 Suggested Project Structure
-
-### Frontend (React)
