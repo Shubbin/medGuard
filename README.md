@@ -2,10 +2,6 @@
 
 **MedGuard** is a full-stack AI-enhanced web application designed to **combat fake and substandard drugs** in Nigeria. Using smart verification tools like image recognition, voice input, and token validation, MedGuard empowers users to validate pharmaceutical products and report suspicious cases in real-time.
 
-> ⚠️ For demonstration purposes only. This is not an official verification tool.
-
----
-
 ## 🚀 Vision
 
 To **protect public health** by enabling **reliable drug verification** through a **smart, accessible, and AI-powered platform**.
@@ -16,13 +12,12 @@ MedGuard aims to serve individuals, pharmacists, and regulatory agencies with to
 
 ## 👥 Authors
 
-| Name                     | GitHub                                 | Alias       |
-| ------------------------ | -------------------------------------- | ----------- |
-| Makinde Olasubomi Alade  | [@Shubbin](https://github.com/Shubbin) | **Shubbin** |
-| Ayinde Abubakar Damilare | N/A                                    | **Damien**  |
-| Tomioluwa David          | N/A                                    | **Mac**     |
+| Name                     | GitHub                                       | Alias       |
+| ------------------------ | -------------------------------------------- | ----------- |
+| Makinde Olasubomi Alade  | [@Shubbin](https://github.com/Shubbin)       | **Shubbin** |
+| Ayinde Abubakar Damilare | [@mac]https://github.com                     | **Damien**  |
+| Temioluwa David          | [@macdavid28](https://github.com/macdavid28) | **Mac**     |
 
----
 
 ## 🧠 Core Objectives
 
