@@ -5,25 +5,40 @@ import cors from "cors";
 import { connectDB } from "./backend/db/connectDb.js";
 import authRouters from "./backend/routes/auth.route.js";
 import blogRoutes from "./backend/routes/blog.routes.js";
-dotenv.config();
 
-const app = express(); 
+// Load environment variables as early as possible
+dotenv.config({ path: "./.env" });
+
+const app = express();
+
+//middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true, // if you use cookies or auth headers
+    // Allow multiple comma‑separated origins via .env, fall back to "*"
+    origin: process.env.CLIENT_URL?.split(",") || "*",
+    credentials: true,
   })
 );
 
-app.use(express.json()); // parse JSON bodies
-app.use(cookieParser()); // parse cookies
+app.use(express.json()); // Parse JSON payloads
+app.use(cookieParser()); // Parse cookies
+
+//routes
 app.use("/api/auth", authRouters);
 app.use("/api/blogs", blogRoutes);
 
-const port = process.env.PORT || 8000;
 
-app.listen(port, () => {
-  connectDB(process.env.MONGO_URI);
-  console.log(`Server is running on port: ${port}`);
-});
+const PORT = process.env.PORT || 8000;
 
+(async () => {
+  try {
+    // Establish database connection *before* starting the server
+    await connectDB(); // connectDB reads MONGO_URI internally
+    app.listen(PORT, () => {
+      console.log(`🚀  Server is running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("❌  Failed to start server:", err);
+    process.exit(1);
+  }
+})();
