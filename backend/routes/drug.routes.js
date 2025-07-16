@@ -5,6 +5,7 @@ import {
   createDrug,
   updateDrug,
   deleteDrug,
+  verifyDrugByNRN,
 } from '../controllers/drug.controller.js';
 import { authMiddleware, requireRole } from '../middleware/auth.js';
 
@@ -15,5 +16,7 @@ router.get("/:id", getDrugById);
 router.post("/", authMiddleware, requireRole(["admin", "sub-admin"]), createDrug);
 router.put("/:id", authMiddleware, requireRole(["admin", "sub-admin"]), updateDrug);
 router.delete("/:id", authMiddleware, requireRole(["admin"]), deleteDrug);
+
+router.post("/verify", verifyDrugByNRN);
 
 export default router;

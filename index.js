@@ -6,6 +6,7 @@ import authRouters from "./backend/routes/auth.route.js";
 import blogRoutes from "./backend/routes/blog.routes.js";
 
 import cors from "cors";
+import { verifyDrugByNRN } from "./backend/controllers/drug.controller.js";
 
 // Load environment variables as early as possible
 dotenv.config({ path: "./.env" });
@@ -27,7 +28,7 @@ app.use(cookieParser()); // Parse cookies
 //routes
 app.use("/api/auth", authRouters);
 app.use("/api/blogs", blogRoutes);
-
+app.use("/api/drugs/verify", verifyDrugByNRN)
 
 const PORT = process.env.PORT || 8000;
 
@@ -36,10 +37,10 @@ const PORT = process.env.PORT || 8000;
     // Establish database connection *before* starting the server
     await connectDB(); // connectDB reads MONGO_URI internally
     app.listen(PORT, () => {
-      console.log(`🚀  Server is running on port ${PORT}`);
+      console.log(` Server is running on port ${PORT}`);
     });
   } catch (err) {
-    console.error("❌  Failed to start server:", err);
+    console.error(" Failed to start server:", err);
     process.exit(1);
   }
 })();

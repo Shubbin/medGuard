@@ -19,6 +19,7 @@
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^2.0.5",
     "react-hot-toast": "^2.4.1",
+    "react-qr-barcode-scanner": "^2.1.8",
     "react-router-dom": "^6.26.0",
     "react-tsparticles": "^2.12.2",
     "recharts": "^3.0.2",
