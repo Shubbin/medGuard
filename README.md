@@ -12,12 +12,11 @@ MedGuard aims to serve individuals, pharmacists, and regulatory agencies with to
 
 ## 👥 Authors
 
-| Name                     | GitHub                                       | Alias       |
-| ------------------------ | -------------------------------------------- | ----------- |
-| Makinde Olasubomi Alade  | [@Shubbin](https://github.com/Shubbin)       | **Shubbin** |
-| Ayinde Abubakar Damilare | [@mac]https://github.com                     | **Damien**  |
-| Temioluwa David          | [@macdavid28](https://github.com/macdavid28) | **Mac**     |
-
+| Name                     | GitHub                                          | Alias       |
+| ------------------------ | ----------------------------------------------- | ----------- |
+| Makinde Olasubomi Alade  | [@Shubbin](https://github.com/Shubbin)          | **Shubbin** |
+| Ayinde Abubakar Damilare | [@Abubakar](https://github.com/Abubakar-Ayinde) | **Damien**  |
+| Temioluwa David          | [@macdavid28](https://github.com/macdavid28)    | **Mac**     |
 
 ## 🧠 Core Objectives
 
