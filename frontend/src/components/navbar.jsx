@@ -70,8 +70,11 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)}>
+          <div className="md:hidden ">
+            <button
+              className="focus:outline-none rounded-full p-2 hover:bg-blue-100 transition"
+              onClick={() => setIsOpen(!isOpen)}
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -80,19 +83,20 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="flex px-4 pb-4 space-y-2 bg-white shadow-lg md:hidden">
-          {navItems.map(({ to, label }) => (
+        <div className="flex flex-col px-4 pt-4 pb-4 space-y-4 bg-white md:hidden">
+          {navItems.map((navItem) => (
             <Link
-              key={to}
-              to={to}
+              key={navItem.label}
+              to={navItem.to}
               onClick={() => setIsOpen(false)}
-              className={`block font-medium ${
-                isActive(to)
-                  ? "text-primary underline underline-offset-4"
+              className={`flex gap-2 items-center font-medium p-4 rounded-md ${
+                isActive(navItem.to)
+                  ? "bg-primary-dark text-white"
                   : "text-gray-700 hover:text-primary"
               }`}
             >
-              {label}
+              {navItem.icon}
+              {navItem.label}
             </Link>
           ))}
           {isAuthenticated && (
