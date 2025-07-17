@@ -7,24 +7,24 @@ import {
   MailIcon,
   UsersIcon,
   SettingsIcon,
-  LogOutIcon,
+  // LogOutIcon,
   ShieldIcon,
   ScanSearchIcon,
   CameraIcon,
   MicIcon,
 } from "lucide-react";
-import { Button } from "../components/ui/button";
+// import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Sidebar } from "../components/ui/sidebar";
 import { Separator } from "../components/ui/separator";
 
 const DashboardPage = () => {
-  const { user, logout } = useAuthStore();
+  // const { user, logout } = useAuthStore();
   const [activeTab, setActiveTab] = useState("Welcome Back");
 
-  const handleLogout = () => {
-    logout();
-  };
+  // const handleLogout = () => {
+  //   logout();
+  // };
 
   const navItems = [
     { name: "Overview", icon: HomeIcon, tab: "overview" },
@@ -112,3 +112,5 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+

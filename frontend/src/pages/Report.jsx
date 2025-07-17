@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import axios from "axios";
 
 const Report = () => {
   const [formData, setFormData] = useState({
@@ -9,8 +8,6 @@ const Report = () => {
     location: "",
     photo: null,
   });
-
-  const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleChange = (e) => {
     if (e.target.type === "file") {
@@ -32,15 +29,20 @@ const Report = () => {
         data.append("photo", formData.photo);
       }
 
-      const response = await axios.post(`${API_URL}/report/create`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const response = await fetch("http://localhost:8000/api/reports/create", {
+        method: "POST",
+        body: data,
       });
 
-      console.log("Backend response:", response.data);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Something went wrong.");
+      }
 
-      alert(" Report submitted successfully. Thank you!");
+      const result = await response.json();
+      console.log("Backend response:", result);
+
+      alert("✅ Report submitted successfully. Thank you!");
       setFormData({
         drugName: "",
         description: "",
@@ -50,7 +52,7 @@ const Report = () => {
       document.getElementById("photo").value = null;
     } catch (err) {
       console.error("Submit failed:", err);
-      alert("❌ Failed to submit report: " + (err.response?.data?.message || err.message));
+      alert("❌ Failed to submit report: " + err.message);
     }
   };
 
