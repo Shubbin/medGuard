@@ -1,6 +1,6 @@
+import { Pill, MapPin, PenLine, Camera } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-
 
 const Report = () => {
   const [formData, setFormData] = useState({
@@ -46,10 +46,14 @@ const Report = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-xl shadow-md space-y-6 border border-gray-100"
+          className="bg-gray-white p-6 rounded-xl shadow-md space-y-6 border border-gray-100 text-primary-dark  [&__label]:text-md [&__label]:font-semibold"
         >
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="drugName">
+            <label
+              className="flex items-center gap-2 text-md font-medium mb-1"
+              htmlFor="drugName"
+            >
+              <Pill className="h-5" />
               Drug Name
             </label>
             <input
@@ -59,13 +63,17 @@ const Report = () => {
               value={formData.drugName}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-2  shadow-md rounded-md focus:outline-primary-dark focus:ring-2 focus:ring-primary"
               placeholder="e.g., Amoxillin 500mg"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="location">
+            <label
+              className="flex items-center gap-2 text-sm font-medium mb-1"
+              htmlFor="location"
+            >
+              <MapPin className="h-5" />
               Location Found
             </label>
             <input
@@ -75,13 +83,17 @@ const Report = () => {
               value={formData.location}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full shadow-md px-4 py-2 rounded-md focus:outline-primary-dark focus:ring-2 focus:ring-primary"
               placeholder="e.g., Alaba Market, Lagos"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="description">
+            <label
+              className="flex items-center gap-2 text-sm font-medium mb-1"
+              htmlFor="description"
+            >
+              <PenLine className="h-5" />
               Description or Effects Noticed
             </label>
             <textarea
@@ -91,13 +103,17 @@ const Report = () => {
               onChange={handleChange}
               required
               rows="4"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-4 py-2 shadow-md rounded-md focus:outline-primary-dark focus:ring-2 focus:ring-primary"
               placeholder="Describe packaging, side effects, or anything unusual..."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1" htmlFor="photo">
+            <label
+              className="flex items-center gap-2 text-md font-medium mb-1"
+              htmlFor="photo"
+            >
+              <Camera className="h-5" />
               Upload Photo (optional)
             </label>
             <input
@@ -106,13 +122,13 @@ const Report = () => {
               type="file"
               accept="image/*"
               onChange={handleChange}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:rounded-md file:text-sm file:bg-primary file:bg-primary-dark hover:file:bg-blue-800"
+              className="shadow-md p-2 max-w-xs rounded-md file:border-primary-dark  block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:rounded-md file:text-sm file:bg-primary file:text-white file:bg-primary-dark hover:file:bg-blue-800"
             />
           </div>
 
           <button
             type="submit"
-            className="bg-primary-dark  text-primary px-6 py-3 rounded-lg hover:bg-blue-800 transition shadow"
+            className="bg-primary-dark  text-primary px-6 py-3 rounded-lg hover:bg-blue-800 transition shadow text-white"
           >
             Submit Report
           </button>

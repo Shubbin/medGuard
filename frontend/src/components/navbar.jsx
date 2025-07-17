@@ -9,6 +9,7 @@ import {
   AlertTriangle,
   LayoutDashboard,
   CircleCheck,
+  Book,
 } from "lucide-react";
 import navbarLogo from "@/assets/images/Medguard Logo Two.png";
 const Navbar = () => {
@@ -26,6 +27,7 @@ const Navbar = () => {
   const navItems = [
     { to: "/", label: "Home", icon: <Home /> },
     { to: "/about", label: "About", icon: <User /> },
+    { to: "/blog", label: "Blog", icon: <Book /> },
     { to: "/report", label: "Report", icon: <AlertTriangle /> },
     { to: "/verify", label: "Verify Drug", icon: <CircleCheck /> },
     { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard /> },
@@ -33,7 +35,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-white shadow-md backdrop-blur-lg py-2">
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div className=" px-4 mx-auto max-w-7xl sm:px-4 lg:px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
@@ -44,7 +46,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden space-x-6 md:flex">
+          <div className="hidden space-x-6 lg:flex">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -70,8 +72,11 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)}>
+          <div className="lg:hidden ">
+            <button
+              className="focus:outline-none rounded-full p-2 hover:bg-blue-100 transition"
+              onClick={() => setIsOpen(!isOpen)}
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -80,19 +85,20 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="flex px-4 pb-4 space-y-2 bg-white shadow-lg md:hidden">
-          {navItems.map(({ to, label }) => (
+        <div className="flex flex-col px-4 pt-4 pb-4 space-y-4 bg-white lg:hidden">
+          {navItems.map((navItem) => (
             <Link
-              key={to}
-              to={to}
+              key={navItem.label}
+              to={navItem.to}
               onClick={() => setIsOpen(false)}
-              className={`block font-medium ${
-                isActive(to)
-                  ? "text-primary underline underline-offset-4"
+              className={`flex gap-2 items-center font-medium p-4 rounded-md ${
+                isActive(navItem.to)
+                  ? "bg-primary-dark text-white"
                   : "text-gray-700 hover:text-primary"
               }`}
             >
-              {label}
+              {navItem.icon}
+              {navItem.label}
             </Link>
           ))}
           {isAuthenticated && (

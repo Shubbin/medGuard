@@ -4,19 +4,33 @@ import { Mail, Lock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import FloatingInput from "../components/FloatingInput";
-import medGuardLogo from "../assets/images/medGuard.png";
-
+import medGuardLogo from "../assets/images/Medguard Logo.png";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isLoading, error } = useAuthStore();
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .email("Invalid Email")
+      .required("Email Address is required"),
+    password: yup
+      .string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    if (!email || !password) {
-      alert("Please enter both email and password.");
-      return;
-    }
+  const handleLogin = async () => {
     try {
       await login(email.trim(), password);
     } catch (err) {
@@ -26,63 +40,63 @@ const LoginPage = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }} 
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="mt-10 mb-20 min-h-screen flex items-center justify-center px-4 bg-gradient-to-tr from-background via-background-light to-background w-full max-w-md"
+      className="flex items-center justify-center w-full max-w-md min-h-screen px-4 mt-10 mb-20 bg-black bg-gradient-to-tr from-background via-background-light to-background"
     >
-      <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl rounded-2xl shadow-lg border border-muted backdrop-blur-xl bg-white/10 pt-12">
+      <div className="relative w-full max-w-md pt-12 border shadow-lg lg:max-w-lg xl:max-w-xl rounded-2xl border-muted backdrop-blur-xl bg-white/10">
         {/* Logo */}
         <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center z-10 p-1.5">
           <motion.img
             src={medGuardLogo}
             alt="MedGuard Logo"
-            className="w-full h-full object-contain"
+            className="object-contain w-full h-full rounded-full"
             animate={{ y: [0, -3, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           />
         </div>
 
         <div className="p-6 pt-4">
-          <h2 className="text-2xl font-bold text-center text-primary mb-1">
+          <h2 className="mb-1 text-2xl font-bold text-center text-primary">
             Welcome Back
           </h2>
-          <p className="text-center text-text opacity-70 text-sm mb-5">
+          <p className="mb-5 text-sm text-center text-text opacity-70">
             Sign in to your <span className="font-medium">MedGuard</span>{" "}
             account
           </p>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
             <FloatingInput
               icon={Mail}
               label="Email Address"
               type="email"
               name="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              // onChange={(e) => setEmail(e.target.value)}
+              {...register("email")}
               className="focus:border-primary"
             />
+            <p className="text-xs text-danger">{errors?.email?.message}</p>
             <FloatingInput
               icon={Lock}
               label="Password"
               type="password"
               name="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              // onChange={(e) => setPassword(e.target.value)}
               className="focus:border-primary"
             />
-
+            <p className="text-xs text-danger">{errors?.password?.message}</p>
             {error && (
               <motion.p
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-danger text-xs font-medium text-center"
+                className="text-xs font-medium text-center text-danger"
               >
                 {error}
               </motion.p>
             )}
-
-            
 
             <motion.button
               whileHover={{ scale: 1.02 }}
@@ -93,14 +107,15 @@ const LoginPage = () => {
               disabled={isLoading}
             >
               {isLoading ? (
-                <Loader className="animate-spin  mx-auto h-5 w-5 "  />
+                <Loader className="h-5 mx-auto flexw-5 animate-spin " />
               ) : (
                 "Login"
               )}
             </motion.button>
+            {/* <LogInIcon /> */}
           </form>
 
-          <div className="flex justify-between text-xs text-primary-dark mt-4">
+          <div className="flex justify-between mt-4 text-xs text-primary-dark">
             <Link to="/forgot-password" className="hover:underline">
               Forgot password?
             </Link>
@@ -110,7 +125,7 @@ const LoginPage = () => {
           </div>
         </div>
 
-        <div className="bg-secondary text-center text-xs px-6 py-3 border-t border-muted rounded-b-2xl">
+        <div className="px-6 py-3 text-xs text-center border-t bg-secondary border-muted rounded-b-2xl">
           <span className="opacity-70">Need help? </span>
           <a
             href="mailto:support@medguard.com"

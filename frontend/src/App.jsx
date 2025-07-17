@@ -28,6 +28,8 @@ import PrivacyPolicy from "../src/document/PrivacyPolicy";
 
 // Loader
 import LoadingSpinner from "./components/LoadingSpinner";
+import NotFound from "./pages/NotFound";
+import Blog from "./pages/Blog";
 
 // ✅ Protected Route Component
 // const ProtectedRoute = ({ children }) => {
@@ -97,6 +99,7 @@ function App() {
               </PageWrapper>
             }
           />
+
           <Route
             path="/dashboard"
             element={
@@ -113,6 +116,16 @@ function App() {
               <PageWrapper>
                 {/* <ProtectedRoute> */}
                 <About />
+                {/* </ProtectedRoute> */}
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <PageWrapper>
+                {/* <ProtectedRoute> */}
+                <Blog />
                 {/* </ProtectedRoute> */}
               </PageWrapper>
             }
@@ -205,12 +218,11 @@ function App() {
               </PageWrapper>
             }
           />
-
+          <Route path="*" element={<NotFound />} />
           {/* Catch-All */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
-
       <Footer />
       <Toaster />
     </div>
