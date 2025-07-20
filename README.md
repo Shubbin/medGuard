@@ -16,7 +16,7 @@ MedGuard aims to serve individuals, pharmacists, and regulatory agencies with to
 | ------------------------ | ----------------------------------------------- | ----------- |
 | Makinde Olasubomi Alade  | [@Shubbin](https://github.com/Shubbin)          | **Shubbin** |
 | Ayinde Abubakar Damilare | [@Abubakar](https://github.com/Abubakar-Ayinde) | **Damien**  |
-| Temioluwa David          | [@macdavid28](https://github.com/macdavid28)    | **Mac**     |
+| Temiloluwa David          | [@macdavid28](https://github.com/macdavid28)    | **Mac**     |
 
 ## 🧠 Core Objectives
 
@@ -35,6 +35,7 @@ MedGuard aims to serve individuals, pharmacists, and regulatory agencies with to
 - **Tailwind CSS**
 - **Framer Motion**
 - **Axios**
+- **Yup**
 - **React Hook Form**
 - **React Router DOM**
 
