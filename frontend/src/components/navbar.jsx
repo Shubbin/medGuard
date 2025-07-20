@@ -11,6 +11,7 @@ import {
   CircleCheck,
 } from "lucide-react";
 import navbarLogo from "@/assets/images/Medguard Logo Two.png";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, logout } = useAuthStore();
@@ -23,6 +24,7 @@ const Navbar = () => {
   };
 
   const isActive = (path) => location.pathname === path;
+
   const navItems = [
     { to: "/", label: "Home", icon: <Home /> },
     { to: "/about", label: "About", icon: <User /> },
@@ -40,19 +42,19 @@ const Navbar = () => {
             to="/"
             className="text-xl font-bold transition duration-200 text-primary hover:text-secondary"
           >
-            <img src={navbarLogo} className="h-14" alt="" />
+            <img src={navbarLogo} className="h-14" alt="MedGuard Logo" />
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden space-x-6 md:flex">
             {navItems.map((item) => (
               <Link
-                key={item.name}
+                key={item.to} 
                 to={item.to}
-                className={`font-bold transition duration-200  p-2  rounded-md flex gap-2 items-end  ${
+                className={`font-bold transition duration-200 p-2 rounded-md flex gap-2 items-end ${
                   isActive(item.to)
                     ? "text-primary font-semibold bg-secondary-dark text-white"
-                    : "text-black hover:bg-secondary-dark hover:text-white "
+                    : "text-black hover:bg-secondary-dark hover:text-white"
                 }`}
               >
                 {item.icon}
@@ -83,6 +85,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
+<<<<<<< HEAD
         <div className="flex flex-col px-4 pt-4 pb-4 space-y-4 bg-white md:hidden">
           {navItems.map((navItem) => (
             <Link
@@ -97,6 +100,21 @@ const Navbar = () => {
             >
               {navItem.icon}
               {navItem.label}
+=======
+        <div className="flex flex-col gap-2 px-4 pb-4 bg-white shadow-lg md:hidden">
+          {navItems.map((item) => (
+            <Link
+              key={item.to} 
+              to={item.to}
+              onClick={() => setIsOpen(false)}
+              className={`block font-medium ${
+                isActive(item.to)
+                  ? "text-primary underline underline-offset-4"
+                  : "text-gray-700 hover:text-primary"
+              }`}
+            >
+              {item.label}
+>>>>>>> origin
             </Link>
           ))}
           {isAuthenticated && (
