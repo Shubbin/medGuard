@@ -37,6 +37,7 @@ import ReportMails from "./pages/dashboard/reportMails";
 import Analytics from "./pages/dashboard/Analytics";
 import Users from "./pages/dashboard/Users";
 import Roles from "./pages/dashboard/Roles";
+import Blogs from "./pages/dashboard/Blogs";
 import Settings from "./pages/dashboard/Settings";
 
 // Documents
@@ -111,6 +112,7 @@ const App = () => {
             <Route path="report-mails" element={<ReportMails />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="users" element={<Users />} />
+            <Route path="Blogs" element={<Blogs />} />
             <Route path="roles" element={<Roles />} />
             <Route path="settings" element={<Settings />} />
           </Route>
