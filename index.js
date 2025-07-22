@@ -2,6 +2,7 @@ import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import adminRoutes from "./backend/routes/admin.route.js";
 import { connectDB } from "./backend/db/connectDb.js";
 import authRouters from "./backend/routes/auth.route.js";
 import blogRoutes from "./backend/routes/blog.routes.js";
@@ -30,6 +31,8 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 
 //routes
+
+app.use("/api/admin", adminRoutes);
 app.use("/api/auth", authRouters);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/drugs/verify", verifyDrugByNRN)

@@ -8,7 +8,7 @@ export const verificationEmailTemplate = (verificationLink) => `
   <body style="margin: 0; padding: 0;">
     <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
       <header style="background-color: #001f3f; padding: 20px; text-align: center; color: white;">
-        <h1 style="margin: 0; font-size: 24px;">CrimeWatch</h1>
+        <h1 style="margin: 0; font-size: 24px;">MedGuard</h1>
       </header>
       <main style="padding: 30px; text-align: center;">
         <h2 style="color: #333;">Verify Your Email</h2>
@@ -18,7 +18,7 @@ export const verificationEmailTemplate = (verificationLink) => `
         </div>
       </main>
       <footer style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-        &copy; ${new Date().getFullYear()} CrimeWatch. All rights reserved.
+        &copy; ${new Date().getFullYear()} MedGuard. All rights reserved.
       </footer>
     </div>
   </body>
@@ -35,7 +35,7 @@ export const resetPasswordTemplate = (resetURL) => `
   <body style="margin: 0; padding: 0;">
     <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
       <header style="background-color: #001f3f; padding: 20px; text-align: center; color: white;">
-        <h1 style="margin: 0; font-size: 24px;">CrimeWatch</h1>
+        <h1 style="margin: 0; font-size: 24px;">MedGuard</h1>
       </header>
       <main style="padding: 30px; text-align: center;">
         <h2 style="color: #333;">Reset Your Password</h2>
@@ -45,7 +45,7 @@ export const resetPasswordTemplate = (resetURL) => `
         </div>
       </main>
       <footer style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-        &copy; ${new Date().getFullYear()} CrimeWatch. All rights reserved.
+        &copy; ${new Date().getFullYear()} MedGuard. All rights reserved.
       </footer>
     </div>
   </body>
@@ -62,14 +62,14 @@ export const resetSuccessTemplate = () => `
   <body style="margin: 0; padding: 0;">
     <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
       <header style="background-color: #001f3f; padding: 20px; text-align: center; color: white;">
-        <h1 style="margin: 0; font-size: 24px;">CrimeWatch</h1>
+        <h1 style="margin: 0; font-size: 24px;">MedGuard</h1>
       </header>
       <main style="padding: 30px; text-align: center;">
         <h2 style="color: #28a745;">Success!</h2>
         <p style="font-size: 16px; color: #555;">Your password was successfully reset. You can now log in with your new password.</p>
       </main>
       <footer style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-        &copy; ${new Date().getFullYear()} CrimeWatch. All rights reserved.
+        &copy; ${new Date().getFullYear()} MedGuard. All rights reserved.
       </footer>
     </div>
   </body>
@@ -81,20 +81,20 @@ export const welcomeEmailTemplate = (name) => `
   <html lang="en" style="font-family: Arial, sans-serif; background-color: #f8f9fa;">
   <head>
     <meta charset="UTF-8">
-    <title>Welcome to CrimeWatch</title>
+    <title>Welcome to MedGuard</title>
   </head>
   <body style="margin: 0; padding: 0;">
     <div style="max-width: 600px; margin: auto; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
       <header style="background-color: #001f3f; padding: 20px; text-align: center; color: white;">
-        <h1 style="margin: 0; font-size: 24px;">CrimeWatch</h1>
+        <h1 style="margin: 0; font-size: 24px;">MedGuard</h1>
       </header>
       <main style="padding: 30px; text-align: center;">
         <h2 style="color: #333;">Welcome, ${name}!</h2>
-        <p style="font-size: 16px; color: #555;">We’re thrilled to have you on board. CrimeWatch empowers you to stay informed and help create safer communities.</p>
+        <p style="font-size: 16px; color: #555;">We’re thrilled to have you on board. MedGuard empowers you to stay informed and help create safer communities.</p>
         <p style="font-size: 16px; color: #555;">Let’s make a difference together.</p>
       </main>
       <footer style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-        &copy; ${new Date().getFullYear()} CrimeWatch. All rights reserved.
+        &copy; ${new Date().getFullYear()} MedGuard. All rights reserved.
       </footer>
     </div>
   </body>

@@ -12,7 +12,7 @@ const EmailVerificationPage = () => {
   const handleChange = (index, value) => {
     const newCode = [...code];
     if (value.length > 1) {
-      const pastedCode = value.slice(0, 6).split("");
+      const pastedCode = value.replace(/\D/g, "").slice(0, 6).split(""); // ✅ Clean pasted input
       for (let i = 0; i < 6; i++) {
         newCode[i] = pastedCode[i] || "";
       }
@@ -37,7 +37,10 @@ const EmailVerificationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const verificationCode = code.join("");
+    const verificationCode = code.join("").replace(/\D/g, "").trim(); // ✅ Sanitize final code
+
+    if (verificationCode.length !== 6) return;
+
     try {
       await verifyEmail(verificationCode);
       navigate("/");
@@ -64,7 +67,9 @@ const EmailVerificationPage = () => {
         <h2 className='text-3xl font-bold mb-6 text-center text-primary'>
           Verify Your Email
         </h2>
-        <p className='text-center text-text mb-6'>Enter the 6-digit code sent to your email address.</p>
+        <p className='text-center text-text mb-6'>
+          Enter the 6-digit code sent to your email address.
+        </p>
         <form onSubmit={handleSubmit} className='space-y-6'>
           <div className='flex justify-between'>
             {code.map((digit, index) => (
@@ -72,6 +77,8 @@ const EmailVerificationPage = () => {
                 key={index}
                 ref={(el) => (inputRefs.current[index] = el)}
                 type='text'
+                inputMode='numeric'
+                pattern='\d*'
                 maxLength='1'
                 value={digit}
                 onChange={(e) => handleChange(index, e.target.value)}
@@ -95,4 +102,5 @@ const EmailVerificationPage = () => {
     </div>
   );
 };
+
 export default EmailVerificationPage;
