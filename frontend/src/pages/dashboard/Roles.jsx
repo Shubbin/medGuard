@@ -1,8 +1,14 @@
 import { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "../../components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import RoleTable from "../../components/dashboardComponets/roles/RoleTable";
-import RoleForm from  "../../components/dashboardComponets/roles/RoleForm";
+import RoleForm from "../../components/dashboardComponets/roles/RoleForm";
+import { PlusCircle } from "lucide-react";
 
 export default function Roles() {
   const [roles, setRoles] = useState([
@@ -25,9 +31,15 @@ export default function Roles() {
   return (
     <div className="p-4 space-y-4">
       <Card>
-        <CardHeader className="flex justify-between items-center">
+        <CardHeader className="flex items-center justify-between">
           <CardTitle>Roles Management</CardTitle>
-          <Button onClick={() => setShowForm(true)}>Add Role</Button>
+          <Button
+            onClick={() => setShowForm(true)}
+            className="flex items-center gap-2 mb-2 text-white bg-primary-dark"
+          >
+            <PlusCircle size={20} />
+            Add Role
+          </Button>
         </CardHeader>
         <CardContent>
           <RoleTable roles={roles} onDelete={handleDelete} />

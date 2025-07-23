@@ -1,4 +1,3 @@
-
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,7 +9,14 @@ import {
   Legend,
 } from "chart.js";
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
+ChartJS.register(
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  Legend
+);
 
 const AnalyticsChart = () => {
   const data = {
@@ -20,7 +26,9 @@ const AnalyticsChart = () => {
         label: "Verifications",
         data: [120, 190, 300, 250, 220, 180, 270],
         fill: false,
-        borderColor: "#3b82f6",
+        textColor: "#fff",
+        backgroundColor: "#fff",
+        borderColor: "#fff",
         tension: 0.3,
       },
     ],
@@ -31,13 +39,60 @@ const AnalyticsChart = () => {
     plugins: {
       legend: {
         display: true,
+        labels: {
+          color: "#fff",
+          font: {
+            size: 14,
+          },
+        },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: "#fff",
+          font: {
+            size: 14,
+          },
+          callback: (value) => `${value}`, // Add text to numbers
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)",
+          lineWidth: 1,
+        },
+        border: {
+          display: true,
+          color: "#fff",
+          width: 2,
+          dash: [], // Solid line
+        },
+      },
+      x: {
+        ticks: {
+          color: "#fff",
+          font: {
+            size: 12,
+          },
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)",
+          lineWidth: 1,
+        },
+        border: {
+          display: true,
+          color: "#fff",
+          width: 2,
+          dash: [], // Solid line
+        },
       },
     },
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-      <h4 className="mb-4 text-lg font-semibold">Weekly Verification Trends</h4>
+    <div className="p-4 bg-white border border-gray-200 shadow-sm dark:bg-primary-dark rounded-2xl dark:border-gray-700">
+      <h4 className="mb-4 text-lg font-semibold text-white ">
+        Weekly Verification Trends
+      </h4>
       <Line data={data} options={options} />
     </div>
   );

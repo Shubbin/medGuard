@@ -1,5 +1,5 @@
 // src/components/ui/sidebar.jsx
-import { Home, Mail, PieChart, Users, FileText, Menu } from "lucide-react";
+import { Home, Mail, PieChart, Users, FileText, Menu, LogOut, Cog } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
@@ -9,8 +9,9 @@ const navItems = [
   { name: "Report Mails", icon: Mail, path: "/dashboard/report-mails" },
   { name: "Analytics", icon: PieChart, path: "/dashboard/analytics" },
   { name: "Users", icon: Users, path: "/dashboard/users" },
-  { name: "Settings", icon: FileText, path: "/dashboard/settings" },
+  { name: "Settings", icon: Cog, path: "/dashboard/settings" },
   { name: "Roles", icon: FileText, path: "/dashboard/roles" },
+  { name: "Logout", icon: LogOut, path: "" },
 ];
 
 const Sidebar = () => {
@@ -20,10 +21,10 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Hamburger Button */}
-      <div className="md:hidden fixed top-4 left-4 z-50">
+      <div className="fixed z-50 md:hidden top-4 left-4">
         <button
           onClick={() => setOpen(!open)}
-          className="p-2 rounded-md bg-blue-900 text-white"
+          className="p-2 text-white bg-blue-900 rounded-md"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -40,7 +41,9 @@ const Sidebar = () => {
           }
         )}
       >
-        <div className="text-2xl font-bold mb-10 tracking-wide">Admin Panel</div>
+        <div className="mb-10 text-2xl font-bold tracking-wide">
+          Admin Panel
+        </div>
         <nav className="space-y-4">
           {navItems.map(({ name, icon: Icon, path }) => (
             <Link
@@ -64,7 +67,7 @@ const Sidebar = () => {
       {/* Overlay for mobile */}
       {open && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
+          className="fixed inset-0 z-30 bg-black bg-opacity-40 md:hidden"
           onClick={() => setOpen(false)}
         />
       )}
