@@ -1,32 +1,85 @@
-export function Sidebar({ navItems, activeTab, setActiveTab }) {
+// src/components/ui/sidebar.jsx
+import {
+  Home,
+  Mail,
+  PieChart,
+  Users,
+  FileText,
+  Menu,
+  LogOut,
+  Cog,
+} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import clsx from "clsx";
+import { useState } from "react";
+
+const navItems = [
+  { name: "Dashboard", icon: Home, path: "/dashboard" },
+  { name: "Report Mails", icon: Mail, path: "/dashboard/report-mails" },
+  { name: "Analytics", icon: PieChart, path: "/dashboard/analytics" },
+  { name: "Users", icon: Users, path: "/dashboard/users" },
+  { name: "Settings", icon: Cog, path: "/dashboard/settings" },
+  { name: "Roles", icon: FileText, path: "/dashboard/roles" },
+  { name: "Logout", icon: LogOut, path: "" },
+];
+
+const Sidebar = () => {
+  const location = useLocation();
+  const [open, setOpen] = useState(false);
+
   return (
-    <aside className="w-64 bg-white shadow-lg min-h-screen p-6">
-      <nav aria-label="Sidebar Navigation">
-        <ul className="space-y-4">
-          {navItems.map((item) => {
-            const isActive = activeTab === item.tab;
-            return (
-              <li key={item.tab}>
-                <button
-                  onClick={() => setActiveTab(item.tab)}
-                  className={`group flex items-center gap-3 w-full px-4 py-2 rounded-lg transition duration-200
-                    ${isActive ? "bg-blue-100 text-[#2563eb]" : "text-gray-700 hover:bg-gray-100"}
-                    focus:outline-none focus:ring-2 focus:ring-[#2563eb]`}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  <div
-                    className={`flex items-center justify-center h-9 w-9 rounded-full transition-colors
-                      ${isActive ? "bg-[#2563eb] text-white" : "bg-gray-200 group-hover:bg-gray-300 text-gray-600 group-hover:text-black"}`}
-                  >
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <span className="text-sm font-medium">{item.name}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </aside>
+    <>
+      {/* Mobile Hamburger Button */}
+      <div className="fixed z-50 md:hidden top-4 left-4">
+        <button
+          onClick={() => setOpen(!open)}
+          className="p-2 text-white bg-blue-900 rounded-md"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+
+      {/* Sidebar */}
+      <aside
+        className={clsx(
+          "fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-blue-950 to-slate-900 text-white shadow-2xl px-6 py-8 z-40 transform transition-transform duration-300 ease-in-out",
+          {
+            "-translate-x-full": !open,
+            "translate-x-0": open,
+            "md:translate-x-0": true, // Always visible on md and above
+          }
+        )}
+      >
+        <div className="mb-10 text-2xl font-bold tracking-wide">
+          Admin Panel
+        </div>
+        <nav className="space-y-4">
+          {navItems.map(({ name, icon: Icon, path }) => (
+            <Link
+              to={path}
+              key={name}
+              onClick={() => setOpen(false)} // close on link click (mobile)
+              className={clsx(
+                "flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-300",
+                location.pathname === path
+                  ? "bg-white/10 text-white font-semibold"
+                  : "text-slate-300 hover:bg-white/10 hover:text-white"
+              )}
+            >
+              <Icon className="w-5 h-5" />
+              <span className="text-sm">{name}</span>
+            </Link>
+          ))}
+        </nav>
+      </aside>
+
+      {/* Overlay for mobile */}
+      {open && (
+        <div
+          className="fixed inset-0 z-30 bg-black bg-opacity-40 md:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+    </>
   );
-}
+};
