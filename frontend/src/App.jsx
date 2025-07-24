@@ -1,10 +1,5 @@
 import { useEffect } from "react";
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
@@ -45,9 +40,8 @@ import TermsAndConditions from "./document/TermsAndConditions";
 import PrivacyPolicy from "./document/PrivacyPolicy";
 
 // ✅ Redirect wrapper
-=======
+
 // Loader
-import LoadingSpinner from "./components/LoadingSpinner";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 
@@ -60,15 +54,13 @@ import Blog from "./pages/Blog";
 // };
 
 // ✅ Redirect Authenticated Users
->>>>>>> 53969141104cea62380aca306f9e80e9d816a024
+
 const RedirectAuthenticatedUser = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
   if (isAuthenticated && user?.isVerified) return <Navigate to="/" replace />;
   return children;
 };
 
-<<<<<<< HEAD
-=======
 function App() {
   const { isCheckingAuth, checkAuth } = useAuthStore();
   const location = useLocation();
@@ -252,7 +244,6 @@ function App() {
   );
 }
 
->>>>>>> 53969141104cea62380aca306f9e80e9d816a024
 // ✅ Framer Motion Page Wrapper
 const PageWrapper = ({ children }) => (
   <motion.div
@@ -280,31 +271,133 @@ const App = () => {
       <ScrollToTop />
 
       {/* Floating Effects */}
-      <FloatingShape color="bg-primary" size="w-64 h-64" top="-5%" left="10%" delay={0} />
-      <FloatingShape color="bg-primary-dark" size="w-48 h-48" top="70%" left="80%" delay={5} />
-      <FloatingShape color="bg-secondary" size="w-32 h-32" top="40%" left="-10%" delay={2} />
+      <FloatingShape
+        color="bg-primary"
+        size="w-64 h-64"
+        top="-5%"
+        left="10%"
+        delay={0}
+      />
+      <FloatingShape
+        color="bg-primary-dark"
+        size="w-48 h-48"
+        top="70%"
+        left="80%"
+        delay={5}
+      />
+      <FloatingShape
+        color="bg-secondary"
+        size="w-32 h-32"
+        top="40%"
+        left="-10%"
+        delay={2}
+      />
 
       <Navbar />
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-
           {/* Public Pages */}
-          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-          <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
-          <Route path="/report" element={<PageWrapper><Report /></PageWrapper>} />
-          <Route path="/verify" element={<PageWrapper><VerifyDrug /></PageWrapper>} />
+          <Route
+            path="/"
+            element={
+              <PageWrapper>
+                <Home />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <PageWrapper>
+                <About />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/report"
+            element={
+              <PageWrapper>
+                <Report />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/verify"
+            element={
+              <PageWrapper>
+                <VerifyDrug />
+              </PageWrapper>
+            }
+          />
 
           {/* Auth Routes */}
-          <Route path="/signup" element={<PageWrapper><RedirectAuthenticatedUser><SignUpPage /></RedirectAuthenticatedUser></PageWrapper>} />
-          <Route path="/login" element={<PageWrapper><RedirectAuthenticatedUser><LoginPage /></RedirectAuthenticatedUser></PageWrapper>} />
-          <Route path="/verify-email" element={<PageWrapper><EmailVerificationPage /></PageWrapper>} />
-          <Route path="/forgot-password" element={<PageWrapper><RedirectAuthenticatedUser><ForgotPasswordPage /></RedirectAuthenticatedUser></PageWrapper>} />
-          <Route path="/reset-password/:token" element={<PageWrapper><RedirectAuthenticatedUser><ResetPasswordPage /></RedirectAuthenticatedUser></PageWrapper>} />
+          <Route
+            path="/signup"
+            element={
+              <PageWrapper>
+                <RedirectAuthenticatedUser>
+                  <SignUpPage />
+                </RedirectAuthenticatedUser>
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PageWrapper>
+                <RedirectAuthenticatedUser>
+                  <LoginPage />
+                </RedirectAuthenticatedUser>
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/verify-email"
+            element={
+              <PageWrapper>
+                <EmailVerificationPage />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <PageWrapper>
+                <RedirectAuthenticatedUser>
+                  <ForgotPasswordPage />
+                </RedirectAuthenticatedUser>
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/reset-password/:token"
+            element={
+              <PageWrapper>
+                <RedirectAuthenticatedUser>
+                  <ResetPasswordPage />
+                </RedirectAuthenticatedUser>
+              </PageWrapper>
+            }
+          />
 
           {/* Documents */}
-          <Route path="/terms" element={<PageWrapper><TermsAndConditions /></PageWrapper>} />
-          <Route path="/privacy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+          <Route
+            path="/terms"
+            element={
+              <PageWrapper>
+                <TermsAndConditions />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/privacy"
+            element={
+              <PageWrapper>
+                <PrivacyPolicy />
+              </PageWrapper>
+            }
+          />
 
           {/* Dashboard */}
           <Route path="/dashboard" element={<DashboardLayout />}>
