@@ -8,10 +8,7 @@ import {
 import { Button } from "../../components/ui/button";
 import RoleTable from "../../components/dashboardComponets/roles/RoleTable";
 import RoleForm from "../../components/dashboardComponets/roles/RoleForm";
-<<<<<<< HEAD
-=======
 import { PlusCircle } from "lucide-react";
->>>>>>> 53969141104cea62380aca306f9e80e9d816a024
 
 export default function Roles() {
   const [roles, setRoles] = useState([
@@ -32,29 +29,6 @@ export default function Roles() {
   };
 
   return (
-<<<<<<< HEAD
-    <section className="p-4 sm:p-6 md:p-10 space-y-8">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold text-gray-800">Roles Management</h1>
-        <p className="text-gray-600">
-          Manage permissions and responsibilities within your system.
-        </p>
-      </div>
-
-      <Card className="shadow-md rounded-2xl border border-muted bg-white">
-        <CardHeader className="flex items-center justify-between">
-          <CardTitle className="text-lg font-semibold text-gray-800">
-            Current Roles
-          </CardTitle>
-          <Button
-            onClick={() => setShowForm(true)}
-            className="bg-primary text-white"
-          >
-            + Add Role
-          </Button>
-        </CardHeader>
-        <CardContent className="pt-0">
-=======
     <div className="p-4 space-y-4">
       <Card>
         <CardHeader className="flex items-center justify-between">
@@ -68,7 +42,6 @@ export default function Roles() {
           </Button>
         </CardHeader>
         <CardContent>
->>>>>>> 53969141104cea62380aca306f9e80e9d816a024
           <RoleTable roles={roles} onDelete={handleDelete} />
         </CardContent>
       </Card>
@@ -76,15 +49,6 @@ export default function Roles() {
       {showForm && (
         <RoleForm onSubmit={handleAddRole} onClose={() => setShowForm(false)} />
       )}
-<<<<<<< HEAD
-    </section>
-  );
-}
-
-
-
-=======
     </div>
   );
 }
->>>>>>> 53969141104cea62380aca306f9e80e9d816a024
