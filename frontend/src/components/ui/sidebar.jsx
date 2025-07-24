@@ -1,14 +1,5 @@
 // src/components/ui/sidebar.jsx
-import {
-  Home,
-  Mail,
-  PieChart,
-  Users,
-  FileText,
-  Menu,
-  LogOut,
-  Cog,
-} from "lucide-react";
+import { Home, Mail, PieChart, Users, FileText, Menu, LogOut, Cog } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
@@ -83,3 +74,5 @@ const Sidebar = () => {
     </>
   );
 };
+
+export default Sidebar;
