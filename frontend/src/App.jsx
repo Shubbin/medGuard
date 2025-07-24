@@ -44,7 +44,6 @@ import Settings from "./pages/dashboard/Settings";
 import TermsAndConditions from "./document/TermsAndConditions";
 import PrivacyPolicy from "./document/PrivacyPolicy";
 
-<<<<<<< HEAD
 // ✅ Redirect wrapper
 =======
 // Loader
