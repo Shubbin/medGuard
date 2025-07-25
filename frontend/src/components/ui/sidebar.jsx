@@ -1,5 +1,14 @@
 // src/components/ui/sidebar.jsx
-import { Home, Mail, PieChart, Users, FileText, Menu, LogOut, Cog } from "lucide-react";
+import {
+  Home,
+  Mail,
+  PieChart,
+  Users,
+  FileText,
+  Menu,
+  LogOut,
+  Cog,
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
@@ -11,6 +20,11 @@ const navItems = [
   { name: "Users", icon: Users, path: "/dashboard/users" },
   { name: "Settings", icon: Cog, path: "/dashboard/settings" },
   { name: "Roles", icon: FileText, path: "/dashboard/roles" },
+  {
+    name: "Blogs",
+    icon: FileText,
+    path: "/dashboard/Blogs",
+  },
   { name: "Logout", icon: LogOut, path: "" },
 ];
 

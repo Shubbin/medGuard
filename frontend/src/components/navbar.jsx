@@ -29,7 +29,7 @@ const Navbar = () => {
   const navItems = [
     { to: "/", label: "Home", icon: <Home /> },
     { to: "/about", label: "About", icon: <User /> },
-    { to: "/blog", label: "Blog", icon: <Book /> },
+    { to: "/Blog", label: "Blog", icon: <Book /> },
     { to: "/report", label: "Report", icon: <AlertTriangle /> },
     { to: "/verify", label: "Verify Drug", icon: <CheckCircle /> },
     { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard /> },

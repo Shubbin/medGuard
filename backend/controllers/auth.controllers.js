@@ -64,12 +64,10 @@ export const verifyEmail = async (req, res) => {
     });
 
     if (!user) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Invalid or expired verification code",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired verification code",
+      });
     }
 
     user.isVerified = true;
@@ -92,16 +90,18 @@ export const verifyEmail = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
-
 export const login = async (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
     return res
       .status(400)
       .json({ success: false, message: "Email and password required" });
   }
+
   try {
     const user = await User.findOne({ email }).select("+password"); // explicitly select password
+
     if (!user) {
       return res
         .status(400)
@@ -113,6 +113,14 @@ export const login = async (req, res) => {
       return res
         .status(400)
         .json({ success: false, message: "Invalid credentials" });
+    }
+
+    // 🚨 NEW: Check if user has verified their email
+    if (!user.isVerified) {
+      return res.status(403).json({
+        success: false,
+        message: "Please verify your email before logging in.",
+      });
     }
 
     generateTokenAndSetCookie(res, user._id);

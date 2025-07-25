@@ -1,201 +1,87 @@
-// import section from "@components/section";
-// import { useState } from "react";
+import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Calendar, DollarSign } from "lucide-react";
-// import SwitchButton from "../components/SwitchButton";
+import { Calendar } from "lucide-react";
+
+// 🔥 Your dynamic blog fetcher
+export const fetchAllBlogs = async () => {
+  try {
+    const response = await fetch("http://localhost:8000/api/blogs"); 
+    if (!response.ok) throw new Error("Failed to fetch blogs");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching blogs:", error.message);
+    return [];
+  }
+};
 
 const Blog = () => {
-  //   const [isCompleted, setIsCompleted] = useState(false);
-  // Sample data for ongoing and completed projects
-  const ongoing = [
-    {
-      title: "Luxury Uptown",
-      description:
-        "Premium condominium complex in the heart of downtown featuring modern amenities, stunning city views, and convenient access to shopping and dining.",
-      image:
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Downtown District",
-      year: "Ongoing",
-      value: "₦2.5M",
-    },
-    {
-      title: "Suburban Family Homes",
-      description:
-        "Beautiful family-friendly neighborhood with spacious homes, parks, and excellent schools. Perfect for growing families seeking comfort and community.",
-      image:
-        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Maple Heights",
-      year: "Ongoing",
-      value: "₦1.8M",
-    },
-    {
-      title: "Commercial Plaza",
-      description:
-        "Mixed-use commercial development featuring retail spaces, office suites, and dining establishments. A thriving hub for local businesses.",
-      image:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Business District",
-      year: "Ongoing",
-      value: "₦4.2M",
-    },
-    {
-      title: "Waterfront Estates",
-      description:
-        "Exclusive waterfront properties offering breathtaking views, private docks, and luxury amenities. The pinnacle of sophisticated living.",
-      image:
-        "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Lakeside Drive",
-      year: "Ongoing",
-      value: "₦3.7M",
-    },
-    {
-      title: "Urban Loft Conversion",
-      description:
-        "Historic warehouse transformed into modern loft apartments, blending industrial charm with contemporary design and amenities.",
-      image:
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Arts Quarter",
-      year: "Ongoing",
-      value: "₦1.9M",
-    },
-    {
-      title: "Green Valley Townhomes",
-      description:
-        "Eco-friendly townhome community with sustainable features, energy-efficient designs, and beautiful landscaping throughout.",
-      image:
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Green Valley",
-      year: "Ongoing",
-      value: "₦2.1M",
-    },
-  ];
-  const projects = [
-    {
-      title: "Luxury Downtown Condos",
-      description:
-        "Premium condominium complex in the heart of downtown featuring modern amenities, stunning city views, and convenient access to shopping and dining.",
-      image:
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Downtown District",
-      year: "2024",
-      value: "₦2.5M",
-    },
-    {
-      title: "Suburban Family Homes",
-      description:
-        "Beautiful family-friendly neighborhood with spacious homes, parks, and excellent schools. Perfect for growing families seeking comfort and community.",
-      image:
-        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Maple Heights",
-      year: "2023",
-      value: "₦1.8M",
-    },
-    {
-      title: "Commercial Plaza",
-      description:
-        "Mixed-use commercial development featuring retail spaces, office suites, and dining establishments. A thriving hub for local businesses.",
-      image:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Business District",
-      year: "2023",
-      value: "₦4.2M",
-    },
-    {
-      title: "Waterfront Estates",
-      description:
-        "Exclusive waterfront properties offering breathtaking views, private docks, and luxury amenities. The pinnacle of sophisticated living.",
-      image:
-        "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Lakeside Drive",
-      year: "2024",
-      value: "₦3.7M",
-    },
-    {
-      title: "Urban Loft Conversion",
-      description:
-        "Historic warehouse transformed into modern loft apartments, blending industrial charm with contemporary design and amenities.",
-      image:
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Arts Quarter",
-      year: "2023",
-      value: "₦1.9M",
-    },
-    {
-      title: "Green Valley Townhomes",
-      description:
-        "Eco-friendly townhome community with sustainable features, energy-efficient designs, and beautiful landscaping throughout.",
-      image:
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      location: "Green Valley",
-      year: "2024",
-      value: "₦2.1M",
-    },
-  ];
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  useEffect(() => {
+    const loadBlogs = async () => {
+      const blogs = await fetchAllBlogs();
+      setBlogPosts(blogs);
+    };
+    loadBlogs();
+  }, []);
 
   return (
-    <>
-          <div className="p-4">
-        <section>
-          <div className="max-w-7xl mx-auto flex justify-between my-12">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold  mb-4">
-              Blog
-              </h1>
-              <p className="text-lg text-gray-600 max-w-3xl">
-                Discover our portfolio of successful real estate developments
-                and transactions that showcase our expertise and commitment to
-                excellence.
-              </p>
-            </div>
-            <div>
-              {/* Button Component */}
-              {/* <SwitchButton
-                isCompleted={isCompleted}
-                setIsCompleted={setIsCompleted}
-              /> */}
-            </div>
+    <div className="p-4">
+      <section>
+        <div className="max-w-7xl mx-auto flex justify-between my-12">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">Blog</h1>
+            <p className="text-lg text-gray-600 max-w-3xl">
+              Explore how MedGuard is transforming healthcare through technology, awareness, and innovation.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* {isCompleted */}
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-              >
-                <div
-                  className="h-48 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                >
+        </div>
 
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-vw-text mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2 text-sm text-gray-500">
-                      <MapPin size={16} />
-                      <span>{project.location}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-sm text-gray-500">
-                      <Calendar size={16} />
-                      <span>Completed {project.year}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-sm font-semibold">
-                      <DollarSign size={16} />
-                      <span>Project Value: {project.value}</span>
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogPosts.map((post, index) => (
+            <div
+              key={post._id || index}
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                className="h-48 bg-cover bg-center"
+                style={{ backgroundImage: `url(${post.designImg || "https://via.placeholder.com/600"})` }}
+              ></div>
+
+              <div className="p-6">
+                <span className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">
+                  {post.category?.title || "Uncategorized"}
+                </span>
+
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <Link to={`/blog/${post._id}`}>{post.title}</Link>
+                </h3>
+
+                <p className="text-gray-700 mb-4">{post.description}</p>
+
+                <div className="flex items-center gap-4 mt-4">
+                  <img
+                    src={post.author?.imageUrl || "https://via.placeholder.com/100"}
+                    alt={post.author?.name || "Author"}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">{post.author?.name || "Unknown Author"}</p>
+                    <p className="text-sm text-gray-500">{post.author?.role || "Contributor"}</p>
                   </div>
                 </div>
+
+                <div className="flex items-center text-sm text-gray-500 mt-4">
+                  <Calendar size={16} className="mr-1" />
+                  <span>{post.date || "Unknown Date"}</span>
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    </>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 };
 
