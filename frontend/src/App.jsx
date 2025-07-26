@@ -1,24 +1,17 @@
 import { useEffect } from "react";
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 
 // Components
-import Navbar from "./components/navbar";
-import Footer from "./components/Footer";
 import FloatingShape from "./components/FloatingShape";
 import ScrollToTop from "./components/ScrollToTop";
 import LoadingSpinner from "./components/LoadingSpinner";
 
 // Layouts
 import DashboardLayout from "./components/layouts/DashboardLayout";
-
+import AppLayout from "./components/layouts/AppLayout";
 // Public Pages
 import Home from "./pages/home/Home";
 import About from "./pages/About/About";
@@ -73,35 +66,136 @@ const App = () => {
   if (isCheckingAuth) return <LoadingSpinner />;
 
   return (
-    <div className="relative min-h-screen pt-16 overflow-hidden bg-gradient-to-br from-background via-secondary to-background-light">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-secondary to-background-light">
       <ScrollToTop />
-
       {/* Floating Effects */}
-      <FloatingShape color="bg-primary" size="w-64 h-64" top="-5%" left="10%" delay={0} />
-      <FloatingShape color="bg-primary-dark" size="w-48 h-48" top="70%" left="80%" delay={5} />
-      <FloatingShape color="bg-secondary" size="w-32 h-32" top="40%" left="-10%" delay={2} />
-
-      <Navbar />
+      <FloatingShape
+        color="bg-primary"
+        size="w-64 h-64"
+        top="-5%"
+        left="10%"
+        delay={0}
+      />
+      <FloatingShape
+        color="bg-primary-dark"
+        size="w-48 h-48"
+        top="70%"
+        left="80%"
+        delay={5}
+      />
+      <FloatingShape
+        color="bg-secondary"
+        size="w-32 h-32"
+        top="40%"
+        left="-10%"
+        delay={2}
+      />
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+          <Route element={<AppLayout />}>
+            {/* Public Pages */}
+            <Route
+              path="/"
+              element={
+                <PageWrapper>
+                  <Home />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PageWrapper>
+                  <About />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/report"
+              element={
+                <PageWrapper>
+                  <Report />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/verify"
+              element={
+                <PageWrapper>
+                  <VerifyDrug />
+                </PageWrapper>
+              }
+            />
 
-          {/* Public Pages */}
-          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-          <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
-          <Route path="/report" element={<PageWrapper><Report /></PageWrapper>} />
-          <Route path="/verify" element={<PageWrapper><VerifyDrug /></PageWrapper>} />
+            {/* Auth Routes */}
+            <Route
+              path="/signup"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <SignUpPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <LoginPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/verify-email"
+              element={
+                <PageWrapper>
+                  <EmailVerificationPage />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/forgot-password"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <ForgotPasswordPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/reset-password/:token"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <ResetPasswordPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
 
-          {/* Auth Routes */}
-          <Route path="/signup" element={<PageWrapper><RedirectAuthenticatedUser><SignUpPage /></RedirectAuthenticatedUser></PageWrapper>} />
-          <Route path="/login" element={<PageWrapper><RedirectAuthenticatedUser><LoginPage /></RedirectAuthenticatedUser></PageWrapper>} />
-          <Route path="/verify-email" element={<PageWrapper><EmailVerificationPage /></PageWrapper>} />
-          <Route path="/forgot-password" element={<PageWrapper><RedirectAuthenticatedUser><ForgotPasswordPage /></RedirectAuthenticatedUser></PageWrapper>} />
-          <Route path="/reset-password/:token" element={<PageWrapper><RedirectAuthenticatedUser><ResetPasswordPage /></RedirectAuthenticatedUser></PageWrapper>} />
-
-          {/* Documents */}
-          <Route path="/terms" element={<PageWrapper><TermsAndConditions /></PageWrapper>} />
-          <Route path="/privacy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+            {/* Documents */}
+            <Route
+              path="/terms"
+              element={
+                <PageWrapper>
+                  <TermsAndConditions />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/privacy"
+              element={
+                <PageWrapper>
+                  <PrivacyPolicy />
+                </PageWrapper>
+              }
+            />
+          </Route>
 
           {/* Dashboard */}
           <Route path="/dashboard" element={<DashboardLayout />}>
@@ -119,8 +213,6 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
-
-      <Footer />
       <Toaster />
     </div>
   );

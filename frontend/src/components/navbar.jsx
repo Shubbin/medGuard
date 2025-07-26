@@ -38,7 +38,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 z-50 w-full py-2 bg-secondary-dark shadow-md backdrop-blur-lg">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20 md:h-16">
           {/* Logo */}
           <Link
             to="/"
@@ -80,7 +80,7 @@ const Navbar = () => {
           {/* Mobile Toggle */}
           <div className="md:hidden">
             <button
-              className="p-2 transition rounded-full focus:outline-none hover:bg-blue-100"
+              className="p-2 transition rounded-full focus:outline-none hover:bg-blue-100 text-white hover:text-black"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -91,7 +91,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-white shadow-md">
+        <div className="lg:hidden bg-secondary-dark">
           <div className="flex flex-col px-4 pt-4 space-y-2">
             {navItems.map((navItem) => (
               <Link
@@ -100,8 +100,8 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-2 p-3 rounded-md ${
                   isActive(navItem.to)
-                    ? "bg-primary-dark text-white"
-                    : "text-gray-700 hover:bg-gray-100"
+                    ? "bg-white text-primary-dark"
+                    : "text-white hover:bg-gray-100"
                 }`}
               >
                 {navItem.icon}

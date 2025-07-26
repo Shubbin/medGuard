@@ -73,7 +73,7 @@ const LoginPage = () => {
               type="email"
               name="email"
               value={email}
-              // onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               {...register("email")}
               className="focus:border-primary"
             />
@@ -84,7 +84,7 @@ const LoginPage = () => {
               type="password"
               name="password"
               value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               className="focus:border-primary"
             />
             <p className="text-xs text-danger">{errors?.password?.message}</p>

@@ -1,5 +1,13 @@
-// src/components/ui/sidebar.jsx
-import { Home, Mail, PieChart, Users, FileText, Menu, LogOut, Cog } from "lucide-react";
+import sidebarLogo from "@/assets/images/Medguard Logo Two.png";
+import {
+  Home,
+  Mail,
+  PieChart,
+  Users,
+  FileText,
+  LogOut,
+  Cog,
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
@@ -21,28 +29,27 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Hamburger Button */}
-      <div className="fixed z-50 md:hidden top-4 left-4">
+      {/* <div className="fixed z-50 md:hidden top-4 left-4">
         <button
           onClick={() => setOpen(!open)}
           className="p-2 text-white bg-blue-900 rounded-md"
         >
           <Menu className="w-6 h-6" />
         </button>
-      </div>
+      </div> */}
 
       {/* Sidebar */}
       <aside
         className={clsx(
-          "fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-blue-950 to-slate-900 text-white shadow-2xl px-6 py-8 z-40 transform transition-transform duration-300 ease-in-out",
-          {
-            "-translate-x-full": !open,
-            "translate-x-0": open,
-            "md:translate-x-0": true, // Always visible on md and above
-          }
+          "fixed top-0 left-0 h-full hidden xl:block md:w-64 bg-gradient-to-tr from-primary-dark to-secondary-dark text-white shadow-2xl px-6 py-8 z-40 transform transition-transform duration-300 ease-in-out"
         )}
       >
-        <div className="mb-10 text-2xl font-bold tracking-wide">
-          Admin Panel
+        <div className="mb-4 text-2xl font-bold tracking-wide mx-auto">
+          <img
+            src={sidebarLogo}
+            className="overflow overflow-y-auto w-40 rounded-md mx-auto"
+            alt={"Medguard Logo"}
+          />
         </div>
         <nav className="space-y-4">
           {navItems.map(({ name, icon: Icon, path }) => (
