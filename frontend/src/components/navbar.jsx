@@ -10,7 +10,6 @@ import {
   LayoutDashboard,
   CheckCircle,
   Book, // ✅ Make sure this is imported
-  Book, 
 } from "lucide-react";
 import navbarLogo from "@/assets/images/Medguard Logo Two.png";
 
@@ -30,7 +29,7 @@ const Navbar = () => {
   const navItems = [
     { to: "/", label: "Home", icon: <Home /> },
     { to: "/about", label: "About", icon: <User /> },
-    { to: "/Blog", label: "Blog", icon: <Book /> },
+    { to: "/blog", label: "Blog", icon: <Book /> },
     { to: "/report", label: "Report", icon: <AlertTriangle /> },
     { to: "/verify", label: "Verify Drug", icon: <CheckCircle /> },
     { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard /> },
@@ -38,20 +37,13 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 z-50 w-full py-2 bg-secondary-dark shadow-md backdrop-blur-lg">
-    <nav className="fixed top-0 z-50 w-full py-2 bg-secondary-dark shadow-md backdrop-blur-lg">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-16">
-        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             to="/"
             className="text-xl font-bold transition duration-200 text-primary hover:text-secondary"
           >
-            <img
-              src={navbarLogo}
-              className="h-20 rounded-xl"
-              alt="MedGuard Logo"
-            />
             <img
               src={navbarLogo}
               className="h-20 rounded-xl"
@@ -64,12 +56,9 @@ const Navbar = () => {
             {navItems.map((item) => (
               <Link
                 key={item.to}
-                key={item.to}
                 to={item.to}
                 className={`font-bold transition duration-200 p-2 rounded-md flex gap-2 items-end ${
                   isActive(item.to)
-                    ? "text-primary font-semibold bg-white text-primary-dark"
-                    : "text-white hover:bg-white hover:text-primary-dark"
                     ? "text-primary font-semibold bg-white text-primary-dark"
                     : "text-white hover:bg-white hover:text-primary-dark"
                 }`}
@@ -89,7 +78,6 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
           <div className="md:hidden">
             <button
               className="p-2 transition rounded-full focus:outline-none hover:bg-blue-100 text-white hover:text-black"
@@ -114,35 +102,6 @@ const Navbar = () => {
                   isActive(navItem.to)
                     ? "bg-white text-primary-dark"
                     : "text-white hover:bg-gray-100"
-                }`}
-              >
-                {navItem.icon}
-                {navItem.label}
-              </Link>
-            ))}
-            {isAuthenticated && (
-              <button
-                onClick={() => {
-                  handleLogout();
-                  setIsOpen(false);
-                }}
-                className="text-left font-semibold text-red-600 hover:underline mt-2"
-              >
-                Logout
-              </button>
-            )}
-          </div>
-        <div className="lg:hidden bg-white shadow-md">
-          <div className="flex flex-col px-4 pt-4 space-y-2">
-            {navItems.map((navItem) => (
-              <Link
-                key={navItem.to}
-                to={navItem.to}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-2 p-3 rounded-md ${
-                  isActive(navItem.to)
-                    ? "bg-primary-dark text-white"
-                    : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
                 {navItem.icon}

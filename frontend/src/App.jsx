@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
@@ -23,7 +22,6 @@ import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage";
-import Blog from "./pages/Blog";
 
 // Dashboard Pages
 import Overview from "./pages/dashboard/Overview";
@@ -33,11 +31,10 @@ import Analytics from "./pages/dashboard/Analytics";
 import Users from "./pages/dashboard/Users";
 import Roles from "./pages/dashboard/Roles";
 import Settings from "./pages/dashboard/Settings";
-import DashBlog from "./pages/dashboard/Blogs";
 
 // Documents
 import TermsAndConditions from "./document/TermsAndConditions";
-import PrivacyPolicy from "./document/policy";
+import PrivacyPolicy from "./document/PrivacyPolicy";
 
 // ✅ Redirect wrapper
 const RedirectAuthenticatedUser = ({ children }) => {
@@ -46,19 +43,6 @@ const RedirectAuthenticatedUser = ({ children }) => {
   return children;
 };
 
-// ✅ Framer Motion Page Wrapper
-const PageWrapper = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.4 }}
-  >
-    {children}
-  </motion.div>
-);
-
-const App = () => {
 // ✅ Framer Motion Page Wrapper
 const PageWrapper = ({ children }) => (
   <motion.div
@@ -85,8 +69,6 @@ const App = () => {
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-secondary to-background-light">
       <ScrollToTop />
       {/* Floating Effects */}
-
-      {/* Floating Effects */}
       <FloatingShape
         color="bg-primary"
         size="w-64 h-64"
@@ -108,8 +90,6 @@ const App = () => {
         left="-10%"
         delay={2}
       />
-
-      <Navbar />
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -147,47 +127,6 @@ const App = () => {
                 </PageWrapper>
               }
             />
-          {/* Public Pages */}
-          <Route
-            path="/"
-            element={
-              <PageWrapper>
-                <Home />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <PageWrapper>
-                <About />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/report"
-            element={
-              <PageWrapper>
-                <Report />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/verify"
-            element={
-              <PageWrapper>
-                <VerifyDrug />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/Blog"
-            element={
-              <PageWrapper>
-                <Blog />
-              </PageWrapper>
-            }
-          />
 
             {/* Auth Routes */}
             <Route
@@ -257,23 +196,6 @@ const App = () => {
               }
             />
           </Route>
-          {/* Documents */}
-          <Route
-            path="/terms"
-            element={
-              <PageWrapper>
-                <TermsAndConditions />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/privacy"
-            element={
-              <PageWrapper>
-                <PrivacyPolicy />
-              </PageWrapper>
-            }
-          />
 
           {/* Dashboard */}
           <Route path="/dashboard" element={<DashboardLayout />}>
@@ -285,7 +207,6 @@ const App = () => {
             <Route path="users" element={<Users />} />
             <Route path="roles" element={<Roles />} />
             <Route path="settings" element={<Settings />} />
-            <Route path="Blogs" element={<DashBlog />} />
           </Route>
 
           {/* 404 Fallback */}
