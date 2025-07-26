@@ -1,14 +1,15 @@
-// src/components/DashboardLayout.jsx
-import Sidebar from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
+import MobileDashboardBar from "../ui/MobileDashboardBar";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="ml-64 flex-1 min-h-screen bg-gray-100 p-6">
-        <Outlet />
-      </main>
+    <div>
+      <MobileDashboardBar />
+      <div className="flex">
+        <main className="flex-1 min-h-screen bg-gray-100 p-6">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

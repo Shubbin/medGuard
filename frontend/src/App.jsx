@@ -1,22 +1,21 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 
 // Components
-import Navbar from "./components/navbar";
-import Footer from "./components/Footer";
 import FloatingShape from "./components/FloatingShape";
 import ScrollToTop from "./components/ScrollToTop";
 import LoadingSpinner from "./components/LoadingSpinner";
 
 // Layouts
 import DashboardLayout from "./components/layouts/DashboardLayout";
-
+import AppLayout from "./components/layouts/AppLayout";
 // Public Pages
 import Home from "./pages/home/Home";
-import About from "./pages/About";
+import About from "./pages/About/About";
 import Report from "./pages/Report";
 import VerifyDrug from "./pages/VerifyDrug";
 import SignUpPage from "./pages/SignUpPage";
@@ -60,6 +59,19 @@ const PageWrapper = ({ children }) => (
 );
 
 const App = () => {
+// ✅ Framer Motion Page Wrapper
+const PageWrapper = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.4 }}
+  >
+    {children}
+  </motion.div>
+);
+
+const App = () => {
   const { isCheckingAuth, checkAuth } = useAuthStore();
   const location = useLocation();
 
@@ -70,8 +82,9 @@ const App = () => {
   if (isCheckingAuth) return <LoadingSpinner />;
 
   return (
-    <div className="relative min-h-screen pt-16 overflow-hidden bg-gradient-to-br from-background via-secondary to-background-light">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-secondary to-background-light">
       <ScrollToTop />
+      {/* Floating Effects */}
 
       {/* Floating Effects */}
       <FloatingShape
@@ -100,6 +113,40 @@ const App = () => {
 
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+          <Route element={<AppLayout />}>
+            {/* Public Pages */}
+            <Route
+              path="/"
+              element={
+                <PageWrapper>
+                  <Home />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PageWrapper>
+                  <About />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/report"
+              element={
+                <PageWrapper>
+                  <Report />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/verify"
+              element={
+                <PageWrapper>
+                  <VerifyDrug />
+                </PageWrapper>
+              }
+            />
           {/* Public Pages */}
           <Route
             path="/"
@@ -142,56 +189,74 @@ const App = () => {
             }
           />
 
-          {/* Auth Routes */}
-          <Route
-            path="/signup"
-            element={
-              <PageWrapper>
-                <RedirectAuthenticatedUser>
-                  <SignUpPage />
-                </RedirectAuthenticatedUser>
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PageWrapper>
-                <RedirectAuthenticatedUser>
-                  <LoginPage />
-                </RedirectAuthenticatedUser>
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/verify-email"
-            element={
-              <PageWrapper>
-                <EmailVerificationPage />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/forgot-password"
-            element={
-              <PageWrapper>
-                <RedirectAuthenticatedUser>
-                  <ForgotPasswordPage />
-                </RedirectAuthenticatedUser>
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/reset-password/:token"
-            element={
-              <PageWrapper>
-                <RedirectAuthenticatedUser>
-                  <ResetPasswordPage />
-                </RedirectAuthenticatedUser>
-              </PageWrapper>
-            }
-          />
+            {/* Auth Routes */}
+            <Route
+              path="/signup"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <SignUpPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <LoginPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/verify-email"
+              element={
+                <PageWrapper>
+                  <EmailVerificationPage />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/forgot-password"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <ForgotPasswordPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/reset-password/:token"
+              element={
+                <PageWrapper>
+                  <RedirectAuthenticatedUser>
+                    <ResetPasswordPage />
+                  </RedirectAuthenticatedUser>
+                </PageWrapper>
+              }
+            />
 
+            {/* Documents */}
+            <Route
+              path="/terms"
+              element={
+                <PageWrapper>
+                  <TermsAndConditions />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/privacy"
+              element={
+                <PageWrapper>
+                  <PrivacyPolicy />
+                </PageWrapper>
+              }
+            />
+          </Route>
           {/* Documents */}
           <Route
             path="/terms"
@@ -227,8 +292,6 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
-
-      <Footer />
       <Toaster />
     </div>
   );

@@ -62,7 +62,7 @@ const Hero = () => {
           <motion.div variants={fadeUp}>
             <Link
               to={isAuthenticated ? "/verify" : "/login"}
-              className="flex items-center gap-2 px-6 py-3 bg-white text-blue-500 transition shadow bg-primary rounded-md hover:scale-105"
+              className="text-sm flex items-center gap-2 px-6 py-3 bg-white text-blue-500 transition shadow bg-primary rounded-md hover:scale-105"
             >
               {/* Toggle login and scan search based on auth status */}
               {isAuthenticated ? <ScanSearch className="w-2 h-2 md:w-5 md:h-5" /> : <LogIn />}
@@ -72,7 +72,7 @@ const Hero = () => {
           <motion.div variants={fadeUp}>
             <Link
               to={isAuthenticated ? "/dashboard" : "/signup"}
-              className="flex items-center gap-2 px-6 py-3 transition border border-primary text-primary rounded-xl hover:bg-primary/5 text-white"
+              className="text-sm flex items-center gap-2 px-6 py-3 transition border border-primary text-primary rounded-xl hover:bg-primary/5 text-white"
             >
               <ShieldCheck className="w-5 h-5" />{" "}
               {isAuthenticated ? "Report Drug" : "Create Account"}
