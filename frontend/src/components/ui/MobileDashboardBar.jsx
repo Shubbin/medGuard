@@ -23,6 +23,7 @@ const MobileDashboardBar = () => {
     { name: "Analytics", icon: PieChart, path: "/dashboard/analytics" },
     { name: "Users", icon: Users, path: "/dashboard/users" },
     { name: "Settings", icon: Cog, path: "/dashboard/settings" },
+      { name: "Blogs", icon: FileText, path: "/dashboard/Blogs" },
     { name: "Roles", icon: FileText, path: "/dashboard/roles" },
   ];
   const [dropdownVisibility, setDropdownVisibility] = useState(false);

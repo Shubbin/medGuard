@@ -1,3 +1,5 @@
+///codes
+
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -22,6 +24,7 @@ import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage";
+import Blog from "./pages/Blog";
 
 // Dashboard Pages
 import Overview from "./pages/dashboard/Overview";
@@ -31,10 +34,11 @@ import Analytics from "./pages/dashboard/Analytics";
 import Users from "./pages/dashboard/Users";
 import Roles from "./pages/dashboard/Roles";
 import Settings from "./pages/dashboard/Settings";
+import DashBlog from "./pages/dashboard/Blogs";
 
 // Documents
 import TermsAndConditions from "./document/TermsAndConditions";
-import PrivacyPolicy from "./document/PrivacyPolicy";
+import PrivacyPolicy from "./document/policy";
 
 // ✅ Redirect wrapper
 const RedirectAuthenticatedUser = ({ children }) => {
@@ -100,6 +104,14 @@ const App = () => {
               element={
                 <PageWrapper>
                   <Home />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/blog"
+              element={
+                <PageWrapper>
+                  <Blog />
                 </PageWrapper>
               }
             />
@@ -207,6 +219,7 @@ const App = () => {
             <Route path="users" element={<Users />} />
             <Route path="roles" element={<Roles />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="Blogs" element={<DashBlog />} />
           </Route>
 
           {/* 404 Fallback */}
