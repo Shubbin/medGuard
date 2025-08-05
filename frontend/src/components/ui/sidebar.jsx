@@ -1,8 +1,8 @@
 import sidebarLogo from "@/assets/images/Medguard Logo Two.png";
 import {
-  Home,
+  Menu,
   Mail,
-  PieChart,
+  LayoutDashboard,
   Users,
   FileText,
   LogOut,
@@ -13,9 +13,8 @@ import clsx from "clsx";
 import { useState } from "react";
 
 const navItems = [
-  { name: "Dashboard", icon: Home, path: "/dashboard" },
+  { name: "Overview", icon: LayoutDashboard, path: "/dashboard" },
   { name: "Report Mails", icon: Mail, path: "/dashboard/report-mails" },
-  { name: "Analytics", icon: PieChart, path: "/dashboard/analytics" },
   { name: "Users", icon: Users, path: "/dashboard/users" },
   { name: "Settings", icon: Cog, path: "/dashboard/settings" },
   { name: "Roles", icon: FileText, path: "/dashboard/roles" },
@@ -29,25 +28,25 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Hamburger Button */}
-      {/* <div className="fixed z-50 md:hidden top-4 left-4">
+      <div className="fixed z-50 md:hidden top-4 left-4">
         <button
           onClick={() => setOpen(!open)}
           className="p-2 text-white bg-blue-900 rounded-md"
         >
           <Menu className="w-6 h-6" />
         </button>
-      </div> */}
+      </div>
 
       {/* Sidebar */}
       <aside
         className={clsx(
-          "fixed top-0 left-0 h-full hidden xl:block md:w-64 bg-gradient-to-tr from-primary-dark to-secondary-dark text-white shadow-2xl px-6 py-8 z-40 transform transition-transform duration-300 ease-in-out"
+          "fixed top-0 left-0 h-full hidden xl:block md:w-52 bg-secondary-dark text-white shadow-2xl px-6 py-8 z-40 transform transition-transform duration-300 ease-in-out"
         )}
       >
         <div className="mb-4 text-2xl font-bold tracking-wide mx-auto">
           <img
             src={sidebarLogo}
-            className="overflow overflow-y-auto w-40 rounded-md mx-auto"
+            className="overflow overflow-y-auto w-32"
             alt={"Medguard Logo"}
           />
         </div>

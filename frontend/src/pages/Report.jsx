@@ -58,7 +58,7 @@ const Report = () => {
   };
 
   return (
-    <div className="bg-gradient-to-tr from-blue-50 to-white min-h-screen py-12 px-6 md:px-16 text-gray-800">
+    <div className="bg-gradient-to-tr from-blue-50 to-white min-h-screen py-24 px-6 md:px-16 text-gray-800">
       <Helmet>
         <title>Report Suspicious Drug | MedGuard</title>
         <meta

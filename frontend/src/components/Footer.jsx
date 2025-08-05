@@ -10,11 +10,15 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-20 lg:gap-72">
           <div className="flex justify-center md:justify-start mb-4 md:mb-0">
-            <img src={footerLogo} className="h-20 md:h-24 rounded-md" alt="" />
+            <img
+              src={footerLogo}
+              className="h-20 rounded-xl shadow-md shadow-white"
+              alt=""
+            />
           </div>
           {/* Navigation */}
           <nav className="w-full md:w-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-4">
-            <ul className="flex flex-wrap justify-center md:justify-start space-x-4 md:space-x-6 text-sm font-medium">
+            <ul className="flex flex-wrap justify-center md:justify-start space-x-4 md:space-x-6 text-md font-medium">
               <li>
                 <Link to="/" className="hover:text-primary transition">
                   Home
