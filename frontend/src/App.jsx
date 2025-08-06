@@ -34,7 +34,7 @@ import Settings from "./pages/dashboard/Settings";
 
 // Documents
 import TermsAndConditions from "./document/TermsAndConditions";
-import PrivacyPolicy from "./document/PrivacyPolicy";
+import PrivacyPolicy from "./document/policy";
 import ChatwootWidget from "./components/bot/Chatwoot";
 
 // ✅ Redirect wrapper
