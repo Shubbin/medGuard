@@ -73,10 +73,13 @@ const LoginPage = () => {
               type="email"
               name="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              {...register("email")}
-              className="focus:border-primary"
+              onChange={(e) => {
+                setEmail(e.target.value);
+                register("email").onChange(e);
+              }}
+              onBlur={(e) => register("email").onBlur(e)}
             />
+
             <p className="text-xs text-danger">{errors?.email?.message}</p>
             <FloatingInput
               icon={Lock}
@@ -84,9 +87,13 @@ const LoginPage = () => {
               type="password"
               name="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="focus:border-primary"
+              onChange={(e) => {
+                setPassword(e.target.value);
+                register("password").onChange(e);
+              }}
+              onBlur={(e) => register("password").onBlur(e)}
             />
+
             <p className="text-xs text-danger">{errors?.password?.message}</p>
             {error && (
               <motion.p

@@ -15,11 +15,24 @@ dotenv.config({ path: "./.env" });
 
 const app = express();
 
-//middleware
+const allowedOrigins = [
+  "http://localhost:5173", // Vite dev
+  "http://127.0.0.1:5173", // Another local dev
+  "http://localhost:3000", // Alt dev port (React default)
+  "http://127.0.0.1:3000", // Alt IP
+  "https://medguard.vercel.app", // Example production
+  "https://www.medguard.ng", // Your live domain
+];
+
 app.use(
   cors({
-    // Allow multiple comma‑separated origins via .env, fall back to "*"
-    origin: process.env.CLIENT_URL?.split(",") || "*",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
     credentials: true,
   })
 );
@@ -28,22 +41,19 @@ app.use(express.json()); // Parse JSON payloads
 app.use(cookieParser()); // Parse cookies
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
-
-
 //routes
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/auth", authRouters);
 app.use("/api/blogs", blogRoutes);
-app.use("/api/drugs/verify", verifyDrugByNRN)
+app.use("/api/drugs/verify", verifyDrugByNRN);
 app.use("/api/reports", reportRoutes);
 
 const PORT = process.env.PORT || 8000;
 
 (async () => {
   try {
-   
-    await connectDB(); 
+    await connectDB();
     app.listen(PORT, () => {
       console.log(` Server is running on port ${PORT}`);
     });

@@ -17,8 +17,8 @@ const features = [
     image: reportImg,
   },
   {
-    title: "AI Voice Assistant",
-    desc: "Talk to MedGuard: ask about drug names, symptoms, or safe alternatives.",
+    title: "AI Powered Chatbot ",
+    desc: "Talk to MedGuard Chatbot: ask about drug names, symptoms, or safe alternatives.",
     icon: <Mic className="w-6 h-6 text-primary" />,
     image: assistantImg,
   },

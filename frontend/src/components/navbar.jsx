@@ -9,7 +9,7 @@ import {
   AlertTriangle,
   LayoutDashboard,
   CheckCircle,
-  Book, // ✅ Make sure this is imported
+  Book,
 } from "lucide-react";
 import navbarLogo from "@/assets/images/Medguard Logo Two.png";
 
@@ -36,7 +36,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 z-50 w-full py-2 bg-secondary-dark shadow-md backdrop-blur-lg">
+    <nav className="fixed top-0 z-50 w-full py-2 bg-secondary-dark shadow-md backdrop-blur-lg ">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-16">
           {/* Logo */}

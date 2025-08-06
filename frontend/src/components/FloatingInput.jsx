@@ -1,12 +1,22 @@
 import { useState } from "react";
 
-const FloatingInput = ({ icon: Icon, label, type, value, onChange, name }) => {
+const FloatingInput = ({
+  icon: Icon,
+  label,
+  type,
+  value,
+  onChange,
+  onBlur, 
+  name
+}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
     <div
       className={`relative w-full transition duration-300 ${
-        isFocused ? "ring-2 ring-primary ring-offset-1 ring-offset-background" : ""
+        isFocused
+          ? "ring-2 ring-primary ring-offset-1 ring-offset-background"
+          : ""
       }`}
     >
       <input
@@ -15,8 +25,11 @@ const FloatingInput = ({ icon: Icon, label, type, value, onChange, name }) => {
         type={type}
         value={value}
         onChange={onChange}
+        onBlur={(e) => {
+          setIsFocused(false);
+          if (onBlur) onBlur(e); // ✅ call external onBlur if given
+        }}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
         placeholder=" "
         className="peer w-full rounded-lg bg-secondary bg-opacity-60 pl-10 pr-3 py-3 text-text placeholder-transparent focus:outline-none "
         autoComplete="off"

@@ -1,22 +1,27 @@
-// routes/admin.route.js
 import express from "express";
-import { verifyToken } from "../middleware/verifyToken.js";
-import { checkRole } from "../middleware/checkRole.js";
-import { getAllUsers, updateUserRole } from "../controllers/admin.controller.js";
+import {
+  login,
+  logout,
+  signup,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
+  checkAuth,
+} from "../controllers/auth.controllers.js";
+
+import { verifyToken, protect } from "../middleware/authMiddleware.js"; // ✅ now valid
 
 const router = express.Router();
 
-router.patch(
-  "/update-role",
-  verifyToken,
-  checkRole("admin"), // or add "sub-admin" if you want them to manage roles too
-  updateUserRole
-);
-router.get(
-  "/users",
-  verifyToken,
-  checkRole("admin", "sub-admin"),
-  getAllUsers
-)
+// Check if user/admin is authenticated
+router.get("/check-auth", verifyToken, checkAuth);
+
+// Auth routes
+router.post("/signup", signup);
+router.post("/login", login);
+router.post("/logout", logout);
+router.post("/verify-email", verifyEmail);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
 export default router;

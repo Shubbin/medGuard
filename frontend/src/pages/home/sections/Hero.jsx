@@ -36,8 +36,9 @@ const Hero = () => {
         <div className="absolute z-30 flex items-center justify-center px-6 mx-auto text-center text-white flex-col bottom-20 max-w-7xl">
           <div className="flex flex-col flex-wrap justify-between md:flex-nowrap md:flex-row md:gap-48">
             <span>
-              <h1 className="mb-2 text-xl md:text-2xl leading-tight text-left lg:text-3xl font-heading">
-                Your Health, Safeguarded. Always.
+              <h1 className="mb-2 text-xl md:text-3xl leading-tight text-left lg:text-5xl font-heading">
+                Your Health,<span className="text-blue-500">Safeguarded.</span>{" "}
+                Always.
               </h1>
               <p className="text-sm mb-2 md:mb-0 lg:text-md flex items-center gap-4">
                 <span className="rounded-full h-2 w-2 bg-green-500"></span>
@@ -65,7 +66,11 @@ const Hero = () => {
               className="text-sm flex items-center gap-2 px-6 py-3 bg-white text-blue-500 transition shadow bg-primary rounded-md hover:scale-105"
             >
               {/* Toggle login and scan search based on auth status */}
-              {isAuthenticated ? <ScanSearch className="w-2 h-2 md:w-5 md:h-5" /> : <LogIn />}
+              {isAuthenticated ? (
+                <ScanSearch className="w-2 h-2 md:w-5 md:h-5" />
+              ) : (
+                <LogIn />
+              )}
               {isAuthenticated ? "Verify Now" : "Login to Start"}
             </Link>
           </motion.div>
