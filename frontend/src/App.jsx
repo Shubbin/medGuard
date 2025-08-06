@@ -35,7 +35,8 @@ import Settings from "./pages/dashboard/Settings";
 // Documents
 import TermsAndConditions from "./document/TermsAndConditions";
 import PrivacyPolicy from "./document/policy";
-import ChatwootWidget from "./components/bot/Chatwoot";
+import Appbot from "../src/Chat_bot/chatbot";
+// import ChatwootWidget from "./components/bot/Chatwoot";
 
 // ✅ Redirect wrapper
 const RedirectAuthenticatedUser = ({ children }) => {
@@ -221,7 +222,8 @@ const App = () => {
         </Routes>
       </AnimatePresence>
       <Toaster />
-      <ChatwootWidget />
+      {/* <ChatwootWidget /> */}
+      {<Appbot />}
     </div>
   );
 };
