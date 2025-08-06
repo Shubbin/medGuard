@@ -36,7 +36,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 z-50 w-full py-2 bg-secondary-dark shadow-md backdrop-blur-lg ">
+    <nav className="fixed top-0 z-50 w-full py-2 bg-secondary-dark shadow-md backdrop-blur-lg">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-16">
           {/* Logo */}
@@ -46,7 +46,7 @@ const Navbar = () => {
           >
             <img
               src={navbarLogo}
-              className="h-20 rounded-xl"
+              className="h-20 rounded-xl shadow-md shadow-white"
               alt="MedGuard Logo"
             />
           </Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               className="p-2 transition rounded-full focus:outline-none hover:bg-blue-100 text-white hover:text-black"
               onClick={() => setIsOpen(!isOpen)}
@@ -101,7 +101,7 @@ const Navbar = () => {
                 className={`flex items-center gap-2 p-3 rounded-md ${
                   isActive(navItem.to)
                     ? "bg-white text-primary-dark"
-                    : "text-white hover:bg-gray-100"
+                    : "text-white hover:bg-gray-100 hover:text-primary-dark"
                 }`}
               >
                 {navItem.icon}

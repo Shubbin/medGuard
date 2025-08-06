@@ -1,5 +1,3 @@
-///codes
-
 import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,27 +16,26 @@ import AppLayout from "./components/layouts/AppLayout";
 import Home from "./pages/home/Home";
 import About from "./pages/About/About";
 import Report from "./pages/Report";
+import Blog from "./pages/Blog";
 import VerifyDrug from "./pages/VerifyDrug";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage";
-import Blog from "./pages/Blog";
 
 // Dashboard Pages
-import Overview from "./pages/dashboard/Overview";
 import Verifications from "./pages/dashboard/Verifications";
 import ReportMails from "./pages/dashboard/reportMails";
 import Analytics from "./pages/dashboard/Analytics";
 import Users from "./pages/dashboard/Users";
 import Roles from "./pages/dashboard/Roles";
 import Settings from "./pages/dashboard/Settings";
-import DashBlog from "./pages/dashboard/Blogs";
 
 // Documents
 import TermsAndConditions from "./document/TermsAndConditions";
-import PrivacyPolicy from "./document/policy";
+import PrivacyPolicy from "./document/PrivacyPolicy";
+import ChatwootWidget from "./components/bot/Chatwoot";
 
 // ✅ Redirect wrapper
 const RedirectAuthenticatedUser = ({ children }) => {
@@ -108,18 +105,18 @@ const App = () => {
               }
             />
             <Route
-              path="/blog"
-              element={
-                <PageWrapper>
-                  <Blog />
-                </PageWrapper>
-              }
-            />
-            <Route
               path="/about"
               element={
                 <PageWrapper>
                   <About />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/blog"
+              element={
+                <PageWrapper>
+                  <Blog />
                 </PageWrapper>
               }
             />
@@ -208,18 +205,15 @@ const App = () => {
               }
             />
           </Route>
-
           {/* Dashboard */}
           <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<Overview />} />
-            <Route path="overview" element={<Overview />} />
+            <Route index element={<Analytics />} />
             <Route path="verifications" element={<Verifications />} />
             <Route path="report-mails" element={<ReportMails />} />
-            <Route path="analytics" element={<Analytics />} />
+            <Route path="dashboard" element={<Analytics />} />
             <Route path="users" element={<Users />} />
             <Route path="roles" element={<Roles />} />
             <Route path="settings" element={<Settings />} />
-            <Route path="Blogs" element={<DashBlog />} />
           </Route>
 
           {/* 404 Fallback */}
@@ -227,6 +221,7 @@ const App = () => {
         </Routes>
       </AnimatePresence>
       <Toaster />
+      <ChatwootWidget />
     </div>
   );
 };

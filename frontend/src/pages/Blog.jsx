@@ -1,88 +1,156 @@
-import  { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Calendar } from "lucide-react";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
-// 🔥 Your dynamic blog fetcher
-export const fetchAllBlogs = async () => {
-  try {
-    const response = await fetch("http://localhost:8000/api/blogs"); 
-    if (!response.ok) throw new Error("Failed to fetch blogs");
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching blogs:", error.message);
-    return [];
-  }
-};
+// Dummy blog post data with images and medical-related content
+const postsData = [
+  {
+    id: 1,
+    title: "How AI is Transforming Healthcare",
+    excerpt:
+      "Explore how artificial intelligence is revolutionizing diagnostics, treatment, and drug discovery.",
+    author: "Dr. Ada Bright",
+    date: "August 1, 2025",
+    image:
+      "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg"
+,
+  },
+  {
+    id: 2,
+    title: "Telemedicine: Bridging the Gap in Rural Health",
+    excerpt:
+      "Discover how telemedicine is improving access to quality care for remote communities.",
+    author: "Dr. Emmanuel Yemi",
+    date: "July 28, 2025",
+    image:
+      "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg"
+,
+  },
+  {
+    id: 3,
+    title: "Understanding mRNA Vaccines",
+    excerpt:
+      "A simplified guide to how mRNA vaccines work to protect your immune system.",
+    author: "Dr. Sophia Lin",
+    date: "July 22, 2025",
+    image:
+      "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg"
+,
+  },
+];
 
-const Blog = () => {
-  const [blogPosts, setBlogPosts] = useState([]);
+const POSTS_PER_PAGE = 2;
 
-  useEffect(() => {
-    const loadBlogs = async () => {
-      const blogs = await fetchAllBlogs();
-      setBlogPosts(blogs);
-    };
-    loadBlogs();
-  }, []);
+export default function Blog() {
+  // State for search input
+  const [searchTerm, setSearchTerm] = useState("");
+  // State to track the current page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Filter posts by search term in the title
+  const filteredPosts = postsData.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Calculate total number of pages for pagination
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  // Get the index for slicing the array of posts
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  // Get current visible posts based on pagination
+  const currentPosts = filteredPosts.slice(
+    startIndex,
+    startIndex + POSTS_PER_PAGE
+  );
 
   return (
-    <div className="p-4">
-      <section>
-        <div className="max-w-7xl mx-auto flex justify-between my-12">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">Blog</h1>
-            <p className="text-lg text-gray-600 max-w-3xl">
-              Explore how MedGuard is transforming healthcare through technology, awareness, and innovation.
-            </p>
-          </div>
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 px-4 py-16 sm:px-8 lg:px-24">
+      <Helmet>
+        <title>Blog - MedGuard Insights</title>
+      </Helmet>
+      <div className="max-w-5xl mx-auto">
+        <div className="flex flex-col items-center mb-10">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-800 dark:text-white mb-2 tracking-tight text-center drop-shadow-lg">
+            MedGuard Blog
+          </h1>
+          <p className="text-lg text-gray-500 dark:text-gray-300 text-center max-w-2xl mb-6">
+            Insights, trends, and stories at the intersection of medicine and
+            technology.
+          </p>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search posts..."
+            className="w-full sm:w-96 px-5 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 shadow focus:outline-none focus:ring-2 focus:ring-blue-300 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 mb-2"
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
-            <div
-              key={post._id || index}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            >
+        <div className="grid gap-10 md:grid-cols-2">
+          {currentPosts.length === 0 ? (
+            <div className="col-span-full text-center text-gray-500 dark:text-gray-400 py-12 text-lg">
+              No posts found.
+            </div>
+          ) : (
+            currentPosts.map((post) => (
               <div
-                className="h-48 bg-cover bg-center"
-                style={{ backgroundImage: `url(${post.designImg || "https://via.placeholder.com/600"})` }}
-              ></div>
-
-              <div className="p-6">
-                <span className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">
-                  {post.category?.title || "Uncategorized"}
-                </span>
-
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  <Link to={`/blog/${post._id}`}>{post.title}</Link>
-                </h3>
-
-                <p className="text-gray-700 mb-4">{post.description}</p>
-
-                <div className="flex items-center gap-4 mt-4">
+                key={post.id}
+                className="group bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-gray-100 dark:border-gray-700 flex flex-col h-full"
+              >
+                <div className="relative">
                   <img
-                    src={post.author?.imageUrl || "https://via.placeholder.com/100"}
-                    alt={post.author?.name || "Author"}
-                    className="w-10 h-10 rounded-full object-cover"
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-56 object-cover object-center transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">{post.author?.name || "Unknown Author"}</p>
-                    <p className="text-sm text-gray-500">{post.author?.role || "Contributor"}</p>
+                  <div className="absolute top-3 left-3 bg-blue-500/80 text-white text-xs px-3 py-1 rounded-full shadow">
+                    {post.date}
                   </div>
                 </div>
-
-                <div className="flex items-center text-sm text-gray-500 mt-4">
-                  <Calendar size={16} className="mr-1" />
-                  <span>{post.date || "Unknown Date"}</span>
+                <div className="flex-1 flex flex-col p-6">
+                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">
+                    {post.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1">
+                    {post.excerpt}
+                  </p>
+                  <div className="flex items-center gap-2 mt-auto">
+                    {/* <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-lg">
+                      {post.author
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </div> */}
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {post.author}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
-      </section>
-    </div>
-  );
-};
 
-export default Blog;
+        <div className="flex justify-between items-center mt-14 gap-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-5 py-2.5 rounded-xl bg-blue-600 dark:bg-blue-700 text-white font-semibold shadow disabled:opacity-50 disabled:cursor-not-allowed transition"
+          >
+            Newer
+          </button>
+          <span className="text-gray-600 dark:text-gray-300 text-base">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="px-5 py-2.5 rounded-xl bg-blue-600 dark:bg-blue-700 text-white font-semibold shadow disabled:opacity-50 disabled:cursor-not-allowed transition"
+          >
+            Older
+          </button>
+        </div>
+      </div>
+    </main>
+  );
+}
