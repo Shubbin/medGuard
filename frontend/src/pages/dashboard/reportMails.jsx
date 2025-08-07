@@ -32,7 +32,7 @@ const ReportMails = () => {
   }, [searchQuery]);
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md dark:bg-gray-900">
+    <div className="xl:ml-6 m-4 md:m-0 p-6 bg-white rounded-xl shadow-md dark:bg-gray-900">
       <h1 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-800 dark:text-gray-100">
         <MailIcon className="w-6 h-6 text-blue-500" />
         Report Mails

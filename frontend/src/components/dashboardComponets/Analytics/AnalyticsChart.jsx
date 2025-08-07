@@ -89,7 +89,7 @@ const AnalyticsChart = () => {
   };
 
   return (
-    <div className="p-4 bg-white border border-gray-200 shadow-sm dark:bg-primary-dark rounded-2xl dark:border-gray-700">
+    <div className="p-4  border border-gray-200 shadow-sm bg-primary-dark rounded-2xl dark:border-gray-700">
       <h4 className="mb-4 text-lg font-semibold text-white ">
         Weekly Verification Trends
       </h4>

@@ -15,7 +15,7 @@ import { useState } from "react";
 const navItems = [
   { name: "Overview", icon: LayoutDashboard, path: "/dashboard" },
   { name: "Report Mails", icon: Mail, path: "/dashboard/report-mails" },
-  { name: "Settings", icon: Cog, path: "/dashboard/settings" },
+  // { name: "Settings", icon: Cog, path: "/dashboard/settings" },
   { name: "User Roles", icon: FileText, path: "/dashboard/roles" },
   { name: "Blogs", icon: FileText, path: "/dashboard/Blogs" },
   { name: "Logout", icon: LogOut, path: "" },
@@ -28,14 +28,14 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Hamburger Button */}
-      <div className="fixed z-50 md:hidden top-4 left-4">
+      {/* <div className="fixed z-50 md:hidden top-4 left-4">
         <button
           onClick={() => setOpen(!open)}
           className="p-2 text-white bg-blue-900 rounded-md"
         >
           <Menu className="w-6 h-6" />
         </button>
-      </div>
+      </div> */}
 
       {/* Sidebar */}
       <aside
@@ -44,11 +44,13 @@ const Sidebar = () => {
         )}
       >
         <div className="mb-4 text-2xl font-bold tracking-wide mx-auto">
-          <img
-            src={sidebarLogo}
-            className="overflow overflow-y-auto w-32"
-            alt={"Medguard Logo"}
-          />
+          <Link to="/">
+            <img
+              src={sidebarLogo}
+              className="overflow overflow-y-auto w-32"
+              alt={"Medguard Logo"}
+            />
+          </Link>
         </div>
         <nav className="space-y-4">
           {navItems.map(({ name, icon: Icon, path }) => (

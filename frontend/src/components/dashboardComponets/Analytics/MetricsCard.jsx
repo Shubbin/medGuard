@@ -12,13 +12,13 @@ const MetricsCard = ({ title, value }) => {
             {title}
           </p>
         </div>
-        <select
+        {/* <select
           className="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-md px-2 py-1 outline-none border border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-blue-300"
           defaultValue="7"
         >
           <option value="7">Last 7 days</option>
           <option value="30">Last 30 days</option>
-        </select>
+        </select> */}
       </div>
       <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-1">
         {value}

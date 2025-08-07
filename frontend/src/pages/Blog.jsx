@@ -1,56 +1,52 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-// Dummy blog post data with images and medical-related content
+// Dummy blog post data with blogImgs and medical-related content
 const postsData = [
   {
     id: 1,
     title: "How AI is Transforming Healthcare",
-    excerpt:
+    content:
       "Explore how artificial intelligence is revolutionizing diagnostics, treatment, and drug discovery.",
-    author: "Dr. Ada Bright",
     date: "August 1, 2025",
-    image:
+    blogImg:
       "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
   },
   {
     id: 2,
     title: "Telemedicine: Bridging the Gap in Rural Health",
-    excerpt:
+    content:
       "Discover how telemedicine is improving access to quality care for remote communities.",
-    author: "Dr. Emmanuel Yemi",
     date: "July 28, 2025",
-    image:
+    blogImg:
       "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
   },
   {
     id: 3,
     title: "Understanding mRNA Vaccines",
-    excerpt:
+    content:
       "A simplified guide to how mRNA vaccines work to protect your immune system.",
-    author: "Dr. Sophia Lin",
     date: "July 22, 2025",
-    image:
+    blogImg:
       "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
   },
   {
     id: 4,
     title: "Understanding The Dangers Of Fake Medication",
-    excerpt:
+    content:
       "A simplified guide to how mRNA vaccines work to protect your immune system.",
-    author: "Dr. Mario Aguire",
+
     date: "July 22, 2024",
-    image:
+    blogImg:
       "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
   },
   {
     id: 5,
     title: "Why you must watch what you eat",
-    excerpt:
+    content:
       "A simplified guide to how mRNA vaccines work to protect your immune system.",
-    author: "Dr. Katlyn Jones",
     date: "July 22, 2023",
-    image:
+    blogImg:
       "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
   },
 ];
@@ -76,8 +72,7 @@ export default function Blog() {
     const term = searchTerm.trim().toLowerCase();
     return (
       post.title.toLowerCase().includes(term) ||
-      post.excerpt.toLowerCase().includes(term) ||
-      post.author.toLowerCase().includes(term)
+      post.content.toLowerCase().includes(term)
     );
   });
   // Calculate total number of pages for pagination
@@ -128,7 +123,7 @@ export default function Blog() {
               >
                 <div className="relative">
                   <img
-                    src={post.image}
+                    src={post.blogImg}
                     alt={post.title}
                     className="w-full h-56 object-cover object-center transition-transform duration-300 group-hover:scale-105"
                   />
@@ -141,13 +136,9 @@ export default function Blog() {
                     {post.title}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                    {post.excerpt}
+                    {post.content}
                   </p>
-                  <div className="flex items-center gap-2 mt-auto">
-                    <span className="text-md text-primary-dark font-bold">
-                      {post.author}
-                    </span>
-                  </div>
+                  <div className="flex items-center gap-2 mt-auto"></div>
                 </div>
               </div>
             ))

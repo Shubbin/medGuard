@@ -1,3 +1,4 @@
+import { CheckCircle, ScanBarcode } from "lucide-react";
 import { useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
@@ -20,7 +21,10 @@ const VerifyDrug = () => {
       const data = await res.json();
       setVerificationResult(data);
     } catch (error) {
-      setVerificationResult({ success: false, message: "Error verifying drug" });
+      setVerificationResult({
+        success: false,
+        message: "Error verifying drug",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -29,32 +33,41 @@ const VerifyDrug = () => {
   return (
     <div className="bg-gradient-to-br from-blue-50 to-white min-h-screen flex items-center justify-center px-4 py-10">
       <div className="max-w-3xl w-full bg-white shadow-2xl rounded-3xl p-8 space-y-6">
-        <h1 className="text-4xl font-bold text-center text-blue-700">Verify Drug Authenticity</h1>
-        <p className="text-center text-gray-600">Enter the NRN or scan the barcode below to check if the drug is authentic.</p>
+        <h1 className="text-2xl md:text-4xl font-bold text-center text-blue-700">
+          Verify Drug Authenticity
+        </h1>
+        <p className="text-center text-gray-600">
+          Enter the NRN or scan the barcode below to check if the drug is
+          authentic.
+        </p>
 
-        <div className="flex flex-col sm:flex-row items-center gap-4">
+        <div className="">
           <input
             type="text"
             value={drugCode}
             onChange={(e) => setDrugCode(e.target.value)}
             placeholder="Enter NRN (e.g. 04-4192)"
-            className="flex-1 px-4 py-3 border-2 border-blue-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full flex-1 px-4 py-3 border-2 border-blue-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button
-            onClick={handleVerify}
-            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition"
-          >
-            Verify
-          </button>
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center items-center gap-4">
+          <button
+            onClick={handleVerify}
+            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition"
+          >
+            <CheckCircle />
+            Verify
+          </button>
           <button
             onClick={() => setScanning(!scanning)}
-            className={`mt-2 px-6 py-2 rounded-lg font-medium transition ${
-              scanning ? "bg-red-500 hover:bg-red-600" : "bg-green-600 hover:bg-green-700"
+            className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition ${
+              scanning
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-green-600 hover:bg-green-700"
             } text-white`}
           >
+            <ScanBarcode />
             {scanning ? "Stop Scanning" : "Scan Barcode"}
           </button>
         </div>
@@ -100,30 +113,40 @@ const VerifyDrug = () => {
                 : "border-red-400 bg-red-50 text-red-800"
             }`}
           >
-            <h2 className="text-xl font-semibold mb-2">{verificationResult.message}</h2>
+            <h2 className="text-xl font-semibold mb-2">
+              {verificationResult.message}
+            </h2>
             {verificationResult.success && verificationResult.data && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="font-medium">Product Name:</span> {verificationResult.data.product_name}
+                  <span className="font-medium">Product Name:</span>{" "}
+                  {verificationResult.data.product_name}
                 </div>
                 <div>
-                  <span className="font-medium">Active Ingredients:</span> {verificationResult.data.active_ingredients}
+                  <span className="font-medium">Active Ingredients:</span>{" "}
+                  {verificationResult.data.active_ingredients}
                 </div>
                 <div>
-                  <span className="font-medium">Form:</span> {verificationResult.data.form}
+                  <span className="font-medium">Form:</span>{" "}
+                  {verificationResult.data.form}
                 </div>
                 <div>
-                  <span className="font-medium">Strength:</span> {verificationResult.data.strengths}
+                  <span className="font-medium">Strength:</span>{" "}
+                  {verificationResult.data.strengths}
                 </div>
                 <div>
-                  <span className="font-medium">Manufacturer:</span> {verificationResult.data.applicant_name}
+                  <span className="font-medium">Manufacturer:</span>{" "}
+                  {verificationResult.data.applicant_name}
                 </div>
                 <div>
                   <span className="font-medium">Approval Date:</span>{" "}
-                  {new Date(verificationResult.data.approval_date).toLocaleDateString()}
+                  {new Date(
+                    verificationResult.data.approval_date
+                  ).toLocaleDateString()}
                 </div>
                 <div>
-                  <span className="font-medium">Status:</span> {verificationResult.data.status}
+                  <span className="font-medium">Status:</span>{" "}
+                  {verificationResult.data.status}
                 </div>
               </div>
             )}

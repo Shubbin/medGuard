@@ -63,7 +63,7 @@ export default function Roles() {
           <CardTitle>Roles Management</CardTitle>
           <Button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 mb-2 text-white bg-primary-dark"
+            className="flex items-center gap-2 mb-2 text-white bg-primary-dark text-sm md:text-md"
           >
             <PlusCircle size={20} />
             Add Role

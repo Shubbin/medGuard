@@ -1,5 +1,6 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import RoleForm from "./RoleForm";
+import { Pencil, Trash } from "lucide-react";
 
 const RoleTable = () => {
   const [roles, setRoles] = useState([]);
@@ -60,9 +61,10 @@ const RoleTable = () => {
     fetchRoles();
   }, []);
 
-  const filteredRoles = roles.filter((user) =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredRoles = roles.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastRole = currentPage * rolesPerPage;
@@ -87,30 +89,33 @@ const RoleTable = () => {
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
-            <th className="border p-2">Name</th>
-            <th className="border p-2">Email</th>
-            <th className="border p-2">Role</th>
-            <th className="border p-2">Actions</th>
+            <th className="border border-primary-dark  p-2">Name</th>
+            <th className="border border-primary-dark  p-2">Email</th>
+            <th className="border border-primary-dark  p-2">Role</th>
+            <th className="border border-primary-dark  p-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {currentRoles.map((user) => (
             <tr key={user._id}>
-              <td className="border p-2">{user.name}</td>
-              <td className="border p-2">{user.email}</td>
-              <td className="border p-2 capitalize">{user.role}</td>
-              <td className="border p-2 flex gap-2">
+              <td className="border border-primary-dark p-2">{user.name}</td>
+              <td className="border border-primary-dark  p-2">{user.email}</td>
+              <td className="border border-primary-dark  p-2 capitalize">
+                {user.role}
+              </td>
+              <td className="border border-r-primary-dark border-b-primary-dark  p-2 flex gap-2">
                 <button
                   onClick={() => setEditingRole(user)}
-                  className="text-blue-600 hover:underline"
+                  className="bg-blue-600 flex items-center gap-4 p-2 text-white"
                 >
-                  Edit
+                  Edit <Pencil size={15} />
                 </button>
                 <button
                   onClick={() => handleDelete(user._id)}
-                  className="text-red-600 hover:underline"
+                  className="bg-red-600 flex items-center gap-4 p-2 text-white"
                 >
                   Delete
+                  <Trash size={15} />
                 </button>
               </td>
             </tr>

@@ -28,7 +28,7 @@ const Hero = () => {
         {/* Dark Overlay */}
         <div className="absolute inset-0 z-10 bg-black/50 backdrop-brightness-60" />
         {/* Heading */}
-        <div className="absolute z-30 text-white top-4 left-5 md:left-10 ">
+        <div className="absolute z-30 text-white top-4 left-5 xl:left-10 ">
           <h1 className=" mb-6 text-2xl font-light leading-tight md:text-6xl drop-shadow-xl font-rubik">
             MedGuard
           </h1>
@@ -58,7 +58,7 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
           variants={staggerVariants}
-          className="absolute bottom-7 left-7 z-30 flex justify-center gap-4 mt-10"
+          className="absolute bottom-7 left-5 z-30 flex justify-center gap-4 mt-10"
         >
           <motion.div variants={fadeUp}>
             <Link

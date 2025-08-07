@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { BotIcon, MessageCircle, X } from "lucide-react";
+import { BotIcon, MessageCircle, Send, X } from "lucide-react";
 import Instructions from "./instructions";
 // Main App component for the MedGuard Chatbot
 
@@ -147,20 +147,11 @@ const MedIntel = () => {
   };
 
   return (
-    <div>
+    <div className="fixed bottom-20 right-6 z-50">
       {/* Toggle Button */}
-      <div
-        className="rounded-full bg-primary-dark fixed bottom-2 right-6 z-50 p-3 cursor-pointer"
-        onClick={toggleBotVisibility}
-      >
-        {botVisibility ? (
-          <X size={40} fill="white" color="white" />
-        ) : (
-          <MessageCircle size={40} fill="white" color="white" />
-        )}
-      </div>
+
       {botVisibility && (
-        <div className="flex flex-col h-[380px] bg-gray-100 font-nunito fixed top-28 right-6 z-50 rounded-lg">
+        <div className="flex flex-col h-[380px] bg-gray-100 font-nunito  rounded-lg">
           <header className="bg-blue-600 text-white p-4 shadow-md rounded-t-lg font-nunito font-bold">
             <h1 className="text-2xl font-bold text-center flex items-center justify-center gap-2">
               MedIntel <BotIcon color="#fff" />
@@ -221,7 +212,7 @@ const MedIntel = () => {
                 className="ml-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                Send
+                <Send fill="white" />
               </button>
             </div>
           </main>
@@ -248,6 +239,16 @@ const MedIntel = () => {
           `}</style>
         </div>
       )}
+      <div
+        className="absolute -bottom-16 right-6  rounded-full bg-gradient-to-tr from-primary-dark to-secondary-dark p-3 cursor-pointer"
+        onClick={toggleBotVisibility}
+      >
+        {botVisibility ? (
+          <X size={40} fill="white" color="white" />
+        ) : (
+          <MessageCircle size={40} fill="white" color="white" />
+        )}
+      </div>
     </div>
   );
 };

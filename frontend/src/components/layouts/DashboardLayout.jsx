@@ -8,7 +8,7 @@ const DashboardLayout = () => {
       <MobileDashboardBar />
       <div className="flex">
         <Sidebar />
-        <main className="xl:ml-44 flex-1 min-h-screen p-6">
+        <main className="xl:ml-44 flex-1 min-h-screen md:p-6">
           <Outlet />
         </main>
       </div>

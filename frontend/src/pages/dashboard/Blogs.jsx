@@ -10,11 +10,8 @@ const BlogDashboard = () => {
   const [form, setForm] = useState({
     title: "",
     description: "",
-    designImg: "",
+    blogImg: "",
     date: "",
-    authorName: "",
-    authorRole: "",
-    authorImageUrl: "",
     categoryTitle: "",
   });
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,17 +43,10 @@ const BlogDashboard = () => {
     const blogPayload = {
       title: form.title,
       description: form.description,
-      designImg: form.designImg,
+      blogImg: form.blogImg,
       date: form.date,
-      author: {
-        name: form.authorName,
-        role: form.authorRole,
-        imageUrl: form.authorImageUrl,
-        href: "#",
-      },
       category: {
         title: form.categoryTitle,
-        href: "#",
       },
     };
 
@@ -78,11 +68,8 @@ const BlogDashboard = () => {
       setForm({
         title: "",
         description: "",
-        designImg: "",
+        blogImg: "",
         date: "",
-        authorName: "",
-        authorRole: "",
-        authorImageUrl: "",
         categoryTitle: "",
       });
       setEditingId(null);
@@ -96,11 +83,8 @@ const BlogDashboard = () => {
     setForm({
       title: post.title,
       description: post.description,
-      designImg: post.designImg,
+      blogImg: post.blogImg,
       date: post.date,
-      authorName: post.author?.name || "",
-      authorRole: post.author?.role || "",
-      authorImageUrl: post.author?.imageUrl || "",
       categoryTitle: post.category?.title || "",
     });
     setEditingId(post._id);
@@ -124,7 +108,7 @@ const BlogDashboard = () => {
   const filteredPosts = posts.filter(
     (post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.author?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      // post.author?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.category?.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -137,20 +121,87 @@ const BlogDashboard = () => {
         onSubmit={handleSubmit}
         className="bg-white shadow-md p-6 rounded-xl mb-10 space-y-4"
       >
-        <input type="text" name="title" value={form.title} onChange={handleInputChange} placeholder="Title" className="w-full border p-2 rounded" required />
-        <textarea name="description" value={form.description} onChange={handleInputChange} placeholder="Description" className="w-full border p-2 rounded" rows="3" required />
-        <input type="text" name="designImg" value={form.designImg} onChange={handleInputChange} placeholder="Image URL" className="w-full border p-2 rounded" required />
-        <input type="text" name="date" value={form.date} onChange={handleInputChange} placeholder="Date (e.g., July 20, 2025)" className="w-full border p-2 rounded" required />
+        <input
+          type="text"
+          name="title"
+          value={form.title}
+          onChange={handleInputChange}
+          placeholder="Title"
+          className="w-full border p-2 rounded"
+          required
+        />
+        <textarea
+          name="description"
+          value={form.description}
+          onChange={handleInputChange}
+          placeholder="Description"
+          className="w-full border p-2 rounded"
+          rows="3"
+          required
+        />
+        <input
+          type="text"
+          name="blogImg"
+          value={form.blogImg}
+          onChange={handleInputChange}
+          placeholder="Image URL"
+          className="w-full border p-2 rounded"
+          required
+        />
+        <input
+          type="text"
+          name="date"
+          value={form.date}
+          onChange={handleInputChange}
+          placeholder="Date (e.g., July 20, 2025)"
+          className="w-full border p-2 rounded"
+          required
+        />
 
-        <div className="grid grid-cols-3 gap-4">
-          <input type="text" name="authorName" value={form.authorName} onChange={handleInputChange} placeholder="Author Name" className="border p-2 rounded" required />
-          <input type="text" name="authorRole" value={form.authorRole} onChange={handleInputChange} placeholder="Author Role" className="border p-2 rounded" required />
-          <input type="text" name="authorImageUrl" value={form.authorImageUrl} onChange={handleInputChange} placeholder="Author Image URL" className="border p-2 rounded" required />
-        </div>
+        {/* <div className="grid grid-cols-3 gap-4">
+          <input
+            type="text"
+            name="authorName"
+            value={form.authorName}
+            onChange={handleInputChange}
+            placeholder="Author Name"
+            className="border p-2 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="authorRole"
+            value={form.authorRole}
+            onChange={handleInputChange}
+            placeholder="Author Role"
+            className="border p-2 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="authorImageUrl"
+            value={form.authorImageUrl}
+            onChange={handleInputChange}
+            placeholder="Author Image URL"
+            className="border p-2 rounded"
+            required
+          />
+        </div> */}
 
-        <input type="text" name="categoryTitle" value={form.categoryTitle} onChange={handleInputChange} placeholder="Category" className="w-full border p-2 rounded" required />
+        <input
+          type="text"
+          name="categoryTitle"
+          value={form.categoryTitle}
+          onChange={handleInputChange}
+          placeholder="Category"
+          className="w-full border p-2 rounded"
+          required
+        />
 
-        <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+        >
           {editingId ? "Update Post" : "Create Post"}
         </button>
       </form>
@@ -172,19 +223,32 @@ const BlogDashboard = () => {
           <p className="text-center text-gray-500">No posts found.</p>
         ) : (
           filteredPosts.map((post) => (
-            <div key={post._id} className="bg-white shadow-md p-6 rounded-xl relative">
+            <div
+              key={post._id}
+              className="bg-white shadow-md p-6 rounded-xl relative"
+            >
               <h2 className="text-xl font-semibold">{post.title}</h2>
               <p className="text-sm text-gray-600 mb-2">
                 {post.category?.title} | By {post.author?.name} on {post.date}
               </p>
-              <img src={post.designImg} alt={post.title} className="w-full h-52 object-cover rounded mb-4" />
+              <img
+                src={post.blogImg}
+                alt={post.title}
+                className="w-full h-52 object-cover rounded mb-4"
+              />
               <p className="text-gray-700 mb-2">{post.description}</p>
 
               <div className="flex items-center gap-4 mt-4">
-                <button onClick={() => handleEdit(post)} className="text-sm text-yellow-600 underline">
+                <button
+                  onClick={() => handleEdit(post)}
+                  className="text-sm text-yellow-600 underline"
+                >
                   Edit
                 </button>
-                <button onClick={() => handleDelete(post._id)} className="text-sm text-red-600 underline">
+                <button
+                  onClick={() => handleDelete(post._id)}
+                  className="text-sm text-red-600 underline"
+                >
                   Delete
                 </button>
               </div>
