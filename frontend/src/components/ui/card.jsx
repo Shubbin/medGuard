@@ -14,4 +14,8 @@ const CardContent = ({ children, className = "text-sm text-[#1f2937]" }) => {
   return <div className={className}>{children}</div>;
 };
 
-export { Card, CardHeader, CardTitle, CardContent };
+const CardFooter = ({ children, className = "mt-4 border-t pt-4 flex justify-end" }) => {
+  return <div className={className}>{children}</div>;
+};
+
+export { Card, CardHeader, CardTitle, CardContent, CardFooter};

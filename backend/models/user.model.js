@@ -52,4 +52,3 @@ const userSchema = new mongoose.Schema(
 
 export const User = mongoose.model("User", userSchema);
 
-//add resusable componments to the frontend: buttons for submission and then remove all the former buttons and use the rersuaBLE COMPONENTS

@@ -7,6 +7,7 @@ import { connectDB } from "./backend/db/connectDb.js";
 import authRouters from "./backend/routes/auth.route.js";
 import blogRoutes from "./backend/routes/blog.routes.js";
 import reportRoutes from "./backend/routes/report.route.js";
+import userRouters from "./backend/routes/users.route.js";
 import cors from "cors";
 import { verifyDrugByNRN } from "./backend/controllers/drug.controller.js";
 
@@ -16,12 +17,12 @@ dotenv.config({ path: "./.env" });
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173", 
-  "http://127.0.0.1:5173", 
-  "http://localhost:3000", 
-  "http://127.0.0.1:3000", 
-  "https://medguard.vercel.app", 
-  "https://www.medguard.ng", 
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://medguard.vercel.app",
+  "https://www.medguard.ng",
 ];
 
 app.use(
@@ -48,7 +49,7 @@ app.use("/api/auth", authRouters);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/drugs/verify", verifyDrugByNRN);
 app.use("/api/reports", reportRoutes);
-
+app.use("/api/users", userRouters);
 const PORT = process.env.PORT || 8000;
 
 (async () => {
