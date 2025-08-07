@@ -1,39 +1,43 @@
-
 import { User } from "../models/user.model.js";
+import { Drug } from "../models/drugs.models.js";
+
+export const searchUsers = async (req, res) => {
+  const { query } = req.query;
+  if (!query) return res.status(400).json({ message: "Query is required" });
+
+  const regex = new RegExp(query, "i");
+  const users = await User.find({
+    $or: [{ name: regex }, { email: regex }, { role: regex }],
+  }).select("-password");
+
+  res.json({ users });
+};
+
+export const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  await User.findByIdAndDelete(id);
+  res.json({ message: "User deleted successfully" });
+};
 
 export const updateUserRole = async (req, res) => {
-  const { userId, newRole } = req.body;
+  const { id } = req.params;
+  const { role } = req.body;
 
-  if (!["user", "sub-admin", "admin"].includes(newRole)) {
-    return res.status(400).json({ success: false, message: "Invalid role" });
+  if (!["user", "sub-admin", "admin"].includes(role)) {
+    return res.status(400).json({ message: "Invalid role" });
   }
 
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
-
-    user.role = newRole;
-    await user.save();
-
-    res.status(200).json({
-      success: true,
-      message: `Role updated to ${newRole}`,
-      user: {
-        ...user._doc,
-        password: undefined,
-      },
-    });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
+  const user = await User.findByIdAndUpdate(id, { role }, { new: true }).select(
+    "-password"
+  );
+  res.json(user);
 };
-export const getAllUsers = async (req, res) => {
+
+export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({}, "-password"); // exclude password
-    res.status(200).json({ success: true, users });
+    const users = await User.find().select("-password");
+    res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };

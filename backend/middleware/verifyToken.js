@@ -1,25 +1,32 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model.js";
 
-export const verifyToken = async (req, res, next) => {
-  const token = req.cookies.token; // 🔐 token must come from cookie
+export const verifyToken = (req, res, next) => {
+  // Check if cookies exist and token is present
+  const token = req.cookies?.token;
 
   if (!token) {
-    return res.status(401).json({ success: false, message: "No token, not authorized" });
+    return res.status(401).json({ success: false, message: "Unauthorized - no token provided" });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findById(decoded.id).select("-password");
-
-    if (!user) {
-      return res.status(401).json({ success: false, message: "User not found" });
+    if (!decoded) {
+      return res.status(401).json({ success: false, message: "Unauthorized - invalid token" });
     }
 
-    req.userId = user._id; // ✅ attach to request
+    // Attach userId from token payload to the request object for next middleware/controller
+    req.userId = decoded.userId;
+
     next();
   } catch (error) {
-    return res.status(401).json({ success: false, message: "Invalid or expired token" });
+    // If token verification failed (expired/invalid), send 401 Unauthorized
+    if (error.name === "TokenExpiredError" || error.name === "JsonWebTokenError") {
+      return res.status(401).json({ success: false, message: "Unauthorized - token expired or invalid" });
+    }
+
+    // Otherwise, it's an unexpected server error
+    console.error("Error in verifyToken middleware:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 };

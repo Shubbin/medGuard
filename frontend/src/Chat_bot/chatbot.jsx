@@ -36,7 +36,7 @@
 //       // Define the system instruction for the chatbot
 //       const systemInstruction = `
 //       You are MedGuard Assistant, an AI-powered chatbot designed to help users with drug verification and reporting suspicious drugs based on the MedGuard platform's capabilities.
-      
+
 //       MedGuard's Core Features:
 //       1.  **Drug Verification**: Users can input NAFDAC numbers and product tokens to check drug authenticity.
 //       2.  **Image-Based Validation**: The platform can compare drug packaging images against registered ones to detect counterfeits.
@@ -246,12 +246,11 @@
 
 // export default App;
 
-
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // toggle floating chat window
   const messagesEndRef = useRef(null);
@@ -263,37 +262,37 @@ const Chatbot = () => {
   useEffect(() => {
     setMessages([
       {
-        sender: 'bot',
-        text: 'Hello! I am your MedGuard Assistant. How can I help you today? You can ask me about verifying drugs, reporting suspicious products, or general information about MedGuard.'
-      }
+        sender: "bot",
+        text: "Hello! I am your MedGuard Assistant. How can I help you today? You can ask me about verifying drugs, reporting suspicious products, or general information about MedGuard.",
+      },
     ]);
   }, []);
 
   const handleSendMessage = async () => {
-    if (input.trim() === '') return;
+    if (input.trim() === "") return;
 
-    const userMessage = { sender: 'user', text: input };
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
+    const userMessage = { sender: "user", text: input };
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
     setIsLoading(true);
 
     try {
       const systemInstruction = `...`; // Keep the full instruction as is
 
-      const chatHistory = messages.map(msg => ({
-        role: msg.sender === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.text }]
+      const chatHistory = messages.map((msg) => ({
+        role: msg.sender === "user" ? "user" : "model",
+        parts: [{ text: msg.text }],
       }));
-      chatHistory.push({ role: 'user', parts: [{ text: input }] });
+      chatHistory.push({ role: "user", parts: [{ text: input }] });
 
       const payload = {
         contents: chatHistory,
         systemInstruction: {
-          parts: [{ text: systemInstruction }]
-        }
+          parts: [{ text: systemInstruction }],
+        },
       };
 
-      const apiKey = "";
+      const apiKey = "AIzaSyC_sEnQv6wvDZN5k573wt3Y0GldGUXYkFc";
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
       let retries = 0;
@@ -304,13 +303,15 @@ const Chatbot = () => {
       while (retries < maxRetries) {
         try {
           const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
           });
 
           if (response.status === 429) {
-            await new Promise(resolve => setTimeout(resolve, baseDelay * 2 ** retries));
+            await new Promise((resolve) =>
+              setTimeout(resolve, baseDelay * 2 ** retries)
+            );
             retries++;
             continue;
           }
@@ -322,27 +323,38 @@ const Chatbot = () => {
         } catch (err) {
           console.error(err);
           if (retries === maxRetries - 1) throw err;
-          await new Promise(resolve => setTimeout(resolve, baseDelay * 2 ** retries));
+          await new Promise((resolve) =>
+            setTimeout(resolve, baseDelay * 2 ** retries)
+          );
           retries++;
         }
       }
 
       if (result?.candidates?.[0]?.content?.parts?.[0]?.text) {
         const botResponse = result.candidates[0].content.parts[0].text;
-        setMessages(prev => [...prev, { sender: 'bot', text: botResponse }]);
+        setMessages((prev) => [...prev, { sender: "bot", text: botResponse }]);
       } else {
-        setMessages(prev => [...prev, { sender: 'bot', text: 'Sorry, I could not get a response. Please try again.' }]);
+        setMessages((prev) => [
+          ...prev,
+          {
+            sender: "bot",
+            text: "Sorry, I could not get a response. Please try again.",
+          },
+        ]);
       }
     } catch (error) {
-      console.error('Error sending message:', error);
-      setMessages(prev => [...prev, { sender: 'bot', text: 'An error occurred. Please try again later.' }]);
+      console.error("Error sending message:", error);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "An error occurred. Please try again later." },
+      ]);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSendMessage();
+    if (e.key === "Enter") handleSendMessage();
   };
 
   return (
@@ -359,20 +371,24 @@ const Chatbot = () => {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-[95vw] sm:w-96 h-[75vh] bg-white shadow-xl rounded-xl flex flex-col z-50 overflow-hidden border border-gray-300">
           <header className="bg-blue-600 text-white p-4">
-            <h1 className="text-lg font-semibold text-center">MedGuard Assistant 💊</h1>
+            <h1 className="text-lg font-semibold text-center">
+              MedGuard Assistant 💊
+            </h1>
           </header>
 
           <main className="flex-1 flex flex-col p-3 overflow-y-auto bg-gray-50">
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex mb-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex mb-2 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
               >
-                <div className={`p-3 rounded-lg max-w-[80%] shadow text-sm ${
-                  msg.sender === 'user'
-                    ? 'bg-blue-600 text-white rounded-br-none'
-                    : 'bg-gray-200 text-gray-800 rounded-bl-none'
-                }`}>
+                <div
+                  className={`p-3 rounded-lg max-w-[80%] shadow text-sm ${
+                    msg.sender === "user"
+                      ? "bg-blue-600 text-white rounded-br-none"
+                      : "bg-gray-200 text-gray-800 rounded-bl-none"
+                  }`}
+                >
                   {msg.text}
                 </div>
               </div>
@@ -425,7 +441,7 @@ const Chatbot = () => {
         }
         .dot-flashing::before,
         .dot-flashing::after {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           width: 10px;
@@ -445,8 +461,13 @@ const Chatbot = () => {
         }
 
         @keyframes dotFlashing {
-          0% { background-color: #989697; }
-          50%, 100% { background-color: #ebebeb; }
+          0% {
+            background-color: #989697;
+          }
+          50%,
+          100% {
+            background-color: #ebebeb;
+          }
         }
       `}</style>
     </>

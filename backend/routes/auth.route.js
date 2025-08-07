@@ -13,7 +13,7 @@ import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 
-router.get("/check-auth", verifyToken, (req, res) => {
+router.get("/check-auth", protect, (req, res) => {
   // This assumes you're attaching user/admin to req in verifyToken
   const user = req.user || req.admin;
 
