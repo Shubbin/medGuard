@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -11,21 +11,49 @@ import RoleForm from "../../components/dashboardComponets/roles/RoleForm";
 import { PlusCircle } from "lucide-react";
 
 export default function Roles() {
-  const [roles, setRoles] = useState([
-    { id: 1, name: "Admin", description: "Full access to everything" },
-    { id: 2, name: "Editor", description: "Can edit content" },
-    { id: 3, name: "Viewer", description: "Can only view content" },
-  ]);
-
+  const [users, setUsers] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
-  const handleAddRole = (newRole) => {
-    setRoles([...roles, { ...newRole, id: Date.now() }]);
-    setShowForm(false);
+  // ✅ Correct endpoint
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const res = await fetch("http://localhost:8000/api/users");
+        if (!res.ok) throw new Error("Failed to fetch users");
+        const data = await res.json();
+        setUsers(data);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+    }
+
+    fetchUsers();
+  }, []);
+
+  // ✅ Correct endpoint
+  const handleRoleUpdate = async (userId, updatedRole) => {
+    try {
+      const res = await fetch(`http://localhost:8000/api/users/${userId}/role`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role: updatedRole }),
+      });
+
+      if (!res.ok) throw new Error("Failed to update role");
+
+      const result = await res.json();
+      const updatedUser = result.user;
+
+      setUsers((prev) =>
+        prev.map((user) => (user._id === userId ? updatedUser : user))
+      );
+    } catch (err) {
+      console.error("Error updating role:", err);
+    }
   };
 
   const handleDelete = (id) => {
-    setRoles(roles.filter((role) => role.id !== id));
+    setUsers(users.filter((user) => user._id !== id));
   };
 
   return (
@@ -42,12 +70,12 @@ export default function Roles() {
           </Button>
         </CardHeader>
         <CardContent>
-          <RoleTable roles={roles} onDelete={handleDelete} />
+          <RoleTable users={users} onDelete={handleDelete} onUpdateRole={handleRoleUpdate} />
         </CardContent>
       </Card>
 
       {showForm && (
-        <RoleForm onSubmit={handleAddRole} onClose={() => setShowForm(false)} />
+        <RoleForm onClose={() => setShowForm(false)} />
       )}
     </div>
   );

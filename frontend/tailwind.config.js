@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        primary: "#4Az8BBE", // soft blue
+        primary: "#4A8BBE", // soft blue
         "primary-dark": "#2563eb", // deep blue
         "secondary-dark": "#2C549C",
         secondary: "#B7D3E3", // light blue
@@ -19,7 +20,6 @@ export default {
         rubik: "Rubik",
       },
     },
-    darkMode: "class",
   },
 
   plugins: [],

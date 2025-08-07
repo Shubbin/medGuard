@@ -1,27 +1,23 @@
-import { PencilIcon, Trash2Icon } from "lucide-react";
+// UserActions.jsx
+import { Trash2Icon } from "lucide-react";
 
-const UserActions = ({ userId }) => {
-  const handleEdit = () => {
-    console.log("Edit user", userId);
-  };
-
-  const handleDelete = () => {
-    console.log("Delete user", userId);
-  };
-
+const UserActions = ({ userId, userRole, onRoleChange, onDelete }) => {
   return (
-    <div className="flex justify-end gap-2 pt-2">
-      <button
-        onClick={handleEdit}
-        className="text-blue-500 hover:text-blue-700"
-        title="Edit"
+    <div className="flex justify-between items-center gap-2 pt-4">
+      <select
+        value={userRole}
+        onChange={(e) => onRoleChange(userId, e.target.value)}
+        className="border border-gray-300 px-2 py-1 rounded text-sm"
       >
-        <PencilIcon className="w-4 h-4" />
-      </button>
+        <option value="user">User</option>
+        <option value="sub-admin">Sub-Admin</option>
+        <option value="admin">Admin</option>
+      </select>
+
       <button
-        onClick={handleDelete}
+        onClick={() => onDelete(userId)}
         className="text-red-500 hover:text-red-700"
-        title="Delete"
+        title="Delete User"
       >
         <Trash2Icon className="w-4 h-4" />
       </button>

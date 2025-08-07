@@ -1,4 +1,3 @@
-// components/Mail/MailReportCard.jsx
 import { Card, CardContent } from "../../ui/card";
 import { MapPin, CalendarDays } from "lucide-react";
 
