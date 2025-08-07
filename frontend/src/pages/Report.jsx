@@ -1,6 +1,6 @@
-import { Pill, MapPin, PenLine, Camera } from "lucide-react";
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Report = () => {
   const [formData, setFormData] = useState({
@@ -11,25 +11,26 @@ const Report = () => {
   });
 
   const handleChange = (e) => {
-    if (e.target.type === "file") {
-      setFormData({ ...formData, photo: e.target.files[0] });
+    const { name, value, files } = e.target;
+    if (name === "photo") {
+      setFormData({ ...formData, photo: files[0] });
     } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData({ ...formData, [name]: value });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const data = new FormData();
-      data.append("drugName", formData.drugName);
-      data.append("description", formData.description);
-      data.append("location", formData.location);
-      if (formData.photo) {
-        data.append("photo", formData.photo);
-      }
+    const data = new FormData();
+    data.append("drugName", formData.drugName);
+    data.append("description", formData.description);
+    data.append("location", formData.location);
+    if (formData.photo) {
+      data.append("photo", formData.photo);
+    }
 
+    try {
       const response = await fetch("http://localhost:8000/api/reports/create", {
         method: "POST",
         body: data,
@@ -37,13 +38,13 @@ const Report = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Something went wrong.");
+        throw new Error(errorData.message || "Submission failed.");
       }
 
       const result = await response.json();
-      console.log("Backend response:", result);
+      console.log("✅ Backend response:", result);
+      toast.success("✅ Report submitted successfully. Thank you!");
 
-      alert("✅ Report submitted successfully. Thank you!");
       setFormData({
         drugName: "",
         description: "",
@@ -51,125 +52,83 @@ const Report = () => {
         photo: null,
       });
       document.getElementById("photo").value = null;
+
     } catch (err) {
-      console.error("Submit failed:", err);
-      alert("❌ Failed to submit report: " + err.message);
+      console.error("❌ Submit failed:", err);
+      toast.error("❌ Failed to submit report: " + err.message);
     }
   };
 
   return (
-    <div className="bg-gradient-to-tr from-blue-50 to-white min-h-screen py-24 px-6 md:px-16 text-gray-800">
-      <Helmet>
-        <title>Report Suspicious Drug | MedGuard</title>
-        <meta
-          name="description"
-          content="Help MedGuard track and eliminate fake drugs by submitting a report on suspicious medicines."
-        />
-      </Helmet>
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Report a Drug</h2>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Drug Name</label>
+          <input
+            type="text"
+            name="drugName"
+            value={formData.drugName}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          />
+        </div>
 
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-primary-dark mb-4 text-center">
-          Report a Suspicious Drug
-        </h1>
-        <p className="text-md sm:text-lg text-gray-600 mb-8 text-center">
-          Help us identify and stop counterfeit or harmful drugs. Your report
-          could save lives.
-        </p>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Description</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          />
+        </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg space-y-6 border border-gray-100"
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Location</label>
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Photo (optional)</label>
+          <input
+            type="file"
+            name="photo"
+            id="photo"
+            accept="image/*"
+            onChange={handleChange}
+            className="w-full"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
         >
-          {/* Drug Name */}
-          <div>
-            <label
-              htmlFor="drugName"
-              className="block text-sm font-semibold text-gray-700 mb-1"
-            >
-              Drug Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="drugName"
-              name="drugName"
-              type="text"
-              value={formData.drugName}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark transition"
-              placeholder="e.g., Amoxicillin 500mg"
-            />
-          </div>
+          Submit Report
+        </button>
+      </form>
 
-          {/* Location */}
-          <div>
-            <label
-              htmlFor="location"
-              className="block text-sm font-semibold text-gray-700 mb-1"
-            >
-              Location Found <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="location"
-              name="location"
-              type="text"
-              value={formData.location}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark transition"
-              placeholder="e.g., Alaba Market, Lagos"
-            />
-          </div>
-
-          {/* Description */}
-          <div>
-            <label
-              htmlFor="description"
-              className="block text-sm font-semibold text-gray-700 mb-1"
-            >
-              Description or Effects Noticed{" "}
-              <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-              rows="4"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-dark transition resize-none"
-              placeholder="Describe packaging, side effects, or anything unusual..."
-            />
-          </div>
-
-          {/* Photo */}
-          <div>
-            <label
-              htmlFor="photo"
-              className="block text-sm font-semibold text-gray-700 mb-1"
-            >
-              Upload Photo (optional)
-            </label>
-            <input
-              id="photo"
-              name="photo"
-              type="file"
-              accept="image/*"
-              onChange={handleChange}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:rounded-lg file:text-sm file:font-semibold file:bg-primary-dark file:text-white hover:file:bg-primary transition"
-            />
-          </div>
-
-          {/* Submit Button */}
-          <div className="text-center">
-            <button
-              type="submit"
-              className="bg-primary-dark text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-900 transition shadow-lg hover:shadow-xl active:scale-95"
-            >
-              Submit Report
-            </button>
-          </div>
-        </form>
-      </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

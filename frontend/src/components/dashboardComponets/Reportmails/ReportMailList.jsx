@@ -1,11 +1,17 @@
-import ReportMailCard from "../../dashboardComponets/Reportmails/MailReportCard"
+// src/components/dashboardComponets/Reportmails/ReportMailList.jsx
 
+import ReportMailCard from "./MailReportCard";
 
 const ReportMailList = ({ reports }) => {
   if (!Array.isArray(reports)) return null;
 
-  if (reports.length === 0)
-    return <p className="text-center text-gray-500 mt-10">No reports available yet.</p>;
+  if (reports.length === 0) {
+    return (
+      <p className="text-center text-gray-500 mt-10">
+        No reports found for the current query.
+      </p>
+    );
+  }
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

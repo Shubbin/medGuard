@@ -16,6 +16,7 @@ export const navConfig = {
     { name: "Analytics", icon: BarChart2Icon, path: "analytics" },
     { name: "Users", icon: UsersIcon, path: "users" },
     { name: "Roles", icon: ShieldIcon, path: "roles" },
+  
     { name: "Settings", icon: SettingsIcon, path: "settings" },
   ],
 

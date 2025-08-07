@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import path from "path";
-import { createReport, getReports } from "../controllers/report.controller.js";
+import { createReport, getReportById, getReports, searchReports } from "../controllers/report.controller.js";
 
 const router = express.Router();
 
@@ -34,5 +34,8 @@ const upload = multer({
 // Routes
 router.post("/create", upload.single("photo"), createReport);
 router.get("/", getReports);
+router.get("/:id", getReportById);
+router.get("/search/filter", searchReports);
+
 
 export default router;

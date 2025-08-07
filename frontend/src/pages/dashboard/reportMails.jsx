@@ -1,23 +1,25 @@
 // src/pages/dashboard/ReportMails.jsx
+
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { MailIcon } from "lucide-react";
+import { MailIcon, Search, Loader } from "lucide-react";
 import ReportMailList from "../../components/dashboardComponets/Reportmails/ReportMailList";
 
 const ReportMails = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchReports = async () => {
+      setLoading(true);
       try {
-        const res = await axios.get("/api/reports");
-        if (Array.isArray(res.data)) {
-          setReports(res.data);
-        } else {
-          console.error("Unexpected response format:", res.data);
-          setReports([]);
-        }
+        const endpoint = searchQuery
+          ? `http://localhost:8000/api/reports/search?query=${searchQuery}`
+          : `http://localhost:8000/api/reports`;
+
+        const res = await axios.get(endpoint);
+        setReports(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
         console.error("Failed to fetch reports:", err);
         setReports([]);
@@ -27,15 +29,7 @@ const ReportMails = () => {
     };
 
     fetchReports();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-60">
-        <div className="text-gray-600 animate-pulse text-lg">Loading report mails...</div>
-      </div>
-    );
-  }
+  }, [searchQuery]);
 
   return (
     <div className="p-6 bg-white rounded-xl shadow-md dark:bg-gray-900">
@@ -44,7 +38,25 @@ const ReportMails = () => {
         Report Mails
       </h1>
 
-      <ReportMailList reports={reports} />
+      <div className="mb-4 flex items-center gap-2">
+        <input
+          type="text"
+          placeholder="Search by drug name or location..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring focus:ring-blue-400 dark:bg-gray-800 dark:text-white"
+        />
+        <Search className="w-5 h-5 text-gray-500" />
+      </div>
+
+      {loading ? (
+        <div className="flex justify-center items-center h-60">
+          <Loader className="animate-spin w-6 h-6 text-gray-600" />
+          <span className="ml-2 text-gray-600">Loading report mails...</span>
+        </div>
+      ) : (
+        <ReportMailList reports={reports} />
+      )}
     </div>
   );
 };

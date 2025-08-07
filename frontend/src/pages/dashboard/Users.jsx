@@ -1,12 +1,8 @@
-// Users.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import UserCard from "../../components/dashboardComponets/users/UserCard";
 
-const API_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:8000/api"
-    : "/api";
+const API_BASE = "http://localhost:8000/api/users";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -16,7 +12,7 @@ const Users = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(`${API_URL}/admin/users`, {
+      const { data } = await axios.get(`${API_BASE}`, {
         withCredentials: true,
       });
       setUsers(data.users);
@@ -30,7 +26,7 @@ const Users = () => {
   const handleRoleChange = async (userId, newRole) => {
     try {
       await axios.patch(
-        `${API_URL}/admin/update-role`,
+        `${API_BASE}/update-role`,
         { userId, newRole },
         { withCredentials: true }
       );
@@ -42,7 +38,7 @@ const Users = () => {
 
   const handleDelete = async (userId) => {
     try {
-      await axios.delete(`${API_URL}/admin/user/${userId}`, {
+      await axios.delete(`${API_BASE}/${userId}`, {
         withCredentials: true,
       });
       fetchUsers();
@@ -56,6 +52,10 @@ const Users = () => {
       user.email.toLowerCase().includes(search.toLowerCase()) ||
       user.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <div className="p-6 space-y-6">

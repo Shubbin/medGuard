@@ -15,7 +15,6 @@ import { useState } from "react";
 const navItems = [
   { name: "Overview", icon: LayoutDashboard, path: "/dashboard" },
   { name: "Report Mails", icon: Mail, path: "/dashboard/report-mails" },
-  { name: "Users", icon: Users, path: "/dashboard/users" },
   { name: "Settings", icon: Cog, path: "/dashboard/settings" },
   { name: "User Roles", icon: FileText, path: "/dashboard/roles" },
   { name: "Blogs", icon: FileText, path: "/dashboard/Blogs" },

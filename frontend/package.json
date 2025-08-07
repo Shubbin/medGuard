@@ -28,6 +28,7 @@
     "react-hot-toast": "^2.4.1",
     "react-qr-barcode-scanner": "^2.1.8",
     "react-router-dom": "^6.26.0",
+    "react-toastify": "^11.0.5",
     "react-tsparticles": "^2.12.2",
     "recharts": "^3.0.2",
     "yup": "^1.6.1",
