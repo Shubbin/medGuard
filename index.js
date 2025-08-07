@@ -11,7 +11,6 @@ import userRouters from "./backend/routes/users.route.js";
 import cors from "cors";
 import { verifyDrugByNRN } from "./backend/controllers/drug.controller.js";
 
-// Load environment variables as early as possible
 dotenv.config({ path: "./.env" });
 
 const app = express();
