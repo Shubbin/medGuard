@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { BotIcon, MessageCircle, X } from "lucide-react";
+import Instructions from "./instructions";
 // Main App component for the MedGuard Chatbot
 
 const MedIntel = () => {
@@ -27,7 +28,7 @@ const MedIntel = () => {
     setMessages([
       {
         sender: "bot",
-        text: "Hello! I am MedIntel your chat bot assistant. How can I help you today? You can ask me about verifying drugs, reporting suspicious products, or general information about MedGuard.",
+        text: "Hello 👋! I am MedIntel your chat bot 🤖 assistant. How can I help you today? You can ask me about verifying drugs, reporting suspicious products, or general information about MedGuard.",
       },
     ]);
   }, []);
@@ -43,25 +44,7 @@ const MedIntel = () => {
 
     try {
       // Define the system instruction for the chatbot
-      const systemInstruction = `
-      You are MedIntel, an AI-powered chatbot designed to help users with drug verification and reporting suspicious drugs based on the MedGuard platform's capabilities.
-      
-      MedGuard's Core Features:
-      1.  **Drug Verification**: Users can input NAFDAC numbers and product tokens to check drug authenticity.
-      2.  **Image-Based Validation**: The platform can compare drug packaging images against registered ones to detect counterfeits.
-      3.  **Report Suspicious Drugs**: Users can report fake products by providing photos, descriptions, and locations.
-      4.  **Admin Dashboard**: For authorities to review reports and analytics.
-      5.  **Voice Search**: (Optional) Users can speak NAFDAC numbers for verification.
-
-      When a user asks about:
-      -   **Verifying drugs**: Ask them to provide the NAFDAC number and the unique product token found on the drug packaging.
-      -   **Reporting suspicious drugs/fake drugs**: Ask them to describe the issue, provide the location where they found the drug, and if possible, suggest uploading a photo (though the chatbot itself cannot handle uploads, it should guide the user to the platform's feature).
-      -   **General complaints/issues**: Try to direct them to the relevant MedGuard feature or explain how MedGuard addresses such issues.
-      -   **Finding fake drugs**: Explain that MedGuard helps by allowing verification via NAFDAC/token or reporting with images.
-
-      Keep your responses concise, helpful, and directly related to MedGuard's functionalities.
-      `;
-
+      const systemInstruction = Instructions;
       // Prepare the chat history for the API call
       let chatHistory = messages.map((msg) => ({
         role: msg.sender === "user" ? "user" : "model", // 'model' for bot responses in Gemini API
@@ -78,7 +61,7 @@ const MedIntel = () => {
       };
 
       // API key is automatically provided by the Canvas environment when left empty
-      const apiKey = "";
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
       // Make the API call with exponential backoff for retries
@@ -178,12 +161,6 @@ const MedIntel = () => {
       </div>
       {botVisibility && (
         <div className="flex flex-col h-[380px] bg-gray-100 font-nunito fixed top-28 right-6 z-50 rounded-lg">
-          <style>
-            {`
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-            body { font-family: 'Nunito Sans', sans-serif; }
-          `}
-          </style>
           <header className="bg-blue-600 text-white p-4 shadow-md rounded-t-lg font-nunito font-bold">
             <h1 className="text-2xl font-bold text-center flex items-center justify-center gap-2">
               MedIntel <BotIcon color="#fff" />
@@ -210,9 +187,19 @@ const MedIntel = () => {
               {isLoading && (
                 <div className="flex justify-start mb-3">
                   <div className="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl p-3 rounded-lg shadow-md bg-gray-200 text-gray-800 rounded-bl-none">
-                    <div className="flex items-center">
-                      <span className="ml-2">Thinking...</span>
-                      <span className="dot-flashing"></span>
+                    <div className="flex items-center space-x-2">
+                      <span>Thinking</span>
+                      <div className="flex space-x-1">
+                        <span className="dot-flashing" />
+                        <span
+                          className="dot-flashing"
+                          style={{ animationDelay: "0.2s" }}
+                        />
+                        <span
+                          className="dot-flashing"
+                          style={{ animationDelay: "0.4s" }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -241,49 +228,21 @@ const MedIntel = () => {
           {/* Basic loading animation CSS */}
           <style jsx>{`
             .dot-flashing {
-              position: relative;
-              width: 10px;
-              height: 10px;
-              border-radius: 5px;
+              width: 8px;
+              height: 8px;
               background-color: #989697;
-              color: #989697;
-              animation: dotFlashing 1s infinite linear alternate;
-              animation-delay: 0.5s;
+              border-radius: 50%;
+              animation: dotFlashing 1s infinite ease-in-out;
             }
-            .dot-flashing::before,
-            .dot-flashing::after {
-              content: "";
-              display: inline-block;
-              position: absolute;
-              top: 0;
-            }
-            .dot-flashing::before {
-              left: -15px;
-              width: 10px;
-              height: 10px;
-              border-radius: 5px;
-              background-color: #989697;
-              color: #989697;
-              animation: dotFlashing 1s infinite linear alternate;
-              animation-delay: 0s;
-            }
-            .dot-flashing::after {
-              left: 15px;
-              width: 10px;
-              height: 10px;
-              border-radius: 5px;
-              background-color: #989697;
-              color: #989697;
-              animation: dotFlashing 1s infinite linear alternate;
-              animation-delay: 1s;
-            }
+
             @keyframes dotFlashing {
-              0% {
-                background-color: #989697;
-              }
-              50%,
+              0%,
+              80%,
               100% {
-                background-color: #ebebeb;
+                opacity: 0;
+              }
+              40% {
+                opacity: 1;
               }
             }
           `}</style>

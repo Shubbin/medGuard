@@ -1,6 +1,12 @@
 import { useState } from "react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../../components/ui/card";
-import  Input  from "../../../components/Input";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../../components/ui/card";
+import Input from "../../../components/Input";
 import { Button } from "../../../components/ui/button";
 import { X } from "lucide-react";
 
@@ -27,11 +33,14 @@ export default function RoleForm({ onClose }) {
         return;
       }
 
-      const resUpdate = await fetch(`http://localhost:8000/api/admin/users/${user._id}/role`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role }),
-      });
+      const resUpdate = await fetch(
+        `http://localhost:8000/api/admin/users/${user._id}/role`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ role }),
+        }
+      );
 
       if (!resUpdate.ok) {
         throw new Error("Failed to update role");
@@ -47,7 +56,13 @@ export default function RoleForm({ onClose }) {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-white border shadow-lg">
+    <Card
+      className="w-full max-w-md mx-auto border shadow-xl p-4 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white/60 dark:bg-gray-900/60 backdrop-blur-2xl border border-gray-200 dark:border-gray-700 transition-all"
+      style={{
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.15)",
+        borderRadius: "1.25rem",
+      }}
+    >
       <CardHeader className="flex justify-between items-center">
         <CardTitle className="text-lg">Assign Role to User</CardTitle>
         <Button variant="ghost" onClick={onClose}>
@@ -58,6 +73,13 @@ export default function RoleForm({ onClose }) {
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <Input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <Input
             type="email"
             placeholder="User Email"
             value={email}
@@ -65,21 +87,15 @@ export default function RoleForm({ onClose }) {
             required
           />
 
-          <select
-            className="w-full px-4 py-2 border rounded"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="user">User</option>
-            <option value="sub-admin">Sub-Admin</option>
-            <option value="admin">Admin</option>
-          </select>
-
           {error && <p className="text-red-600 text-sm">{error}</p>}
         </CardContent>
 
         <CardFooter>
-          <Button type="submit" className="w-full bg-primary-dark text-white" disabled={loading}>
+          <Button
+            type="submit"
+            className="w-full bg-primary-dark text-white"
+            disabled={loading}
+          >
             {loading ? "Assigning..." : "Assign Role"}
           </Button>
         </CardFooter>
