@@ -38,7 +38,7 @@ const postsData = [
   },
 ];
 
-const POSTS_PER_PAGE = 2;
+const POSTS_PER_PAGE = 4;
 
 export default function Blog() {
   // State for search input
@@ -62,11 +62,11 @@ export default function Blog() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 px-4 py-16 sm:px-8 lg:px-24">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 px-4 py-16 sm:px-8 lg:px-24">
       <Helmet>
         <title>Blog - MedGuard Insights</title>
       </Helmet>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-7xl w-full mx-auto">
         <div className="flex flex-col items-center mb-10">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-800 dark:text-white mb-2 tracking-tight text-center drop-shadow-lg">
             MedGuard Blog
@@ -84,7 +84,7 @@ export default function Blog() {
           />
         </div>
 
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {currentPosts.length === 0 ? (
             <div className="col-span-full text-center text-gray-500 dark:text-gray-400 py-12 text-lg">
               No posts found.
@@ -93,7 +93,7 @@ export default function Blog() {
             currentPosts.map((post) => (
               <div
                 key={post.id}
-                className="group bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-gray-100 dark:border-gray-700 flex flex-col h-full"
+                className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-gray-100 dark:border-gray-700 flex flex-col h-full"
               >
                 <div className="relative">
                   <img
@@ -113,12 +113,12 @@ export default function Blog() {
                     {post.excerpt}
                   </p>
                   <div className="flex items-center gap-2 mt-auto">
-                    {/* <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-lg">
+                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-lg">
                       {post.author
                         .split(" ")
                         .map((n) => n[0])
                         .join("")}
-                    </div> */}
+                    </div>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {post.author}
                     </span>

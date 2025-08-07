@@ -35,7 +35,7 @@ import Settings from "./pages/dashboard/Settings";
 // Documents
 import TermsAndConditions from "./document/TermsAndConditions";
 import PrivacyPolicy from "./document/PrivacyPolicy";
-import ChatwootWidget from "./components/bot/Chatwoot";
+import MedIntel from "./components/bot/MedIntel";
 
 // ✅ Redirect wrapper
 const RedirectAuthenticatedUser = ({ children }) => {
@@ -221,7 +221,7 @@ const App = () => {
         </Routes>
       </AnimatePresence>
       <Toaster />
-      <ChatwootWidget />
+      <MedIntel />
     </div>
   );
 };
