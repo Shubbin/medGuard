@@ -16,12 +16,12 @@ dotenv.config({ path: "./.env" });
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173", // Vite dev
-  "http://127.0.0.1:5173", // Another local dev
-  "http://localhost:3000", // Alt dev port (React default)
-  "http://127.0.0.1:3000", // Alt IP
-  "https://medguard.vercel.app", // Example production
-  "https://www.medguard.ng", // Your live domain
+  "http://localhost:5173", 
+  "http://127.0.0.1:5173", 
+  "http://localhost:3000", 
+  "http://127.0.0.1:3000", 
+  "https://medguard.vercel.app", 
+  "https://www.medguard.ng", 
 ];
 
 app.use(
