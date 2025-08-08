@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BlogStats from "./BlogStats";
 
 const API_URL = "http://localhost:8000/api/blogs";
 
@@ -113,7 +114,9 @@ const BlogDashboard = () => {
   );
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
+<>
+  <BlogStats />
+      <div className="max-w-5xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-8 text-center">📝 Blog Dashboard</h1>
 
       {/* Form */}
@@ -257,6 +260,7 @@ const BlogDashboard = () => {
         )}
       </div>
     </div>
+</>
   );
 };
 

@@ -15,7 +15,7 @@ const PostSchema = new mongoose.Schema(
   {
     blogImg: { type: String, required: true },
     title: { type: String, required: true },
-    description: { type: String, required: true },
+    content: { type: String, required: true },
     date: { type: String, required: true },
     category: { type: CategorySchema, required: true },
     // author: { type: AuthorSchema, required: true },

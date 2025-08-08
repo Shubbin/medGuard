@@ -147,7 +147,7 @@ const MedIntel = () => {
   };
 
   return (
-    <div className="fixed bottom-20 right-6 z-50">
+    <div className="hidden fixed bottom-20 right-6 z-50">
       {/* Toggle Button */}
 
       {botVisibility && (
