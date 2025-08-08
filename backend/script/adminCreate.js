@@ -2,25 +2,30 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
-import { User } from "../models/user.model.js"; // Make sure to include the .js extension for ESM
+import { User } from "../models/user.model.js";
 
 dotenv.config();
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/medGuard"; // Update with your MongoDB URI
 
-const adminEmail = "makindeolasubomi2@gmail.com";
+const MONGODB_URI = process.env.MONGO_URI;
+
+if (!MONGODB_URI) {
+  console.error(" MONGO_URI is not defined. Please check your .env file.");
+  process.exit(1);
+}
+
+const adminEmail = "oladimejidaud5@gmail.com";
 const adminPassword = "Welcome123.";
 const adminRole = "admin";
 
 async function createAdmin() {
   try {
     await mongoose.connect(MONGODB_URI);
-    console.log("Connected to MongoDB");
+    console.log("✅ Connected to MongoDB");
 
     const existingAdmin = await User.findOne({ email: adminEmail });
     if (existingAdmin) {
-      console.log("Admin user already exists:", adminEmail);
+      console.log("⚠️ Admin user already exists:", adminEmail);
       process.exit(0);
     }
 
@@ -28,7 +33,7 @@ async function createAdmin() {
     const hashedPassword = await bcrypt.hash(adminPassword, salt);
 
     const adminUser = new User({
-      name: "Admin", // required field from your schema
+      name: "Admin",
       email: adminEmail,
       password: hashedPassword,
       role: adminRole,
@@ -36,10 +41,10 @@ async function createAdmin() {
     });
 
     await adminUser.save();
-    console.log("Admin user created successfully:", adminEmail);
+    console.log("✅ Admin user created successfully:", adminEmail);
     process.exit(0);
   } catch (error) {
-    console.error("Error creating admin user:", error);
+    console.error(" Error creating admin user:", error);
     process.exit(1);
   }
 }

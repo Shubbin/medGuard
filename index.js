@@ -37,6 +37,10 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("MedGuard Backend is Running");
+});
+
 app.use(express.json()); // Parse JSON payloads
 app.use(cookieParser()); // Parse cookies
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));

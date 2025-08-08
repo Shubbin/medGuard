@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "nafdac": "node backend/script/import-nafdac.js"
+    "nafdac": "node backend/script/import-nafdac.js",
+    "admin":"node backend/script/adminCreate.js"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,7 @@
     "express": "^5.1.0",
     "framer-motion": "^12.23.12",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.17.0",
+    "mongodb": "^6.18.0",
     "mongoose": "^8.16.2",
     "multer": "^2.0.1",
     "nodemon": "^3.1.10",
