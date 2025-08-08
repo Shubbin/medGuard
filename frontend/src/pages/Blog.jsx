@@ -29,25 +29,6 @@ const postsData = [
     date: "July 22, 2025",
     blogImg: image3,
   },
-  {
-    id: 4,
-    title: "Understanding The Dangers Of Fake Medication",
-    content:
-      "A simplified guide to how mRNA vaccines work to protect your immune system.",
-
-    date: "July 22, 2024",
-    blogImg:
-      "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
-  },
-  {
-    id: 5,
-    title: "Why you must watch what you eat",
-    content:
-      "A simplified guide to how mRNA vaccines work to protect your immune system.",
-    date: "July 22, 2023",
-    blogImg:
-      "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
-  },
 ];
 
 const POSTS_PER_PAGE = 3;

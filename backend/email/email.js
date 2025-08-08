@@ -7,30 +7,14 @@ import {
 } from "./emailTemplates.js";
 
 // Send verification email
-// export const sendVerificationEmail = async (email, token) => {
-//   const verificationLink = `${process.env.CLIENT_URL}/verify-email/${token}`;
-//   try {
-//     const { data, error } = await resend.emails.send({
-//       from: sender,
-//       to: [email],
-//       subject: "Verify Your Email",
-//       html: verificationEmailTemplate(verificationLink),
-//     });
-
-//     if (error) throw new Error(`Verification email failed: ${error.message}`);
-//     console.log("Verification email sent:", data);
-//   } catch (err) {
-//     console.error("Verification email error:", err);
-//     throw err;
-//   }
-// };
-export const sendVerificationEmail = async (email, otp) => {
+export const sendVerificationEmail = async (email, token) => {
+  const verificationLink = `${process.env.CLIENT_URL}/verify-email/${token}`;
   try {
     const { data, error } = await resend.emails.send({
       from: sender,
       to: [email],
-      subject: "Your Verification Code",
-      html: verificationEmailTemplate(otp),
+      subject: "Verify Your Email",
+      html: verificationEmailTemplate(verificationLink),
     });
 
     if (error) throw new Error(`Verification email failed: ${error.message}`);
@@ -40,6 +24,22 @@ export const sendVerificationEmail = async (email, otp) => {
     throw err;
   }
 };
+// export const sendVerificationEmail = async (email, otp) => {
+//   try {
+//     const { data, error } = await resend.emails.send({
+//       from: sender,
+//       to: [email],
+//       subject: "Your Verification Code",
+//       html: verificationEmailTemplate(otp),
+//     });
+
+//     if (error) throw new Error(`Verification email failed: ${error.message}`);
+//     console.log("Verification email sent:", data);
+//   } catch (err) {
+//     console.error("Verification email error:", err);
+//     throw err;
+//   }
+// };
 // Send welcome email
 export const sendWelcomeEmail = async (email, name) => {
   try {

@@ -13,7 +13,7 @@ const VerifyDrug = () => {
     setVerificationResult(null);
     try {
       const res = await fetch(
-        "https://medguardapi.onrender.com/api/drugs/verify",
+        "http://localhost:8000/api/drugs/verify",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

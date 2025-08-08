@@ -11,7 +11,7 @@ const RoleTable = () => {
 
   const fetchRoles = async () => {
     try {
-      const res = await fetch("https://medguardapi.onrender.com/api/users", {
+      const res = await fetch("http://localhost:8000/api/users", {
         method: "GET",
         credentials: "include",
       });
@@ -26,7 +26,7 @@ const RoleTable = () => {
   const handleDelete = async (id) => {
     try {
       const res = await fetch(
-        `https://medguardapi.onrender.com/api/users/${id}`,
+        `http://localhost:8000/api/users/${id}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -43,7 +43,7 @@ const RoleTable = () => {
   const handleUpdate = async (id, newRole) => {
     try {
       const res = await fetch(
-        `https://medguardapi.onrender.com/api/users/${id}/role`,
+        `http://localhost:8000/api/users/${id}/role`,
         {
           method: "PUT",
           credentials: "include",

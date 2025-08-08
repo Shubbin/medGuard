@@ -3,7 +3,7 @@ import axios from "axios";
 
 const API_URL =
   import.meta.env.MODE === "development"
-    ? "https://medguardapi.onrender.com/api/auth"
+    ? "http://localhost:8000/api/auth"
     : "/api/auth";
 
 axios.defaults.withCredentials = true;

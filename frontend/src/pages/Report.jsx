@@ -32,7 +32,7 @@ const Report = () => {
 
     try {
       const response = await fetch(
-        "https://medguardapi.onrender.com/api/reports/create",
+        "http://localhost:8000/api/reports/create",
         {
           method: "POST",
           body: data,

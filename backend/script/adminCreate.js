@@ -14,7 +14,7 @@ if (!MONGODB_URI) {
   process.exit(1);
 }
 
-const adminEmail = "oladimejidaud5@gmail.com";
+const adminEmail = "david.tomi2020@gmail.com";
 const adminPassword = "Welcome123.";
 const adminRole = "admin";
 

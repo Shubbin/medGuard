@@ -10,7 +10,7 @@ const ReportMailCard = ({ report }) => {
     <Card className="shadow-lg hover:shadow-xl transition overflow-hidden">
       {report.photo && (
         <img
-          src={`https://medguardapi.onrender.com/uploads/${report.photo}`}
+          src={`http://localhost:8000/uploads/${report.photo}`}
           alt={report.drugName || "Report"}
           className="w-full h-48 object-cover"
         />
