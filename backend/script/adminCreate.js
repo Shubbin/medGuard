@@ -2,19 +2,19 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
-import { User } from "../models/user.model.js"; // Ensure .js extension is used for ESM
+import { User } from "../models/user.model.js";
 
 dotenv.config();
 
-// ✅ FIX: Correct the variable name to match your .env file
+
 const MONGODB_URI = process.env.MONGO_URI;
 
 if (!MONGODB_URI) {
-  console.error("❌ MONGO_URI is not defined. Please check your .env file.");
+  console.error(" MONGO_URI is not defined. Please check your .env file.");
   process.exit(1);
 }
 
-const adminEmail = "ayindedamilareabubakar@gmail.com";
+const adminEmail = "oladimejidaud5@gmail.com";
 const adminPassword = "Welcome123.";
 const adminRole = "admin";
 
@@ -44,7 +44,7 @@ async function createAdmin() {
     console.log("✅ Admin user created successfully:", adminEmail);
     process.exit(0);
   } catch (error) {
-    console.error("❌ Error creating admin user:", error);
+    console.error(" Error creating admin user:", error);
     process.exit(1);
   }
 }
