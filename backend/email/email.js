@@ -8,7 +8,7 @@ import {
 
 // Send verification email
 export const sendVerificationEmail = async (email, token) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
+  const verificationLink = `${process.env.CLIENT_URL}/verify-email/${token}`;
   try {
     const { data, error } = await resend.emails.send({
       from: sender,
@@ -81,7 +81,4 @@ export const sendResetSuccessEmail = async (email) => {
 
 //contaact email
 
-export const contaactEmail = async (email) =>{
-
-
-}
+export const contaactEmail = async (email) => {};
