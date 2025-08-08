@@ -67,7 +67,7 @@ const Testimonials = () => {
       </section>
 
       {/* Video Section */}
-      <section className="mt-24" aria-labelledby="video-heading" role="region">
+      {/* <section className="mt-24" aria-labelledby="video-heading" role="region">
         <h2
           id="video-heading"
           className="mb-6 text-2xl font-bold text-gray-800"
@@ -85,7 +85,7 @@ const Testimonials = () => {
             loading="lazy"
           ></iframe>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

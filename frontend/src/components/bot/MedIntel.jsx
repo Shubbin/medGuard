@@ -147,18 +147,18 @@ const MedIntel = () => {
   };
 
   return (
-    <div className="hidden fixed bottom-20 right-6 z-50">
+    <div className="fixed z-50  bottom-20 right-6">
       {/* Toggle Button */}
 
       {botVisibility && (
         <div className="flex flex-col h-[380px] bg-gray-100 font-nunito  rounded-lg">
-          <header className="bg-blue-600 text-white p-4 shadow-md rounded-t-lg font-nunito font-bold">
-            <h1 className="text-2xl font-bold text-center flex items-center justify-center gap-2">
+          <header className="p-4 font-bold text-white bg-blue-600 rounded-t-lg shadow-md font-nunito">
+            <h1 className="flex items-center justify-center gap-2 text-2xl font-bold text-center">
               MedIntel <BotIcon color="#fff" />
             </h1>
           </header>
-          <main className="flex-1 flex flex-col p-4 overflow-hidden  font-nunito">
-            <div className="flex-1 overflow-y-auto p-4 bg-white rounded-lg shadow-inner mb-4 border border-gray-200">
+          <main className="flex flex-col flex-1 p-4 overflow-hidden font-nunito">
+            <div className="flex-1 p-4 mb-4 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-inner">
               {messages.map((msg, index) => (
                 <div
                   key={index}
@@ -177,7 +177,7 @@ const MedIntel = () => {
               ))}
               {isLoading && (
                 <div className="flex justify-start mb-3">
-                  <div className="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl p-3 rounded-lg shadow-md bg-gray-200 text-gray-800 rounded-bl-none">
+                  <div className="max-w-xs p-3 text-gray-800 bg-gray-200 rounded-lg rounded-bl-none shadow-md sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
                     <div className="flex items-center space-x-2">
                       <span>Thinking</span>
                       <div className="flex space-x-1">
@@ -197,10 +197,10 @@ const MedIntel = () => {
               )}
               <div ref={messagesEndRef} /> {/* Element to scroll to */}
             </div>
-            <div className="flex items-center bg-white p-3 rounded-lg shadow-md border border-gray-200">
+            <div className="flex items-center p-3 bg-white border border-gray-200 rounded-lg shadow-md">
               <input
                 type="text"
-                className="flex-1 p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+                className="flex-1 p-3 text-gray-800 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Type your message..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -209,7 +209,7 @@ const MedIntel = () => {
               />
               <button
                 onClick={handleSendMessage}
-                className="ml-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-3 ml-2 font-semibold text-white transition duration-200 ease-in-out transform bg-blue-600 rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
                 <Send fill="white" />
@@ -240,7 +240,7 @@ const MedIntel = () => {
         </div>
       )}
       <div
-        className="absolute -bottom-16 right-6  rounded-full bg-gradient-to-tr from-primary-dark to-secondary-dark p-3 cursor-pointer"
+        className="absolute p-3 rounded-full cursor-pointer -bottom-16 right-6 bg-gradient-to-tr from-primary-dark to-secondary-dark"
         onClick={toggleBotVisibility}
       >
         {botVisibility ? (

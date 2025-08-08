@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import verifyImg from "@/assets/images/candid.jpeg";
-import reportImg from "@/assets/images/candid4.jpeg";
-import assistantImg from "@/assets/images/he-guy.jpeg";
+import verifyImg from "@/assets/images/why two.png";
+import reportImg from "@/assets/images/vision.png";
+import assistantImg from "@/assets/images/labby.png";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 const images = [verifyImg, reportImg, assistantImg];
@@ -17,7 +17,7 @@ const Stats = () => {
   return (
     <div>
       <section aria-labelledby="stats-heading" className="p-4" role="region">
-        <div className="flex flex-wrap lg:flex-nowrap gap-4 lg:gap-64 mb-10 mt-14">
+        <div className="flex flex-wrap gap-4 mb-10 lg:flex-nowrap lg:gap-64 mt-14">
           <h1 className="text-2xl md:text-4xl">
             <span className="text-primary-dark">Our Numbers </span>Speak For
             Themselves
@@ -30,17 +30,17 @@ const Stats = () => {
               medications.
             </p>
             <Link to="/signup">
-              <button className="bg-black text-white hover:bg-transparent hover:text-black transform duration-300 flex items-center gap-2 px-6 py-2 mt-4 text-lg border border-black rounded-md">
+              <button className="flex items-center gap-2 px-6 py-2 mt-4 text-lg text-white duration-300 transform bg-black border border-black rounded-md hover:bg-transparent hover:text-black">
                 Get Started <ArrowUpRight />{" "}
               </button>
             </Link>
           </div>
         </div>
         {/* Stat Images */}
-        <div className="flex flex-wrap md:flex-nowrap items-center gap-4 my-4">
+        <div className="flex flex-wrap items-center gap-4 my-4 md:flex-nowrap">
           {images.map((image, idx) => (
             <div key={idx}>
-              <img src={image} alt={image} className="hover:scale-105 rounded-md" />
+              <img src={image} alt={image} className="rounded-md hover:scale-105" />
             </div>
           ))}
         </div>
@@ -48,15 +48,15 @@ const Stats = () => {
         <motion.div
           initial="hidden"
           animate="visible"
-          className="grid gap-6 text-center grid-cols-2 md:grid-cols-4"
+          className="grid grid-cols-2 gap-6 text-center md:grid-cols-4"
         >
           {stats.map((stat, index) => (
             <motion.div key={index} className="">
               <div className="flex flex-col">
-                <p className="text-2xl md:text-4xl font-normal text-primary font-rubik">
+                <p className="text-2xl font-normal md:text-4xl text-primary font-rubik">
                   {stat.value}
                 </p>
-                <p className="text-gray-600 text-sm md:text-md">{stat.label}</p>
+                <p className="text-sm text-gray-600 md:text-md">{stat.label}</p>
               </div>
             </motion.div>
           ))}

@@ -76,43 +76,43 @@ const RoleTable = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">User Role Management</h2>
+      <h2 className="mb-4 text-xl font-bold">User Role Management</h2>
 
       <input
         type="text"
         placeholder="Search by name or email"
-        className="mb-4 p-2 border rounded w-full md:w-1/2"
+        className="w-full p-2 mb-4 border rounded md:w-1/2"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      <table className="w-full border-collapse border border-gray-300">
+      <table className="w-full border border-collapse border-gray-300">
         <thead>
           <tr className="bg-gray-100">
-            <th className="border border-primary-dark  p-2">Name</th>
-            <th className="border border-primary-dark  p-2">Email</th>
-            <th className="border border-primary-dark  p-2">Role</th>
-            <th className="border border-primary-dark  p-2">Actions</th>
+            <th className="p-2 border border-primary-dark">Name</th>
+            <th className="p-2 border border-primary-dark">Email</th>
+            <th className="p-2 border border-primary-dark">Role</th>
+            <th className="p-2 border border-primary-dark">Actions</th>
           </tr>
         </thead>
         <tbody>
           {currentRoles.map((user) => (
             <tr key={user._id}>
-              <td className="border border-primary-dark p-2">{user.name}</td>
-              <td className="border border-primary-dark  p-2">{user.email}</td>
-              <td className="border border-primary-dark  p-2 capitalize">
+              <td className="p-2 border border-primary-dark">{user.name}</td>
+              <td className="p-2 border border-primary-dark">{user.email}</td>
+              <td className="p-2 capitalize border border-primary-dark">
                 {user.role}
               </td>
-              <td className="border border-r-primary-dark border-b-primary-dark  p-2 flex gap-2">
+              <td className="flex gap-2 p-2 border border-r-primary-dark border-b-primary-dark">
                 <button
                   onClick={() => setEditingRole(user)}
-                  className="bg-blue-600 flex items-center gap-4 p-2 text-white"
+                  className="flex items-center gap-4 p-2 text-white bg-blue-600 rounded-md"
                 >
                   Edit <Pencil size={15} />
                 </button>
                 <button
                   onClick={() => handleDelete(user._id)}
-                  className="bg-red-600 flex items-center gap-4 p-2 text-white"
+                  className="flex items-center gap-4 p-2 text-white bg-red-600 rounded-md"
                 >
                   Delete
                   <Trash size={15} />
@@ -123,7 +123,7 @@ const RoleTable = () => {
         </tbody>
       </table>
 
-      <div className="flex justify-center mt-4 gap-2">
+      <div className="flex justify-center gap-2 mt-4">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
           <button
             key={num}

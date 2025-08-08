@@ -10,7 +10,7 @@
 // //   return (
 // //     <>
 // //       <AboutHero />
-// //       <main className="min-h-screen bg-white px-6 py-16 sm:px-12 md:px-20">
+// //       <main className="min-h-screen px-6 py-16 bg-white sm:px-12 md:px-20">
 // //         <Helmet>
 // //           <title>About MedGuard</title>
 // //           <meta
@@ -20,20 +20,20 @@
 // //         </Helmet>
 
 // //         <div className="max-w-6xl mx-auto text-center">
-// //           <h1 className="text-4xl md:text-5xl font-extrabold text-primary-dark mb-6"></h1>
+// //           <h1 className="mb-6 text-4xl font-extrabold md:text-5xl text-primary-dark"></h1>
 
-// //           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+// //           <div className="grid grid-cols-1 gap-12 text-left md:grid-cols-2">
 // //             <div>
 // //               <img
 // //                 src={about1}
 // //                 alt="Mission"
-// //                 className="rounded-xl w-full h-72 object-center object-cover shadow-lg"
+// //                 className="object-cover object-center w-full shadow-lg rounded-xl h-72"
 // //                 loading="lazy"
 // //               />
-// //               <h2 className="text-2xl font-bold text-primary-dark mt-6 mb-2">
+// //               <h2 className="mt-6 mb-2 text-2xl font-bold text-primary-dark">
 // //                 Our Mission
 // //               </h2>
-// //               <p className="text-gray-700 leading-relaxed">
+// //               <p className="leading-relaxed text-gray-700">
 // //                 We aim to eliminate the threat of counterfeit drugs by creating
 // //                 a robust ecosystem of verification, awareness, and reporting.
 // //                 Our mission is rooted in saving lives, one verification at a
@@ -45,13 +45,13 @@
 // //               <img
 // //                 src={about2}
 // //                 alt="Technology"
-// //                 className="rounded-xl w-full h-64 object-cover shadow-lg"
+// //                 className="object-cover w-full h-64 shadow-lg rounded-xl"
 // //                 loading="lazy"
 // //               />
-// //               <h2 className="text-2xl font-bold text-primary-dark mt-6 mb-2">
+// //               <h2 className="mt-6 mb-2 text-2xl font-bold text-primary-dark">
 // //                 AI-Driven Technology
 // //               </h2>
-// //               <p className="text-gray-700 leading-relaxed">
+// //               <p className="leading-relaxed text-gray-700">
 // //                 With MedGuard, users can scan a drug’s barcode, enter its NAFDAC
 // //                 number, or upload a photo. Our intelligent backend flags
 // //                 suspicious entries and offers immediate validation. AI also
@@ -64,13 +64,13 @@
 // //               <img
 // //                 src={about3}
 // //                 alt="Reporting Tools"
-// //                 className="rounded-xl w-full h-64 object-cover shadow-lg"
+// //                 className="object-cover w-full h-64 shadow-lg rounded-xl"
 // //                 loading="lazy"
 // //               />
-// //               <h2 className="text-2xl font-bold text-primary-dark mt-6 mb-2">
+// //               <h2 className="mt-6 mb-2 text-2xl font-bold text-primary-dark">
 // //                 User-Powered Reporting
 // //               </h2>
-// //               <p className="text-gray-700 leading-relaxed">
+// //               <p className="leading-relaxed text-gray-700">
 // //                 Every user is a watchdog. By submitting fake drug cases,
 // //                 uploading suspicious packaging, and reporting discrepancies, our
 // //                 community keeps the ecosystem clean.
@@ -81,13 +81,13 @@
 // //               <img
 // //                 src={about4}
 // //                 alt="Outreach"
-// //                 className="rounded-xl w-full h-64 object-cover shadow-lg"
+// //                 className="object-cover w-full h-64 shadow-lg rounded-xl"
 // //                 loading="lazy"
 // //               />
-// //               <h2 className="text-2xl font-bold text-primary-dark mt-6 mb-2">
+// //               <h2 className="mt-6 mb-2 text-2xl font-bold text-primary-dark">
 // //                 Nationwide Outreach
 // //               </h2>
-// //               <p className="text-gray-700 leading-relaxed">
+// //               <p className="leading-relaxed text-gray-700">
 // //                 We collaborate with hospitals, pharmacies, NGOs, and student
 // //                 bodies to host workshops and safety campaigns. Education is key
 // //                 in the war against fake drugs.
@@ -98,13 +98,13 @@
 // //               <img
 // //                 src={about5}
 // //                 alt="Analytics"
-// //                 className="rounded-xl w-full h-64 object-cover shadow-lg"
+// //                 className="object-cover w-full h-64 shadow-lg rounded-xl"
 // //                 loading="lazy"
 // //               />
-// //               <h2 className="text-2xl font-bold text-primary-dark mt-6 mb-2">
+// //               <h2 className="mt-6 mb-2 text-2xl font-bold text-primary-dark">
 // //                 Data & Analytics
 // //               </h2>
-// //               <p className="text-gray-700 leading-relaxed">
+// //               <p className="leading-relaxed text-gray-700">
 // //                 Our backend tools aggregate reports, track trends, and create
 // //                 visual dashboards for health bodies and policy makers. Data
 // //                 drives decisions that prevent pharmaceutical fraud.
@@ -115,13 +115,13 @@
 // //               <img
 // //                 src={about6}
 // //                 alt="Vision"
-// //                 className="rounded-xl w-full h-64 object-cover shadow-lg"
+// //                 className="object-cover w-full h-64 shadow-lg rounded-xl"
 // //                 loading="lazy"
 // //               />
-// //               <h2 className="text-2xl font-bold text-primary-dark mt-6 mb-2">
+// //               <h2 className="mt-6 mb-2 text-2xl font-bold text-primary-dark">
 // //                 Our Vision
 // //               </h2>
-// //               <p className="text-gray-700 leading-relaxed">
+// //               <p className="leading-relaxed text-gray-700">
 // //                 We envision a future where counterfeit drugs are a thing of the
 // //                 past, and technology ensures that every medication reaching a
 // //                 patient is verified, safe, and trusted.
@@ -130,10 +130,10 @@
 // //           </div>
 
 // //           <div className="mt-20 text-center">
-// //             <h3 className="text-xl font-bold text-primary-dark mb-2">
+// //             <h3 className="mb-2 text-xl font-bold text-primary-dark">
 // //               Together, we can end fake drugs in Africa.
 // //             </h3>
-// //             <p className="text-gray-700 max-w-2xl mx-auto">
+// //             <p className="max-w-2xl mx-auto text-gray-700">
 // //               Whether you’re a patient, doctor, regulator, or advocate—MedGuard
 // //               provides the tools to help you stay safe and make informed
 // //               decisions. Join our mission to protect lives.
@@ -205,12 +205,12 @@
 
 //       <AboutHero />
 
-//       <main className="min-h-screen bg-gray-50 px-6 py-20 sm:px-10 lg:px-20">
-//         <div className="max-w-7xl mx-auto text-center">
-//           <h1 className="text-4xl md:text-5xl font-extrabold text-primary-dark mb-6">
+//       <main className="min-h-screen px-6 py-20 bg-gray-50 sm:px-10 lg:px-20">
+//         <div className="mx-auto text-center max-w-7xl">
+//           <h1 className="mb-6 text-4xl font-extrabold md:text-5xl text-primary-dark">
 //             Empowering Drug Safety in Africa
 //           </h1>
-//           <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-16">
+//           <p className="max-w-2xl mx-auto mb-16 text-lg text-gray-600">
 //             Discover how MedGuard is leveraging innovation, data, and community power to combat counterfeit drugs and promote a healthier Africa.
 //           </p>
 
@@ -218,18 +218,18 @@
 //             {aboutSections.map((section, index) => (
 //               <div
 //                 key={index}
-//                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group"
+//                 className="overflow-hidden transition-all duration-300 bg-white shadow-md rounded-2xl hover:shadow-xl group"
 //               >
 //                 <img
 //                   src={section.image}
 //                   alt={section.title}
-//                   className="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+//                   className="object-cover w-full h-64 transition-transform duration-300 group-hover:scale-105"
 //                 />
 //                 <div className="p-6 text-left">
-//                   <h2 className="text-2xl font-bold text-primary-dark mb-2">
+//                   <h2 className="mb-2 text-2xl font-bold text-primary-dark">
 //                     {section.title}
 //                   </h2>
-//                   <p className="text-gray-700 leading-relaxed">
+//                   <p className="leading-relaxed text-gray-700">
 //                     {section.desc}
 //                   </p>
 //                 </div>
@@ -237,8 +237,8 @@
 //             ))}
 //           </div>
 
-//           <div className="mt-24 bg-primary-dark text-white p-10 rounded-xl shadow-lg">
-//             <h3 className="text-2xl font-bold mb-3">
+//           <div className="p-10 mt-24 text-white shadow-lg bg-primary-dark rounded-xl">
+//             <h3 className="mb-3 text-2xl font-bold">
 //               Together, we can end fake drugs in Africa.
 //             </h3>
 //             <p className="max-w-2xl mx-auto text-lg">
@@ -259,7 +259,7 @@ import about1 from "../../assets/images/approved1.jpeg";
 import about2 from "../../assets/images/approved3.jpeg";
 import about3 from "../../assets/images/candid4.jpeg";
 import about4 from "../../assets/images/approve-test2.png";
-import about5 from "../../assets/images/approve-test.png";
+import about5 from "../../assets/images/data_analytics.png";
 import about6 from "../../assets/images/he-guy.jpeg";
 import { AboutHero } from "./AboutHero";
 
@@ -309,12 +309,12 @@ const About = () => {
 
       <AboutHero />
 
-      <section className="relative bg-gradient-to-br from-blue-50 to-gray-100 py-24 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto text-center mb-20">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-800">
+      <section className="relative px-6 py-24 bg-gradient-to-br from-blue-50 to-gray-100 sm:px-12 lg:px-24">
+        <div className="max-w-6xl mx-auto mb-20 text-center">
+          <h1 className="text-4xl font-bold text-primary-dark sm:text-5xl">
             MedGuard: Tech for Trustworthy Healthcare
           </h1>
-          <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto mt-4 text-lg text-gray-600">
             We’re building a future where every pill is safe, every report
             counts, and technology protects every household.
           </p>
@@ -328,19 +328,19 @@ const About = () => {
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               } items-center gap-10`}
             >
-              <div className="md:w-1/2 relative">
+              <div className="relative md:w-1/2">
                 <img
                   src={section.image}
                   alt={section.title}
-                  className="rounded-3xl shadow-2xl w-full h-[300px] sm:h-[400px] object-cover object-center"
+                  className="rounded-3xl shadow-primary-dark shadow-2xl w-full h-[300px] sm:h-[400px] object-cover object-center"
                 />
-                <div className="absolute top-0 left-0 w-full h-full rounded-3xl bg-gradient-to-br from-primary-dark/20 to-black/10 backdrop-blur-md"></div>
+                <div className="absolute top-0 left-0 w-full h-full rounded-3xl bg-gradient-to-br from-primary-dark/20 to-black/10"></div>
               </div>
               <div className="md:w-1/2">
-                <h2 className="text-3xl font-semibold text-primary-dark mb-4">
+                <h2 className="mb-4 text-3xl font-semibold text-primary-dark">
                   {section.title}
                 </h2>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <p className="text-lg leading-relaxed text-gray-700">
                   {section.desc}
                 </p>
               </div>
@@ -348,16 +348,16 @@ const About = () => {
           ))}
         </div>
 
-        <div className="mt-32 bg-white shadow-xl rounded-3xl py-14 px-8 md:px-16 text-center max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-primary-dark mb-4">
+        <div className="max-w-4xl px-8 mx-auto mt-32 text-center bg-white shadow-xl rounded-3xl py-14 md:px-16">
+          <h3 className="mb-4 text-2xl font-bold text-primary-dark">
             Together, We Can End Fake Drugs in Africa.
           </h3>
-          <p className="text-gray-700 text-lg">
+          <p className="text-lg text-gray-700">
             Whether you’re a patient, healthcare provider, policymaker, or
             advocate — MedGuard empowers you to verify, report, and act. Let's
             build a continent free of counterfeit drugs.
           </p>
-         <button className="mt-8 inline-block bg-primary-dark text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-primary-dark/90 transition">
+         <button className="inline-block px-8 py-3 mt-8 text-lg font-semibold text-white transition rounded-full bg-primary-dark hover:bg-primary-dark/90">
             Join the Mission
           </button>
         </div>

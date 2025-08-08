@@ -33,11 +33,14 @@ export default function Roles() {
   // ✅ Correct endpoint
   const handleRoleUpdate = async (userId, updatedRole) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/users/${userId}/role`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role: updatedRole }),
-      });
+      const res = await fetch(
+        `http://localhost:8000/api/users/${userId}/role`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ role: updatedRole }),
+        }
+      );
 
       if (!res.ok) throw new Error("Failed to update role");
 
@@ -63,20 +66,22 @@ export default function Roles() {
           <CardTitle>Roles Management</CardTitle>
           <Button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 mb-2 text-white bg-primary-dark text-sm md:text-md"
+            className="flex items-center gap-2 mb-2 text-sm text-white bg-primary-dark md:text-md"
           >
             <PlusCircle size={20} />
             Add Role
           </Button>
         </CardHeader>
         <CardContent>
-          <RoleTable users={users} onDelete={handleDelete} onUpdateRole={handleRoleUpdate} />
+          <RoleTable
+            users={users}
+            onDelete={handleDelete}
+            onUpdateRole={handleRoleUpdate}
+          />
         </CardContent>
       </Card>
 
-      {showForm && (
-        <RoleForm onClose={() => setShowForm(false)} />
-      )}
+      {showForm && <RoleForm onClose={() => setShowForm(false)} />}
     </div>
   );
 }
