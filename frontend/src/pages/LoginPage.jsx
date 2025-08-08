@@ -36,9 +36,9 @@ const LoginPage = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-center w-full max-w-md min-h-screen px-4 mt-10 mb-20 bg-gradient-to-tr from-background via-background-light to-background"
+        className="flex items-center justify-center w-full max-w-md min-h-screen px-4 mx-auto mt-10 mb-20 rounded-xl rounded- bg-gradient-to-tr from-background via-background-light to-background "
       >
-        <div className="relative w-full pt-12 border shadow-lg lg:max-w-lg xl:max-w-xl rounded-2xl border-muted backdrop-blur-xl bg-white/10">
+        <div className="relative w-full pt-12 border shadow-sm bg-white/10 shadow-black lg:max-w-lg xl:max-w-xl rounded-2xl border-muted backdrop-blur-xl">
           {/* Logo */}
           <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center z-10 p-1.5">
             <motion.img
@@ -55,7 +55,8 @@ const LoginPage = () => {
               Welcome Back
             </h2>
             <p className="mb-5 text-sm text-center text-text opacity-70">
-              Sign in to your <span className="font-medium">MedGuard</span> account
+              Sign in to your <span className="font-medium">MedGuard</span>{" "}
+              account
             </p>
 
             <form onSubmit={handleLogin} className="space-y-4">

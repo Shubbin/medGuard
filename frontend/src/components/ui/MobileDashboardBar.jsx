@@ -36,26 +36,26 @@ const MobileDashboardBar = () => {
   const isActive = (path) => location.pathname === path;
   return (
     <div className="flex flex-col w-full">
-      <div className="xl:ml-52 xl:h-24 flex items-center justify-between px-4 py-2 bg-secondary-dark">
-        <div className="flex gap-4 items-center">
+      <div className="flex items-center justify-between px-4 py-2 xl:ml-52 xl:h-24 bg-secondary-dark">
+        <div className="flex items-center gap-4">
           <Link to="/">
             <img src={logo} className="h-24 xl:hidden" alt="MedGuard Logo" />
           </Link>
-          <h1 className="text-lg md:text-4xl font-bold text-white">
-            Welcome Back, Mac
+          <h1 className="text-lg font-bold text-white md:text-4xl">
+            Welcome Back
           </h1>
         </div>
         <div className="flex items-center gap-4">
           {/* <Moon className="text-white" /> */}
           <img
             src={avatar}
-            className="h-8 w-8 bg-secondary-dark rounded-full border border-white cursor-pointer"
+            className="w-8 h-8 border border-white rounded-full cursor-pointer bg-secondary-dark"
             alt="User Avatar"
             onClick={toggleVisibility}
           />
         </div>
       </div>
-      <div className="xl:hidden w-full flex justify-around bg-white py-2 border-t border-gray-200">
+      <div className="flex justify-around w-full py-2 bg-white border-t border-gray-200 xl:hidden">
         {navItems.map(({ name, icon: Icon, path }) => (
           <Link
             key={name}

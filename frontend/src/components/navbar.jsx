@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   CheckCircle,
   Book,
+  LogOutIcon,
 } from "lucide-react";
 import navbarLogo from "@/assets/images/Medguard Logo Two.png";
 
@@ -36,7 +37,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="top-0 z-50 w-full py-4 bg-secondary-dark shadow-md backdrop-blur-lg">
+    <nav className="top-0 z-50 w-full py-4 shadow-md bg-secondary-dark backdrop-blur-lg">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 md:h-16">
           {/* Logo */}
@@ -46,7 +47,7 @@ const Navbar = () => {
           >
             <img
               src={navbarLogo}
-              className="h-20 rounded-xl shadow-md shadow-white"
+              className="h-20 shadow-md rounded-xl shadow-white"
               alt="MedGuard Logo"
             />
           </Link>
@@ -70,8 +71,9 @@ const Navbar = () => {
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
-                className="font-semibold text-red-600 hover:underline"
+                className="flex items-center gap-2 p-2 font-semibold text-white transition-all duration-200 transform bg-red-600 rounded-md hover:-translate-y-2"
               >
+                <LogOutIcon size={15} />
                 Logout
               </button>
             )}
@@ -80,7 +82,7 @@ const Navbar = () => {
           {/* Mobile Toggle */}
           <div className="lg:hidden">
             <button
-              className="p-2 transition rounded-full focus:outline-none hover:bg-blue-100 text-white hover:text-black"
+              className="p-2 text-white transition rounded-full focus:outline-none hover:bg-blue-100 hover:text-black"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -114,7 +116,7 @@ const Navbar = () => {
                   handleLogout();
                   setIsOpen(false);
                 }}
-                className="text-left font-semibold text-red-600 hover:underline mt-2"
+                className="mt-2 font-semibold text-left text-red-600 hover:underline"
               >
                 Logout
               </button>

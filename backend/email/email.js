@@ -7,14 +7,30 @@ import {
 } from "./emailTemplates.js";
 
 // Send verification email
-export const sendVerificationEmail = async (email, token) => {
-  const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${token}`;
+// export const sendVerificationEmail = async (email, token) => {
+//   const verificationLink = `${process.env.CLIENT_URL}/verify-email/${token}`;
+//   try {
+//     const { data, error } = await resend.emails.send({
+//       from: sender,
+//       to: [email],
+//       subject: "Verify Your Email",
+//       html: verificationEmailTemplate(verificationLink),
+//     });
+
+//     if (error) throw new Error(`Verification email failed: ${error.message}`);
+//     console.log("Verification email sent:", data);
+//   } catch (err) {
+//     console.error("Verification email error:", err);
+//     throw err;
+//   }
+// };
+export const sendVerificationEmail = async (email, otp) => {
   try {
     const { data, error } = await resend.emails.send({
       from: sender,
       to: [email],
-      subject: "Verify Your Email",
-      html: verificationEmailTemplate(verificationLink),
+      subject: "Your Verification Code",
+      html: verificationEmailTemplate(otp),
     });
 
     if (error) throw new Error(`Verification email failed: ${error.message}`);
@@ -24,7 +40,6 @@ export const sendVerificationEmail = async (email, token) => {
     throw err;
   }
 };
-
 // Send welcome email
 export const sendWelcomeEmail = async (email, name) => {
   try {
@@ -44,13 +59,29 @@ export const sendWelcomeEmail = async (email, name) => {
 };
 
 // Send reset password email
-export const sendPasswordResetEmail = async (email, resetURL) => {
+// export const sendPasswordResetEmail = async (email, resetURL) => {
+//   try {
+//     const { data, error } = await resend.emails.send({
+//       from: sender,
+//       to: [email],
+//       subject: "Reset Your Password",
+//       html: resetPasswordTemplate(resetURL),
+//     });
+
+//     if (error) throw new Error(`Reset password email failed: ${error.message}`);
+//     console.log("Password reset email sent:", data);
+//   } catch (err) {
+//     console.error("Password reset email error:", err);
+//     throw err;
+//   }
+// };
+export const sendPasswordResetEmail = async (email, otp) => {
   try {
     const { data, error } = await resend.emails.send({
       from: sender,
       to: [email],
-      subject: "Reset Your Password",
-      html: resetPasswordTemplate(resetURL),
+      subject: "Your Password Reset Code",
+      html: resetPasswordTemplate(otp),
     });
 
     if (error) throw new Error(`Reset password email failed: ${error.message}`);
@@ -60,7 +91,6 @@ export const sendPasswordResetEmail = async (email, resetURL) => {
     throw err;
   }
 };
-
 // Send password reset success email
 export const sendResetSuccessEmail = async (email) => {
   try {
@@ -81,7 +111,4 @@ export const sendResetSuccessEmail = async (email) => {
 
 //contaact email
 
-export const contaactEmail = async (email) =>{
-
-
-}
+export const contaactEmail = async (email) => {};

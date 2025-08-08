@@ -25,21 +25,33 @@ export const signup = async (req, res) => {
     }
 
     const hashedPassword = await bcryptjs.hash(password, 10);
+    // const verificationToken = Math.floor(
+    //   100000 + Math.random() * 900000
+    // ).toString();
     const verificationToken = Math.floor(
       100000 + Math.random() * 900000
     ).toString();
-
     const user = new User({
       email,
       password: hashedPassword,
       name,
       verificationToken,
-      verificationTokenExpiresAt: Date.now() + 5 * 60 * 1000, // 5 minutes
+      verificationTokenExpiresAt: Date.now() + 5 * 60 * 1000, // 5 mins
     });
 
     await user.save();
-
     await sendVerificationEmail(user.email, verificationToken);
+    // const user = new User({
+    //   email,
+    //   password: hashedPassword,
+    //   name,
+    //   verificationToken,
+    //   verificationTokenExpiresAt: Date.now() + 5 * 60 * 1000, // 5 minutes
+    // });
+
+    // await user.save();
+
+    // await sendVerificationEmail(user.email, verificationToken);
 
     res.status(201).json({
       success: true,
@@ -54,6 +66,42 @@ export const signup = async (req, res) => {
   }
 };
 
+// export const verifyEmail = async (req, res) => {
+//   const { code } = req.body;
+
+//   try {
+//     const user = await User.findOne({
+//       verificationToken: code,
+//       verificationTokenExpiresAt: { $gt: Date.now() },
+//     });
+
+//     if (!user) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid or expired verification code",
+//       });
+//     }
+
+//     user.isVerified = true;
+//     user.verificationToken = undefined;
+//     user.verificationTokenExpiresAt = undefined;
+//     await user.save();
+
+//     await sendWelcomeEmail(user.email, user.name);
+
+//     res.status(200).json({
+//       success: true,
+//       message: "Email verified successfully",
+//       user: {
+//         ...user._doc,
+//         password: undefined,
+//       },
+//     });
+//   } catch (error) {
+//     console.log(error, "error in verifyEmail controller");
+//     res.status(400).json({ success: false, message: error.message });
+//   }
+// };
 export const verifyEmail = async (req, res) => {
   const { code } = req.body;
 
@@ -86,10 +134,10 @@ export const verifyEmail = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error, "error in verifyEmail controller");
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -157,13 +205,20 @@ export const forgotPassword = async (req, res) => {
         .status(404)
         .json({ success: false, message: "Email not found" });
     }
+    const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const resetToken = crypto.randomBytes(32).toString("hex");
     user.passwordResetToken = resetToken;
-    user.passwordResetExpires = Date.now() + 3600000; // 1 hour
+    user.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 mins
     await user.save();
 
     await sendPasswordResetEmail(email, resetToken);
+
+    // const resetToken = crypto.randomBytes(32).toString("hex");
+    // user.passwordResetToken = resetToken;
+    // user.passwordResetExpires = Date.now() + 3600000; // 1 hour
+    // await user.save();
+
+    // await sendPasswordResetEmail(email, resetToken);
 
     res.status(200).json({
       success: true,
@@ -178,13 +233,16 @@ export const forgotPassword = async (req, res) => {
 export const resetPassword = async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;
-
+  const { otp } = req.body;
   try {
+    // const user = await User.findOne({
+    //   passwordResetToken: token,
+    //   passwordResetExpires: { $gt: Date.now() },
+    // });
     const user = await User.findOne({
-      passwordResetToken: token,
+      passwordResetToken: otp,
       passwordResetExpires: { $gt: Date.now() },
     });
-
     if (!user) {
       return res
         .status(400)

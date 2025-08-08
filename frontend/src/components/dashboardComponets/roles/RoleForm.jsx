@@ -23,7 +23,7 @@ export default function RoleForm({ onClose }) {
 
     try {
       // Fetch user by email
-      const res = await fetch("http://localhost:8000/api/users");
+      const res = await fetch("https://medguardapi.onrender.com/api/users");
       const allUsers = await res.json();
       const user = allUsers.find((u) => u.email === email);
 
@@ -34,7 +34,7 @@ export default function RoleForm({ onClose }) {
       }
 
       const resUpdate = await fetch(
-        `http://localhost:8000/api/users/${user._id}/role`,
+        `https://medguardapi.onrender.com/api/users/${user._id}/role`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

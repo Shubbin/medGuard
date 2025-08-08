@@ -18,7 +18,7 @@ export default function Roles() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const res = await fetch("http://localhost:8000/api/users");
+        const res = await fetch("https://medguardapi.onrender.com/api/users");
         if (!res.ok) throw new Error("Failed to fetch users");
         const data = await res.json();
         setUsers(data);
@@ -34,7 +34,7 @@ export default function Roles() {
   const handleRoleUpdate = async (userId, updatedRole) => {
     try {
       const res = await fetch(
-        `http://localhost:8000/api/users/${userId}/role`,
+        `https://medguardapi.onrender.com/api/users/${userId}/role`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

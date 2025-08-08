@@ -31,10 +31,13 @@ const Report = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/reports/create", {
-        method: "POST",
-        body: data,
-      });
+      const response = await fetch(
+        "https://medguardapi.onrender.com/api/reports/create",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -52,7 +55,6 @@ const Report = () => {
         photo: null,
       });
       document.getElementById("photo").value = null;
-
     } catch (err) {
       console.error("❌ Submit failed:", err);
       toast.error("❌ Failed to submit report: " + err.message);
@@ -61,10 +63,18 @@ const Report = () => {
 
   return (
     <div className="max-w-xl mx-auto mt-14 p-8 bg-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-800">
-      <h2 className="text-3xl font-extrabold text-gray-800 dark:text-white mb-6 text-center tracking-tight">Report a Drug</h2>
-      <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-6">
+      <h2 className="text-3xl font-extrabold text-gray-800 dark:text-white mb-6 text-center tracking-tight">
+        Report a Drug
+      </h2>
+      <form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        className="space-y-6"
+      >
         <div>
-          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Drug Name</label>
+          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
+            Drug Name
+          </label>
           <input
             type="text"
             name="drugName"
@@ -75,7 +85,9 @@ const Report = () => {
           />
         </div>
         <div>
-          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Description</label>
+          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
+            Description
+          </label>
           <textarea
             name="description"
             value={formData.description}
@@ -85,7 +97,9 @@ const Report = () => {
           />
         </div>
         <div>
-          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Location</label>
+          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
+            Location
+          </label>
           <input
             type="text"
             name="location"
@@ -96,7 +110,9 @@ const Report = () => {
           />
         </div>
         <div>
-          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">Photo (optional)</label>
+          <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-300">
+            Photo (optional)
+          </label>
           <input
             type="file"
             name="photo"

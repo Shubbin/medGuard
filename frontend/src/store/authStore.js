@@ -1,11 +1,9 @@
-
-
 import { create } from "zustand";
 import axios from "axios";
 
 const API_URL =
   import.meta.env.MODE === "development"
-    ? "http://localhost:8000/api/auth"
+    ? "https://medguardapi.onrender.com/api/auth"
     : "/api/auth";
 
 axios.defaults.withCredentials = true;
@@ -130,10 +128,9 @@ export const useAuthStore = create((set) => {
     resetPassword: async (token, password) => {
       set({ isLoading: true, error: null });
       try {
-        const res = await axios.post(
-          `${API_URL}/reset-password/${token}`,
-          { password }
-        );
+        const res = await axios.post(`${API_URL}/reset-password/${token}`, {
+          password,
+        });
         set({ message: res.data.message, isLoading: false });
       } catch (error) {
         set({ error: extractError(error), isLoading: false });

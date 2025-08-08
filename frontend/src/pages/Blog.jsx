@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-
+import image2 from "../assets/images/meds.jpg";
+import image3 from "../assets/images/test_lab.jpg";
 // Dummy blog post data with blogImgs and medical-related content
 const postsData = [
   {
@@ -18,8 +19,7 @@ const postsData = [
     content:
       "Discover how telemedicine is improving access to quality care for remote communities.",
     date: "July 28, 2025",
-    blogImg:
-      "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
+    blogImg: image2,
   },
   {
     id: 3,
@@ -27,8 +27,7 @@ const postsData = [
     content:
       "A simplified guide to how mRNA vaccines work to protect your immune system.",
     date: "July 22, 2025",
-    blogImg:
-      "https://img.freepik.com/free-photo/african-american-doctor-standing-hospital-corridor_1157-33842.jpg",
+    blogImg: image3,
   },
   {
     id: 4,
@@ -59,6 +58,10 @@ export default function Blog() {
   // State to track the current page
   const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
   //Sort By Date
   const sortedPosts = [...postsData].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
@@ -86,17 +89,17 @@ export default function Blog() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 px-4 py-16 sm:px-8 lg:px-24">
+    <main className="min-h-screen px-4 py-16 bg-gradient-to-br from-blue-50 via-white to-blue-100 sm:px-8 lg:px-24">
       <Helmet>
         <title>Blog - MedGuard Insights</title>
       </Helmet>
-      <div className="max-w-7xl w-full mx-auto">
-        <div className="flex flex-wrap justify-between items-center mb-10">
+      <div className="w-full mx-auto max-w-7xl">
+        <div className="flex flex-wrap items-center justify-between mb-10">
           <div className="text-left">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-800 dark:text-white mb-2 tracking-tight  drop-shadow-lg">
+            <h1 className="mb-2 text-4xl font-extrabold tracking-tight text-gray-800 sm:text-5xl dark:text-white drop-shadow-lg">
               MedGuard Blog
             </h1>
-            <p className="text-lg text-gray-500 dark:text-gray-300 text-center max-w-2xl mb-6">
+            <p className="max-w-2xl mb-6 text-lg text-center text-gray-500 dark:text-gray-300">
               Insights, trends, and stories at the intersection of medicine and
               technology.
             </p>
@@ -106,36 +109,36 @@ export default function Blog() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search posts..."
-            className="w-full sm:w-96 px-5 py-3 rounded-2xl border border-gray-200 dark:border-gray-700 shadow focus:outline-none ring-2 ring-blue-300 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 mb-2"
+            className="w-full px-5 py-3 mb-2 text-gray-700 bg-white border border-gray-200 shadow sm:w-96 rounded-2xl dark:border-gray-700 focus:outline-none ring-2 ring-blue-300 dark:bg-gray-800 dark:text-gray-200"
           />
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {currentPosts.length === 0 ? (
-            <div className="col-span-full text-center text-gray-500 dark:text-gray-400 py-12 text-lg">
+            <div className="py-12 text-lg text-center text-gray-500 col-span-full dark:text-gray-400">
               No posts found.
             </div>
           ) : (
             currentPosts.map((post) => (
               <div
                 key={post.id}
-                className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-gray-100 dark:border-gray-700 flex flex-col h-full"
+                className="flex flex-col h-full overflow-hidden transition-all bg-white border border-gray-100 shadow-lg group rounded-3xl hover:shadow-2xl dark:border-gray-700"
               >
                 <div className="relative">
                   <img
                     src={post.blogImg}
                     alt={post.title}
-                    className="w-full h-56 object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover object-center w-full h-56 transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div className="absolute top-3 left-3 bg-blue-500/80 text-white text-xs px-3 py-1 rounded-full shadow">
+                  <div className="absolute px-3 py-1 text-xs text-white rounded-full shadow top-3 left-3 bg-blue-500/80">
                     {post.date}
                   </div>
                 </div>
-                <div className="flex-1 flex flex-col p-6">
-                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">
+                <div className="flex flex-col flex-1 p-6">
+                  <h2 className="mb-2 text-2xl font-bold text-gray-800 transition-colors dark:text-white group-hover:text-blue-600">
                     {post.title}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 flex-1">
+                  <p className="flex-1 mb-4 text-gray-600 dark:text-gray-300">
                     {post.content}
                   </p>
                   <div className="flex items-center gap-2 mt-auto"></div>
@@ -145,7 +148,7 @@ export default function Blog() {
           )}
         </div>
 
-        <div className="flex justify-between items-center mt-14 gap-4">
+        <div className="flex items-center justify-between gap-4 mt-14">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
@@ -153,7 +156,7 @@ export default function Blog() {
           >
             Newer
           </button>
-          <span className="text-gray-600 dark:text-gray-300 text-base">
+          <span className="text-base text-gray-600 dark:text-gray-300">
             Page {currentPage} of {totalPages}
           </span>
           <button

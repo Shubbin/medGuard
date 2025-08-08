@@ -11,7 +11,7 @@ const RoleTable = () => {
 
   const fetchRoles = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/users", {
+      const res = await fetch("https://medguardapi.onrender.com/api/users", {
         method: "GET",
         credentials: "include",
       });
@@ -25,10 +25,13 @@ const RoleTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/users/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      const res = await fetch(
+        `https://medguardapi.onrender.com/api/users/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to delete user");
       fetchRoles();
@@ -39,14 +42,17 @@ const RoleTable = () => {
 
   const handleUpdate = async (id, newRole) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/users/${id}/role`, {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ role: newRole }),
-      });
+      const res = await fetch(
+        `https://medguardapi.onrender.com/api/users/${id}/role`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ role: newRole }),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to update role");

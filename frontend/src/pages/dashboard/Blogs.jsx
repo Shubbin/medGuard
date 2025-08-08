@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BlogStats from "./BlogStats";
 
-const API_URL = "http://localhost:8000/api/blogs";
+const API_URL = "https://medguardapi.onrender.com/api/blogs";
 
 const BlogDashboard = () => {
   const [posts, setPosts] = useState([]);

@@ -15,8 +15,8 @@ const ReportMails = () => {
       setLoading(true);
       try {
         const endpoint = searchQuery
-          ? `http://localhost:8000/api/reports/search?query=${searchQuery}`
-          : `http://localhost:8000/api/reports`;
+          ? `https://medguardapi.onrender.com/api/reports/search?query=${searchQuery}`
+          : `https://medguardapi.onrender.com/api/reports`;
 
         const res = await axios.get(endpoint);
         setReports(Array.isArray(res.data) ? res.data : []);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import UserCard from "../../components/dashboardComponets/users/UserCard";
 
-const API_BASE = "http://localhost:8000/api/users";
+const API_BASE = "https://medguardapi.onrender.com/api/users";
 
 const Users = () => {
   const [users, setUsers] = useState([]);

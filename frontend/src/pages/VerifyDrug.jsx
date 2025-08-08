@@ -12,11 +12,14 @@ const VerifyDrug = () => {
     setIsLoading(true);
     setVerificationResult(null);
     try {
-      const res = await fetch("http://localhost:8000/api/drugs/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nrn: drugCode }),
-      });
+      const res = await fetch(
+        "https://medguardapi.onrender.com/api/drugs/verify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nrn: drugCode }),
+        }
+      );
 
       const data = await res.json();
       setVerificationResult(data);
